@@ -1,32 +1,19 @@
 package com.test.app.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
-import com.test.app.domain.Authority;
-import com.test.app.domain.PersistentToken;
-import com.test.app.domain.User;
-import com.test.app.repository.PersistentTokenRepository;
-import com.test.app.repository.UserRepository;
-import com.test.app.security.SecurityUtils;
-import com.test.app.service.MailService;
-import com.test.app.service.UserService;
-import com.test.app.web.rest.dto.UserDTO;
-
-import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.util.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.test.app.repository.PersistentTokenRepository;
+import com.test.app.repository.UserRepository;
+import com.test.app.service.MailService;
+import com.test.app.service.UserService;
 
 /**
  * REST controller for managing the current user's account.

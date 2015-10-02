@@ -1,30 +1,14 @@
 package com.test.app.repository;
-import static org.springframework.data.mongodb.core.query.Criteria.where;
-/*
-import org.springframework.mail.MailSender;
-import org.springframework.mail.SimpleMailMessage;*/
-import static org.springframework.data.mongodb.core.query.Query.query;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
-import com.health.app.domain.Doctor;
-import com.health.app.domain.ReturnCodes;
-import com.health.app.domain.Role;
-import com.health.app.domain.UserDoctor;
-import com.health.app.domain.UserTable;
 @Service
 public class DoctorRepositoryHelperFunctions {
 	@Autowired
 	MongoTemplate mongoTemplate;
 	
-	@Autowired
-	DoctorRepository dr;
 	
 	@Autowired
 	UniqueIdRepositoryHelper uth;

@@ -1,13 +1,11 @@
 package com.test.app.service;
 
-import com.test.app.domain.Authority;
-import com.test.app.domain.PersistentToken;
-import com.test.app.domain.User;
-import com.test.app.repository.AuthorityRepository;
-import com.test.app.repository.PersistentTokenRepository;
-import com.test.app.repository.UserRepository;
-import com.test.app.security.SecurityUtils;
-import com.test.app.service.util.RandomUtil;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import javax.inject.Inject;
+
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.slf4j.Logger;
@@ -16,10 +14,14 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.inject.Inject;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import com.test.app.domain.Authority;
+import com.test.app.domain.PersistentToken;
+import com.test.app.domain.User;
+import com.test.app.repository.AuthorityRepository;
+import com.test.app.repository.PersistentTokenRepository;
+import com.test.app.repository.UserRepository;
+import com.test.app.security.SecurityUtils;
+import com.test.app.service.util.RandomUtil;
 
 /**
  * Service class for managing users.
@@ -90,7 +92,7 @@ public class UserService {
 
     public User createUserInformation(String login, String password, String firstName, String lastName, String email,
             String langKey, Set<Authority> authorities) {
-    	return createUserInformation(login, password, firstName, lastName, email, langKey, null, false,false);
+    	return createUserInformation(login, password, firstName, lastName, email, langKey, authorities, false,false);
     }
     
     public User createUserInformation(String login, String password, String firstName, String lastName, String email,

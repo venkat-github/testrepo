@@ -1,35 +1,18 @@
 package com.test.app.repository;
 
 import static org.springframework.data.mongodb.core.query.Criteria.where;
-
-import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-
 import static org.springframework.data.mongodb.core.query.Query.query;
 
-import java.io.UnsupportedEncodingException;
 import java.util.Date;
-import java.util.List;
-import java.util.Properties;
 
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
 import com.health.app.domain.DatabaseDateWithoutime;
-import com.health.app.domain.EventToNotify;
-import com.health.app.domain.Role;
-import com.health.app.domain.TypeOfCommunication;
 import com.health.app.domain.UniqueId;
-import com.health.app.domain.UserTable;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @Service
 public class UniqueIdRepositoryHelper {

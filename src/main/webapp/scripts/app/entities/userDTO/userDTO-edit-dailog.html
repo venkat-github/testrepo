@@ -1,16 +1,18 @@
-
-<form name="editForm" role="form" novalidate ng-submit="save()">
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+<form name="editForm" class="form-horizontal" role="form" novalidate ng-submit="save()">
 
     <div >
         <button type="button" class="close"  aria-hidden="true"
                 ng-click="clear()">&times;</button>
-        <h4 id="myUserDTOLabel">edit Profile</h4>
+        <h4 id="myUserDTOLabel">edit Profile2</h4>
     </div>
     <div >
         <div class="form-group">
-            <label for="id">ID</label>
-            <input type="text" class="form-control" id="id" name="id"
-                    ng-model="userDTO.id" readonly>
+            <label for="id" class="col-md-2 control-label">ID</label>
+            <div class="col-md-10">
+              <input type="text" class="form-control" id="id"  name="id" ng-model="userDTO.id" readonly>
+            </div>
         </div>
 
         <div class="form-group">
@@ -99,3 +101,5 @@
         </button>
     </div>
 </form>
+</div>
+</div>

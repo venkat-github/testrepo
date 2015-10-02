@@ -2,12 +2,11 @@ package com.test.app.repository;
 
 import java.util.List;
 
-import com.test.app.domain.Doctor;
-import com.test.app.domain.DoctorVisit;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
+
+import com.test.app.domain.DoctorVisit;
 
 /**
  * Spring Data MongoDB repository for the DoctorVisitDTO entity.

@@ -20,7 +20,6 @@ import com.test.app.domain.Authority;
 import com.test.app.domain.DoctorVisit;
 import com.test.app.domain.Hospital;
 import com.test.app.domain.HospitalDoctorConsultaion;
-import com.test.app.domain.MedUser;
 import com.test.app.domain.User;
 import com.test.app.domain.UserDoctorVisitRecord;
 import com.test.app.domain.enumeration.Sex;
@@ -29,10 +28,8 @@ import com.test.app.repository.AuthorityRepository;
 import com.test.app.repository.DoctorVisitRepository;
 import com.test.app.repository.HospitalDoctorConsultaionRepository;
 import com.test.app.repository.HospitalRepository;
-import com.test.app.repository.MedUserRepository;
 import com.test.app.repository.UserRecordRepository;
 import com.test.app.repository.UserRepository;
-import com.test.app.web.rest.dto.MedUserDto;
 
 @Service
 public class InitService {
@@ -50,9 +47,6 @@ public class InitService {
     
 	@Inject
     AuthorityRepository authorityRepository;
-
-    @Inject
-    MedUserRepository medUserRepo;
 
     @Inject
     DoctorVisitRepository doctorVisitRepository;
@@ -329,15 +323,14 @@ public class InitService {
         HashSet<String> degrees = new HashSet<String>();
         degrees.add(degree);
         
-        auths.add(userAuth);
-        auths.add(hospAuth);
+        //auths.add(userAuth);
+        //auths.add(hospAuth);
         auths.add(docAuth);
         
 		User user = userService.createUserInformation(name, "admin" , name, name,
 				emailId, "en", auths);
         
 		User doctorDto = user;
-		doctorDto.setPassword("admin");
 		doctorDto.setLogin(name);
 		doctorDto.setName(name);
 		doctorDto.setAge(age);

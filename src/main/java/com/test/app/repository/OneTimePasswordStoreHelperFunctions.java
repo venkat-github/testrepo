@@ -1,37 +1,8 @@
 package com.test.app.repository;
 
-	
-	import java.util.Date;
-
-
-
-
-
-
-
-
-import static org.springframework.data.mongodb.core.query.Query.query;
-import static org.springframework.data.mongodb.core.query.Criteria.where;
-
-
-
-
-
-
-
-/*
-import org.springframework.mail.MailSender;
-import org.springframework.mail.SimpleMailMessage;*/
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
-
-import com.health.app.domain.OneTimePassword;
-import com.health.app.domain.OneTimePasswordStore;
-import com.health.app.domain.ReturnCodes;
-import com.health.app.domain.UserTable;
 
 @Service
 public class OneTimePasswordStoreHelperFunctions {

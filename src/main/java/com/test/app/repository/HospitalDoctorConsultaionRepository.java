@@ -2,11 +2,10 @@ package com.test.app.repository;
 
 import java.util.List;
 
-import com.test.app.domain.Doctor;
-import com.test.app.domain.HospitalDoctorConsultaion;
-
 import org.joda.time.LocalDate;
 import org.springframework.data.mongodb.repository.MongoRepository;
+
+import com.test.app.domain.HospitalDoctorConsultaion;
 
 /**
  * Spring Data MongoDB repository for the HospitalDoctorDTO4 entity.

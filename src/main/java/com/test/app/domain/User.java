@@ -14,7 +14,6 @@ import com.test.app.domain.util.CustomDateTimeDeserializer;
 import com.test.app.domain.util.CustomDateTimeSerializer;
 import com.test.app.domain.util.CustomLocalDateSerializer;
 import com.test.app.domain.util.ISO8601LocalDateDeserializer;
-import com.test.app.web.rest.dto.MedUserDto;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -47,7 +46,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Size(min = 1, max = 50)
     private String login;
 
-    @JsonIgnore
+    //@JsonIgnore
     @NotNull
     private String password;
 

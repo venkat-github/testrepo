@@ -25,20 +25,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.codahale.metrics.annotation.Timed;
 import com.test.app.domain.DoctorVisit;
 import com.test.app.domain.Hospital;
 import com.test.app.domain.HospitalDoctorConsultaion;
-import com.test.app.domain.MedUser;
+import com.test.app.domain.User;
 import com.test.app.domain.UserDoctorVisitRecord;
 import com.test.app.repository.DoctorVisitRepository;
 import com.test.app.repository.HospitalDoctorConsultaionRepository;
 import com.test.app.repository.HospitalRepository;
-import com.test.app.repository.MedUserRepository;
 import com.test.app.repository.UserRecordRepository;
 import com.test.app.repository.UserRepository;
 import com.test.app.web.rest.dto.HospitalDto;
-import com.test.app.domain.User;
 import com.test.app.web.rest.util.HeaderUtil;
 import com.test.app.web.rest.util.PaginationUtil;
 
@@ -77,6 +74,7 @@ public class MedUserResource {
 		return cities;
 	}
 
+	/*
 	@RequestMapping(value="/search", method = RequestMethod.GET)
 	List<HospitalDoctorConsultaion> search(
 			@RequestParam(value = "speciality" , required = false) String speciality,
@@ -94,6 +92,7 @@ public class MedUserResource {
 		consultations.add(doc2);
 		return results;
 	}
+	*/
 	
     
     @RequestMapping(value = "/userDTOs",

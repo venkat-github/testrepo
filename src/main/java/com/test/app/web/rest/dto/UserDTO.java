@@ -6,9 +6,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-import javax.validation.constraints.Size;
-
-import org.hibernate.validator.constraints.Email;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 
@@ -17,7 +14,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.health.app.domain.Languages;
 import com.test.app.domain.Authority;
-import com.test.app.domain.MedUser;
 import com.test.app.domain.TypeOfCommunication;
 import com.test.app.domain.User;
 import com.test.app.domain.enumeration.BloodGroup;

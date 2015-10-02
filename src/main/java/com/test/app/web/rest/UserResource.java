@@ -1,10 +1,9 @@
 package com.test.app.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
-import com.test.app.domain.User;
-import com.test.app.repository.MedUserRepository;
-import com.test.app.repository.UserRepository;
-import com.test.app.security.AuthoritiesConstants;
+import java.util.List;
+
+import javax.inject.Inject;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,11 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.inject.Inject;
-
-import java.util.List;
-
-import javax.servlet.http.HttpServletResponse;
+import com.codahale.metrics.annotation.Timed;
+import com.test.app.domain.User;
+import com.test.app.repository.UserRepository;
 
 /**
  * REST controller for managing users.
@@ -44,9 +41,6 @@ public class UserResource {
         return userRepository.findAll();
     }
 
-    @Inject
-    MedUserRepository repo;
-    
     /**
      * GET  /users/:login -> get the "login" user.
      */
