@@ -1,0 +1,38 @@
+
+<div>
+    <h2><span>TestBlob</span> {{testBlob.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span>File</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{testBlob.file}}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Image</span>
+                </td>
+                <td>
+                    <img data-ng-src="{{'data:image/*;base64,' + testBlob.image}}" style="max-width: 100%;" ng-if="testBlob.image"/>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            ui-sref="testBlob"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

@@ -1,0 +1,70 @@
+
+<div>
+    <h2><span>UserRecordDTO</span> {{userRecordDTO.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span>UserId</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{userRecordDTO.userId}}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>VisitId</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{userRecordDTO.visitId}}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Symptoms</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{userRecordDTO.symptoms}}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Diagnosis</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{userRecordDTO.diagnosis}}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Prescription</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{userRecordDTO.prescription}}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Tests</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{userRecordDTO.tests}}" readonly>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            ui-sref="userRecordDTO"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

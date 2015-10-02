@@ -1,0 +1,104 @@
+
+<div>
+    <h2><span>UserDTO</span> {{userDTO.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span>Name</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{userDTO.name}}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Mobileno</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{userDTO.mobileno}}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>EmailId</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{userDTO.emailId}}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Password</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{userDTO.password}}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Sex</span>
+                </td>
+                <td>
+                    <span class="input-sm form-control readonly"
+                          translate-interpolation="messageformat"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Age</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{userDTO.age}}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>DateOfBirth</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{userDTO.dateOfBirth}}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>BloodGroup</span>
+                </td>
+                <td>
+                    <span class="input-sm form-control readonly"
+                          translate-interpolation="messageformat"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Location</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{userDTO.location}}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>City</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{userDTO.city}}" readonly>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            ui-sref="userDTO"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

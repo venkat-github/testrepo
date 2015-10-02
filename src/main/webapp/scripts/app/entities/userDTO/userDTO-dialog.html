@@ -1,0 +1,50 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()">
+
+    <div >
+        <button type="button" class="close"  aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 id="myUserDTOLabel">Edit profile</h4>
+    </div>
+    <div >
+            <input type="hidden" class="form-control" id="id" name="id"
+                    ng-model="userDTO.id" readonly>
+
+        <div class="form-group">
+            <label for="field_mobileno">Mobileno *</label>
+            <input type="text" class="form-control" name="mobileno" id="field_mobileno"
+                    ng-model="userDTO.mobileno"
+                    required>
+			<div ng-show="editForm.mobileno.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.mobileno.$error.required">
+                    This field is required.
+                </p>
+            </div>
+
+        </div>
+        <div class="form-group">
+            <label for="field_emailId">EmailId *</label>
+            <input type="text" class="form-control" name="emailId" id="field_emailId"
+                    ng-model="userDTO.emailId"
+                    required>
+
+        </div>
+        <div class="form-group">
+            <label for="field_password">Password *</label>
+            <input type="password" class="form-control" name="password" id="field_password"
+                    ng-model="userDTO.password"
+                    required>
+
+        </div>
+        
+    </div>
+    <div >
+        <button type="button" class="btn btn-default"  ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || editForm.$submitted" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

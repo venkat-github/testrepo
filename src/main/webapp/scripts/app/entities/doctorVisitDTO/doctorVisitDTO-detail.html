@@ -1,0 +1,87 @@
+
+<div>
+    <h2><span>DoctorVisitDTO</span> {{doctorVisitDTO.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span>UserId</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{doctorVisitDTO.userId}}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>DoctorId</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{doctorVisitDTO.doctorId}}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>HospitalId</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{doctorVisitDTO.hospitalId}}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Date</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{doctorVisitDTO.date}}" readonly>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>
+                    <span>consultaion id</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{doctorVisitDTO.consultId}}" readonly>
+                </td>
+            </tr>
+
+			<tr>
+                <td>
+                    <span>slot</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{doctorVisitDTO.slot}}" readonly>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <span>SlotNo</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{doctorVisitDTO.slotNo}}" readonly>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            ui-sref="userRecordDTO.new({userId:doctorVisitDTO.userId, visitId:doctorVisitDTO.id})"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Create Record</span>
+    </button>
+
+    <button type="submit"
+            ui-sref="doctorVisitDTO"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

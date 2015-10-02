@@ -1,0 +1,70 @@
+
+<div>
+    <h2><span>HospitalDTO</span> {{hospitalDTO.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span>Name</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{hospitalDTO.name}}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>MobileNo</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{hospitalDTO.mobileNo}}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>EmailId</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{hospitalDTO.emailId}}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>City</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{hospitalDTO.city}}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Location</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{hospitalDTO.location}}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Zipcode</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{hospitalDTO.zipcode}}" readonly>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            ui-sref="hospitalDTO"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

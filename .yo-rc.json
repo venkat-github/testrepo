@@ -1,0 +1,21 @@
+{
+  "generator-jhipster": {
+    "baseName": "hipster1",
+    "packageName": "com.test.app",
+    "packageFolder": "com/test/app",
+    "authenticationType": "session",
+    "hibernateCache": "no",
+    "clusteredHttpSession": "no",
+    "websocket": "no",
+    "databaseType": "mongodb",
+    "devDatabaseType": "mongodb",
+    "prodDatabaseType": "mongodb",
+    "searchEngine": "no",
+    "useCompass": false,
+    "buildTool": "maven",
+    "frontendBuilder": "grunt",
+    "javaVersion": "7",
+    "enableTranslation": false,
+    "rememberMeKey": "dba11879a487490fdda2dc55fc9199470817dfe4"
+  }
+}

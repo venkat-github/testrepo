@@ -1,0 +1,32 @@
+<div class="modal fade" id="mymodal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true" ng-click="clear()">&times;</button>
+				<h4 class="modal-title" id="myDoctorVisitDTOLabel">Create or
+					edit a DoctorVisitDTO</h4>
+			</div>
+			<div class="modal-body">
+
+				<table class="table">
+					<tr ng-repeat="slot in hospitalDoctorDTO4.freeSlots">
+						>
+						<td><a href="#"
+							ng-click="fixAppointment(slot, hospitalDoctorDTO4)" type="submit">{{slot}}
+								a</a></td>
+					</tr>
+				</table>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal"
+					ng-click="clear()">
+					<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+				</button>
+
+			</div>
+		</div>
+
+	</div>
+</div>

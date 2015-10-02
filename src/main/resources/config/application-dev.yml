@@ -1,0 +1,29 @@
+server:
+    port: 8080
+
+liquibase:
+    context: dev
+
+spring:
+    profiles:
+        active: dev
+    data:
+        mongodb:
+            host: localhost
+            port: 27017
+            database: hipster1
+    messages:
+        cache-seconds: 1
+    thymeleaf:
+        mode: XHTML
+        cache: false
+
+metrics:
+    jmx.enabled: true
+    graphite:
+        enabled: false
+        host: localhost
+        port: 2003
+        prefix: hipster1
+
+

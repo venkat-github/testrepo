@@ -1,0 +1,68 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()">
+
+    <div>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myUserRecordDTOLabel">Create or edit a UserRecordDTO</h4>
+    </div>
+    <div>
+        <div class="form-group">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="userRecordDTO.id" readonly>
+        </div>
+
+        <div class="form-group">
+            <label for="field_userId">UserId</label>
+            <input type="text" class="form-control" name="userId" id="field_userId"
+                    ng-model="userRecordDTO.userId"
+                    >
+
+        </div>
+        <div class="form-group">
+            <label for="field_visitId">VisitId</label>
+            <input type="text" class="form-control" name="visitId" id="field_visitId"
+                    ng-model="userRecordDTO.visitId"
+                    >
+
+        </div>
+        <div class="form-group">
+            <label for="field_symptoms">Symptoms</label>
+            <input type="text" class="form-control" name="symptoms" id="field_symptoms"
+                    ng-model="userRecordDTO.symptoms"
+                    >
+
+        </div>
+        <div class="form-group">
+            <label for="field_diagnosis">Diagnosis</label>
+            <input type="text" class="form-control" name="diagnosis" id="field_diagnosis"
+                    ng-model="userRecordDTO.diagnosis"
+                    >
+
+        </div>
+        <div class="form-group">
+            <label for="field_prescription">Prescription</label>
+            <input type="text" class="form-control" name="prescription" id="field_prescription"
+                    ng-model="userRecordDTO.prescription"
+                    >
+
+        </div>
+        <div class="form-group">
+            <label for="field_tests">Tests</label>
+            <input type="text" class="form-control" name="tests" id="field_tests"
+                    ng-model="userRecordDTO.tests"
+                    >
+
+        </div>
+
+    </div>
+    <div>
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || editForm.$submitted" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

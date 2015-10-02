@@ -1,0 +1,55 @@
+<ul>
+			<div has-any-role="ROLE_HOSPITAL_ADMIN,ROLE_ADMIN"  id="id5">hospital admin content</div>
+            <div has-any-role="ROLE_USER"  id="id5">user content</div>
+
+<div has-any-role="ROLE_USER"  >            
+	<div class="list-group">
+        <a  ng-click="fire('userDTO.detail', user)" class="list-group-item active">
+            <span class="glyphicon glyphicon-log-in"></span>View profile
+        </a>
+        <a  ng-click="fire('userDTO.edit', user)"  class="list-group-item">
+            <span class="glyphicon glyphicon-facetime-video"></span>update profile
+        </a>
+        <a ui-sref="userRecordDTO" class="list-group-item">
+            <span class="glyphicon glyphicon-phone"></span> Download records 
+        </a>
+        <a ui-sref="testBlob" class="list-group-item">
+            <span class="glyphicon glyphicon-envelope"></span> upload report 
+        </a>
+        <a href="#" class="list-group-item">
+            <span class="glyphicon glyphicon-envelope"></span> upload bills 
+        </a>
+        <a href="#" class="list-group-item">
+            <span class="glyphicon glyphicon-envelope"></span> view bills 
+        </a>
+        <a href="#" class="list-group-item">
+            <span class="glyphicon glyphicon-envelope"></span> download bills 
+        </a>
+        <a href="#" class="list-group-item">
+            <span class="glyphicon glyphicon-trash"></span> Add Family member 
+        </a>
+    </div>
+</div>
+	
+<div has-any-role="ROLE_HOSPITAL_ADMIN"  >            
+	<div class="list-group">
+        <a  ui-sref="doctorVisitDTO" class="list-group-item active">
+            <span class="glyphicon glyphicon-log-in"></span> My appointments 
+        </a>
+        <a  ui-sref="userDTO.edit({id:1})" class="list-group-item">
+            <span class="glyphicon glyphicon-facetime-video"></span> update profile2
+        </a>
+        <a ui-sref="userRecordDTO" class="list-group-item">
+            <span class="glyphicon glyphicon-phone"></span> add hospital 
+        </a>
+        <a ui-sref="testBlob" class="list-group-item">
+            <span class="glyphicon glyphicon-envelope"></span> update hospital 
+        </a>
+        <a href="#" class="list-group-item">
+            <span class="glyphicon glyphicon-envelope"></span> add doctor 
+        </a>
+    </div>
+</div>
+				
+	<!-- JHipster will add entities to the menu here -->
+</ul>
