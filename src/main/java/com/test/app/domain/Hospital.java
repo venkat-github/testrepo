@@ -269,8 +269,4 @@ public class Hospital implements Serializable {
                 '}';
     }
 
-	public void setAdminIds(HashSet<String> adminIds2) {
-		adminIds = adminIds2;
-		
-	}
 }
