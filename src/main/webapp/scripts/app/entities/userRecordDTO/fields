@@ -1,0 +1,12 @@
+doctorName
+doctorId
+hospitalName
+hospitalId
+startDate
+endDate
+fees
+slotDuration
+startTime
+breakStartTime
+breakEndTime
+endTime

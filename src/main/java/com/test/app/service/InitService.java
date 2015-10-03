@@ -31,6 +31,11 @@ import com.test.app.repository.HospitalRepository;
 import com.test.app.repository.UserRecordRepository;
 import com.test.app.repository.UserRepository;
 
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Query;
+
+
 @Service
 public class InitService {
 
@@ -57,6 +62,9 @@ public class InitService {
     @Inject
     HospitalDoctorConsultaionRepository hospitalDoctorConsultaionRepository;
     
+    @Inject
+    MongoTemplate mongoTemplate;
+    
     @PostConstruct
     public  void init() {
     	try {
@@ -72,7 +80,13 @@ public class InitService {
 	    	createHospitals();
 	    	addDoctorsToHospitals();
 	    	bookAppointments();
+
+	    	User user = userRepository.findOneByName("hosp");
 	    	
+	    	Query query = Query.query(Criteria.where("adminIds").in(user.getId()));
+	    	List<Hospital> doctor = mongoTemplate.find(query , Hospital.class);
+	    	System.out.println("found "+doctor.size()+" no of hospitals ");
+
     	} catch (javax.validation.ConstraintViolationException ex1) {
     		System.out.println("constrant name "+ex1.getConstraintViolations());
     		for (ConstraintViolation x : ex1.getConstraintViolations()) {
@@ -146,7 +160,7 @@ public class InitService {
         createUser("user4", "admin", "user4", "user","user@gmail.com","en", users);
 	}
 
-	void createUser(String name, String password, String first, String last, String email, 
+	String createUser(String name, String password, String first, String last, String email, 
 			String lang, HashSet<Authority> auths) {
 		
 		RestTemplate restTemplate = new RestTemplate();
@@ -164,7 +178,7 @@ public class InitService {
         
         Map<String, String> params = new HashMap<>();
         params.put("id", dto.getId());
-        
+        return user.getId();
 	}
 	
 	void findDoctor(String location, String speciality) {
@@ -194,7 +208,6 @@ public class InitService {
 
 	void addDoctorsToHospitals() {
 		addDoctorToHospital("koramanagala", "manipal", "doc1");
-		User doc = userRepository.findOneByName("doc1");
 		LocalDate dt = new LocalDate(2015,8,1);
 		for (HospitalDoctorConsultaion dto : 
 			hospitalDoctorConsultaionRepository.findBySpecialityAndDate(Speciality.DENTIST.toString(), dt) ) {
@@ -314,6 +327,13 @@ public class InitService {
 		hospitalDto.setLocation(location);
 		hospitalDto.setMobileNo(mobileno);
 		hospitalDto.setName(name);
+		
+		HashSet<String> adminIds = new HashSet<String>();
+		
+		User doc = userRepository.findOneByName("hosp");
+		adminIds.add(doc.getId());
+		hospitalDto.setAdminIds(adminIds);
+		
 		hospitalRepository.save(hospitalDto);
 		return hospitalDto;	
 	}
@@ -357,6 +377,7 @@ public class InitService {
 	
 	void createDoctors() {
 		createDoctor("doc1",40, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("doc1",45, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
 		createDoctor("doc2",41, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
 		createDoctor("doc3",42, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
 		createDoctor("doc4",43, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);

@@ -1,4 +1,49 @@
 angular.forEach(response.data, function(value, key) {
             		  console.log(key)
             		  console.log(value)
-            		});
+            		
+
+http://docs.spring.io/spring-data/mongodb/docs/1.3.3.RELEASE/reference/html/mongo.repositories.html
+http://docs.spring.io/spring-data/mongodb/docs/current/reference/html/
+
+GreaterThan	findByAgeGreaterThan(int age)	{"age" : {"$gt" : age}}
+LessThan	findByAgeLessThan(int age)	{"age" : {"$lt" : age}}
+Between	findByAgeBetween(int from, int to)	{"age" : {"$gt" : from, "$lt" : to}}
+IsNotNull, NotNull	findByFirstnameNotNull()	{"age" : {"$ne" : null}}
+IsNull, Null	findByFirstnameNull()	{"age" : null}
+Like	findByFirstnameLike(String name)	{"age" : age} ( age as regex)
+Regex	findByFirstnameRegex(String firstname)	{"firstname" : {"$regex" : firstname }}
+(No keyword)	findByFirstname(String name)	{"age" : name}
+Not	findByFirstnameNot(String name)	{"age" : {"$ne" : name}}
+Near	findByLocationNear(Point point)	{"location" : {"$near" : [x,y]}}
+Within	findByLocationWithin(Circle circle)	{"location" : {"$within" : {"$center" : [ [x, y], distance]}}}
+Within	findByLocationWithin(Box box)	{"location" : {"$within" : {"$box" : [ [x1, y1], x2, y2]}}}True
+IsTrue, True	findByActiveIsTrue()	{"active" : true}
+IsFalse, False	findByActiveIsFalse()	{"active" : false}
+Exists	findByLocationExists(boolean exists)	{"location" : {"$exists" : exists }}
+
+findByBirthdateAfter(Date date) {"birthdate" : {"$gt" : date}}
+findByAgeGreaterThan(int age) {"age" : {"$gt" : age}}
+findByAgeGreaterThanEqual(int age){"age" : {"$gte" : age}}
+findByBirthdateBefore(Date date) {"birthdate" : {"$lt" : date}}
+findByAgeLessThan(int age) {"age" : {"$lt" : age}}
+findByAgeLessThanEqual(int age) {"age" : {"$lte" : age}}
+findByAgeBetween(int from, int to) {"age" : {"$gt" : from, "$lt" : to}}
+findByAgeIn(Collection ages) {"age" : {"$in" : [ages…​]}}
+findByAgeNotIn(Collection ages) {"age" : {"$nin" : [ages…​]}}
+findByFirstnameNotNull() {"firstname" : {"$ne" : null}}
+findByFirstnameNull() {"firstname" : null}
+findByFirstnameLike(String name) {"firstname" : name} ( name as regex)
+findByFirstnameContaining(String name) {"firstname" : name} (name as regex)
+findByAddressesContaining(Address address) {"addresses" : { "$in" : address}}
+findByFirstnameRegex(String firstname) {"firstname" : {"$regex" : firstname }}
+findByFirstname(String name) {"firstname" : name}
+findByFirstnameNot(String name) {"firstname" : {"$ne" : name}}
+findByLocationNear(Point point) {"location" : {"$near" : [x,y]}}
+findByLocationNear(Point point, Distance max) {"location" : {"$near" : [x,y], "$maxDistance" : max}}
+findByLocationNear(Point point, Distance min, Distance max) {"location" : {"$near" : [x,y], "$minDistance" : min, "$maxDistance" : max}}
+findByLocationWithin(Circle circle) {"location" : {"$geoWithin" : {"$center" : [ [x, y], distance]}}}
+findByLocationWithin(Box box) {"location" : {"$geoWithin" : {"$box" : [ [x1, y1], x2, y2]}}}
+findByActiveIsTrue() {"active" : true}
+findByActiveIsFalse() {"active" : false}
+findByLocationExists(boolean exists) {"location" : {"$exists" : exists }}

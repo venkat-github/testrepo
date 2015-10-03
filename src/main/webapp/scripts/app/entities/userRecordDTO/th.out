@@ -1,0 +1,12 @@
+<th>doctorName</th>
+<th>doctorId</th>
+<th>hospitalName</th>
+<th>hospitalId</th>
+<th>startDate</th>
+<th>endDate</th>
+<th>fees</th>
+<th>slotDuration</th>
+<th>startTime</th>
+<th>breakStartTime</th>
+<th>breakEndTime</th>
+<th>endTime</th>

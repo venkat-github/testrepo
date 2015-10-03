@@ -1,0 +1,96 @@
+<tr>
+                <td>
+                    <span>doctorName</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{doctorScheduleDTO.doctorName}}" readonly>
+                </td>
+            </tr>
+<tr>
+                <td>
+                    <span>doctorId</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{doctorScheduleDTO.doctorId}}" readonly>
+                </td>
+            </tr>
+<tr>
+                <td>
+                    <span>hospitalName</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{doctorScheduleDTO.hospitalName}}" readonly>
+                </td>
+            </tr>
+<tr>
+                <td>
+                    <span>hospitalId</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{doctorScheduleDTO.hospitalId}}" readonly>
+                </td>
+            </tr>
+<tr>
+                <td>
+                    <span>startDate</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{doctorScheduleDTO.startDate}}" readonly>
+                </td>
+            </tr>
+<tr>
+                <td>
+                    <span>endDate</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{doctorScheduleDTO.endDate}}" readonly>
+                </td>
+            </tr>
+<tr>
+                <td>
+                    <span>fees</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{doctorScheduleDTO.fees}}" readonly>
+                </td>
+            </tr>
+<tr>
+                <td>
+                    <span>slotDuration</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{doctorScheduleDTO.slotDuration}}" readonly>
+                </td>
+            </tr>
+<tr>
+                <td>
+                    <span>startTime</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{doctorScheduleDTO.startTime}}" readonly>
+                </td>
+            </tr>
+<tr>
+                <td>
+                    <span>breakStartTime</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{doctorScheduleDTO.breakStartTime}}" readonly>
+                </td>
+            </tr>
+<tr>
+                <td>
+                    <span>breakEndTime</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{doctorScheduleDTO.breakEndTime}}" readonly>
+                </td>
+            </tr>
+<tr>
+                <td>
+                    <span>endTime</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{doctorScheduleDTO.endTime}}" readonly>
+                </td>
+            </tr>

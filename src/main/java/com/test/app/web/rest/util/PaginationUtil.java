@@ -35,6 +35,35 @@ public class PaginationUtil {
         }
         return new PageRequest(offset - 1, limit);
     }
+    
+    public static HttpHeaders generatePaginationHttpHeaders(int totalPages, int totalElements, String baseUrl, Integer offset, Integer limit)
+            throws URISyntaxException {
+
+            if (offset == null || offset < MIN_OFFSET) {
+                offset = DEFAULT_OFFSET;
+            }
+            if (limit == null || limit > MAX_LIMIT) {
+                limit = DEFAULT_LIMIT;
+            }
+            HttpHeaders headers = new HttpHeaders();
+            headers.add("X-Total-Count", "" + totalElements);
+            String link = "";
+            if (offset < totalPages) {
+                link = "<" + (new URI(baseUrl +"?page=" + (offset + 1) + "&per_page=" + limit)).toString()
+                    + ">; rel=\"next\",";
+            }
+            if (offset > 1) {
+                link += "<" + (new URI(baseUrl +"?page=" + (offset - 1) + "&per_page=" + limit)).toString()
+                    + ">; rel=\"prev\",";
+            }
+            link += "<" + (new URI(baseUrl +"?page=" + totalPages + "&per_page=" + limit)).toString()
+                + ">; rel=\"last\"," +
+                "<" + (new URI(baseUrl +"?page=" + 1 + "&per_page=" + limit)).toString()
+                + ">; rel=\"first\"";
+            headers.add(HttpHeaders.LINK, link);
+            return headers;
+        }
+
 
     public static HttpHeaders generatePaginationHttpHeaders(Page<?> page, String baseUrl, Integer offset, Integer limit)
         throws URISyntaxException {

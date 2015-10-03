@@ -1,0 +1,193 @@
+
+<div>
+    <!--<h2><span>DoctorScheduleDTO</span> {{doctorScheduleDTO.id}}</h2>
+    
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>doctorName</th>
+				<th>doctorId</th>
+				<th>hospitalName</th>
+				<th>hospitalId</th>
+				<th>startDate</th>
+				<th>endDate</th>
+				<th>fees</th>
+				<th>slotDuration</th>
+				<th>startTime</th>
+				<th>breakStartTime</th>
+				<th>breakEndTime</th>
+				<th>endTime</th>
+            </tr>
+            </thead>
+            <tbody>
+<tr>
+                <td>
+                    <span>doctorName</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{doctorScheduleDTO.doctorName}}" readonly>
+                </td>
+            </tr>
+<tr>
+                <td>
+                    <span>doctorId</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{doctorScheduleDTO.doctorId}}" readonly>
+                </td>
+            </tr>
+<tr>
+                <td>
+                    <span>hospitalName</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{doctorScheduleDTO.hospitalName}}" readonly>
+                </td>
+            </tr>
+<tr>
+                <td>
+                    <span>hospitalId</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{doctorScheduleDTO.hospitalId}}" readonly>
+                </td>
+            </tr>
+<tr>
+                <td>
+                    <span>startDate</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{doctorScheduleDTO.startDate}}" readonly>
+                </td>
+            </tr>
+<tr>
+                <td>
+                    <span>endDate</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{doctorScheduleDTO.endDate}}" readonly>
+                </td>
+            </tr>
+<tr>
+                <td>
+                    <span>fees</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{doctorScheduleDTO.fees}}" readonly>
+                </td>
+            </tr>
+<tr>
+                <td>
+                    <span>slotDuration</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{doctorScheduleDTO.slotDuration}}" readonly>
+                </td>
+            </tr>
+<tr>
+                <td>
+                    <span>startTime</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{doctorScheduleDTO.startTime}}" readonly>
+                </td>
+            </tr>
+<tr>
+                <td>
+                    <span>breakStartTime</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{doctorScheduleDTO.breakStartTime}}" readonly>
+                </td>
+            </tr>
+<tr>
+                <td>
+                    <span>breakEndTime</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{doctorScheduleDTO.breakEndTime}}" readonly>
+                </td>
+            </tr>
+<tr>
+                <td>
+                    <span>endTime</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{doctorScheduleDTO.endTime}}" readonly>
+                </td>
+            </tr>
+            
+            </tbody>
+        </table>
+    
+    </div>
+-->
+
+
+<div class="form-group">
+            <label for="doctorName">doctorName</label>
+            <input type="text" class="form-control" id="doctorName" name="doctorName"
+                    ng-model="doctorScheduleDTO.doctorName" readonly >
+      </div>
+      <div class="form-group">
+            <label for="doctorId">doctorId</label>
+            <input type="text" class="form-control" id="doctorId" name="doctorId"
+                    ng-model="doctorScheduleDTO.doctorId" readonly>
+      </div>
+      <div class="form-group">
+            <label for="hospitalName">hospitalName</label>
+            <input  type="text" id="hospitalName" name="hospitalName"
+                    ng-model="doctorScheduleDTO.hospitalId"  
+                    readonly />
+      </div>
+      
+      <div class="form-group">
+            <label for="startDate">startDate</label>
+              <input type="text" class="form-control"  ng-model="doctorScheduleDTO.startDate" 
+            readonly   />
+
+      </div>
+      
+      <div class="form-group">
+            <label for="fees">fees</label>
+            <input type="text" class="form-control" id="fees" name="fees"
+                    ng-model="doctorScheduleDTO.fees" readonly >
+      </div>
+      <div class="form-group">
+            <label for="slotDuration">slotDuration</label>
+            <input type="text" class="form-control" id="slotDuration" name="slotDuration"
+                    ng-model="doctorScheduleDTO.slotDuration" readonly >
+      </div>
+    
+      <div class="form-group">
+            <label for="startTime">startTime</label>
+
+            <input type="text" class="form-control" id="startTime" name="startTime"
+                    ng-model="doctorScheduleDTO.startTime"  readonly
+                    />
+
+      </div>
+
+      <div class="form-group">
+            <label for="breakStartTime">breakStartTime</label>
+            <input type="text" class="form-control" id="breakStartTime" name="breakStartTime"
+                    ng-model="doctorScheduleDTO.breakStartTime" readonly >
+      </div>
+      <div class="form-group">
+            <label for="breakEndTime">breakEndTime</label>
+            <input type="text" class="form-control" id="breakEndTime" name="breakEndTime"
+                    ng-model="doctorScheduleDTO.breakEndTime" readonly>
+      </div>
+      <div class="form-group">
+            <label for="endTime">endTime</label>
+            <input type="text" class="form-control" id="endTime" name="endTime"
+                    ng-model="doctorScheduleDTO.endTime" readonly >
+      </div>
+
+    <button type="submit"
+            ui-sref="doctorScheduleDTO"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

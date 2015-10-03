@@ -1,0 +1,5 @@
+      <div class="form-group">
+            <label for="placeHolder">placeHolder</label>
+            <input type="text" class="form-control" id="placeHolder" name="placeHolder"
+                    ng-model="doctorScheduleDTO.placeHolder" readonly>
+      </div>
