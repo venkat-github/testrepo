@@ -5,6 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -113,7 +114,128 @@ public class Hospital implements Serializable {
         this.zipcode = zipcode;
     }
 
-    @Override
+    
+    public String getRegistrationId() {
+		return registrationId;
+	}
+
+	public void setRegistrationId(String registrationId) {
+		this.registrationId = registrationId;
+	}
+
+	public String getLandmark() {
+		return landmark;
+	}
+
+	public void setLandmark(String landmark) {
+		this.landmark = landmark;
+	}
+
+	public Set<String> getDoctorIds() {
+		return doctorIds;
+	}
+
+	public void setDoctorIds(Set<String> doctorIds) {
+		this.doctorIds = doctorIds;
+	}
+
+	public Set<String> getAdminIds() {
+		return adminIds;
+	}
+
+	public void setAdminIds(Set<String> adminIds) {
+		this.adminIds = adminIds;
+	}
+
+	public Set<String> getEmergencyNos() {
+		return emergencyNos;
+	}
+
+	public void setEmergencyNos(Set<String> emergencyNos) {
+		this.emergencyNos = emergencyNos;
+	}
+
+	public Set<Facility> getFacilities() {
+		return facilities;
+	}
+
+	public void setFacilities(Set<Facility> facilities) {
+		this.facilities = facilities;
+	}
+
+	public Set<HospitalService> getEmergencyServices() {
+		return emergencyServices;
+	}
+
+	public void setEmergencyServices(Set<HospitalService> emergencyServices) {
+		this.emergencyServices = emergencyServices;
+	}
+
+	public String getCaption() {
+		return caption;
+	}
+
+	public void setCaption(String caption) {
+		this.caption = caption;
+	}
+
+	public Set<String> getPhotoIds() {
+		return photoIds;
+	}
+
+	public void setPhotoIds(Set<String> photoIds) {
+		this.photoIds = photoIds;
+	}
+
+	public Set<String> getNurseIds() {
+		return nurseIds;
+	}
+
+	public void setNurseIds(Set<String> nurseIds) {
+		this.nurseIds = nurseIds;
+	}
+
+	public String getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
+
+	public String getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
+
+	public Set<WorkingDay> getWorkingDays() {
+		return workingDays;
+	}
+
+	public void setWorkingDays(Set<WorkingDay> workingDays) {
+		this.workingDays = workingDays;
+	}
+
+	public long getLangitude() {
+		return langitude;
+	}
+
+	public void setLangitude(long langitude) {
+		this.langitude = langitude;
+	}
+
+	public long getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(long latitude) {
+		this.latitude = latitude;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -146,4 +268,9 @@ public class Hospital implements Serializable {
                 ", zipcode='" + zipcode + "'" +
                 '}';
     }
+
+	public void setAdminIds(HashSet<String> adminIds2) {
+		adminIds = adminIds2;
+		
+	}
 }

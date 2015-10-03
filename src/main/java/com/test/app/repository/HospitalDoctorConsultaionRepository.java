@@ -15,7 +15,6 @@ import com.test.app.domain.HospitalDoctorConsultaion;
 public interface HospitalDoctorConsultaionRepository extends MongoRepository<HospitalDoctorConsultaion,String> {
 
 	List<HospitalDoctorConsultaion> findBySpecialityOrLocation(String speciality, String location);
-
 	List<HospitalDoctorConsultaion> findBySpecialityAndLocation(String speciality, String location);
 	List<HospitalDoctorConsultaion> findBySpecialityAndLocationAndDate(String speciality, String location, LocalDate date);
 	List<HospitalDoctorConsultaion> findByLocationAndDate(String location, LocalDate date);

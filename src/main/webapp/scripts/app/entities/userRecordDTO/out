@@ -1,0 +1,60 @@
+      <div class="form-group">
+            <label for="doctorName">doctorName</label>
+            <input type="text" class="form-control" id="doctorName" name="doctorName"
+                    ng-model="doctorScheduleDTO.doctorName" readonly>
+      </div>
+      <div class="form-group">
+            <label for="doctorId">doctorId</label>
+            <input type="text" class="form-control" id="doctorId" name="doctorId"
+                    ng-model="doctorScheduleDTO.doctorId" readonly>
+      </div>
+      <div class="form-group">
+            <label for="hospitalName">hospitalName</label>
+            <input type="text" class="form-control" id="hospitalName" name="hospitalName"
+                    ng-model="doctorScheduleDTO.hospitalName" readonly>
+      </div>
+      <div class="form-group">
+            <label for="hospitalId">hospitalId</label>
+            <input type="text" class="form-control" id="hospitalId" name="hospitalId"
+                    ng-model="doctorScheduleDTO.hospitalId" readonly>
+      </div>
+      <div class="form-group">
+            <label for="startDate">startDate</label>
+            <input type="text" class="form-control" id="startDate" name="startDate"
+                    ng-model="doctorScheduleDTO.startDate" readonly>
+      </div>
+      <div class="form-group">
+            <label for="endDate">endDate</label>
+            <input type="text" class="form-control" id="endDate" name="endDate"
+                    ng-model="doctorScheduleDTO.endDate" readonly>
+      </div>
+      <div class="form-group">
+            <label for="fees">fees</label>
+            <input type="text" class="form-control" id="fees" name="fees"
+                    ng-model="doctorScheduleDTO.fees" readonly>
+      </div>
+      <div class="form-group">
+            <label for="slotDuration">slotDuration</label>
+            <input type="text" class="form-control" id="slotDuration" name="slotDuration"
+                    ng-model="doctorScheduleDTO.slotDuration" readonly>
+      </div>
+      <div class="form-group">
+            <label for="startTime">startTime</label>
+            <input type="text" class="form-control" id="startTime" name="startTime"
+                    ng-model="doctorScheduleDTO.startTime" readonly>
+      </div>
+      <div class="form-group">
+            <label for="breakStartTime">breakStartTime</label>
+            <input type="text" class="form-control" id="breakStartTime" name="breakStartTime"
+                    ng-model="doctorScheduleDTO.breakStartTime" readonly>
+      </div>
+      <div class="form-group">
+            <label for="breakEndTime">breakEndTime</label>
+            <input type="text" class="form-control" id="breakEndTime" name="breakEndTime"
+                    ng-model="doctorScheduleDTO.breakEndTime" readonly>
+      </div>
+      <div class="form-group">
+            <label for="endTime">endTime</label>
+            <input type="text" class="form-control" id="endTime" name="endTime"
+                    ng-model="doctorScheduleDTO.endTime" readonly>
+      </div>

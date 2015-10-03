@@ -2,6 +2,7 @@ package com.test.app.domain;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.test.app.domain.enumeration.Speciality;
 import com.test.app.domain.util.CustomLocalDateSerializer;
 import com.test.app.domain.util.ISO8601LocalDateDeserializer;
 
@@ -39,8 +40,22 @@ public class HospitalDoctorConsultaion implements Serializable {
 
     private String hospitalName;
 
-    @Field("speciality")
-    private String speciality;
+    public String getHospitalName() {
+		return hospitalName;
+	}
+	public void setHospitalName(String hospitalName) {
+		this.hospitalName = hospitalName;
+	}
+	public Set<String> getDegrees() {
+		return degrees;
+	}
+	public void setDegrees(Set<String> degrees) {
+		this.degrees = degrees;
+	}
+
+
+	@Field("speciality")
+    private Set<Speciality> speciality;
 
     @Field("experience")
     private Integer experience;
@@ -68,10 +83,39 @@ public class HospitalDoctorConsultaion implements Serializable {
     @Field("location")
     private String location;
 
+    @Field("city")
+    private String city;
+
+    private List<String> degree;
+    
     long langitude;
     long latitude;
     
-    public String getId() {
+    public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
+	public List<String> getDegree() {
+		return degree;
+	}
+	public void setDegree(List<String> degree) {
+		this.degree = degree;
+	}
+	public long getLangitude() {
+		return langitude;
+	}
+	public void setLangitude(long langitude) {
+		this.langitude = langitude;
+	}
+	public long getLatitude() {
+		return latitude;
+	}
+	public void setLatitude(long latitude) {
+		this.latitude = latitude;
+	}
+	public String getId() {
         return id;
     }
 
@@ -87,11 +131,11 @@ public class HospitalDoctorConsultaion implements Serializable {
         this.doctorName = doctorName;
     }
 
-    public String getSpeciality() {
+    public Set<Speciality> getSpeciality() {
         return speciality;
     }
 
-    public void setSpeciality(String speciality) {
+    public void setSpeciality(Set<Speciality> speciality) {
         this.speciality = speciality;
     }
 

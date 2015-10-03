@@ -9,14 +9,12 @@ angular.module('hipster1App')
         	if (!angular.isDefined(speciality)) {
         		speciality = $rootScope.speciality;
         	}
-        	HospitalDoctorDTO4.query({page: $scope.page, per_page: 20,
+        	HospitalDoctorDTO4.query({page: $scope.page, per_page: 5,
             	location: $rootScope.city, date:'8/1/2015',
                 speciality : $rootScope.speciality }, function(result, headers) {
                 $scope.links = ParseLinks.parse(headers('link'));
                 $scope.hospitalDoctorDTO4s = result;
                 $scope.hospitalDoctorDTO4check = result[0];
-            	
-                
             });
             
         };

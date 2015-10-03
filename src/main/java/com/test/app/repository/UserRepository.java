@@ -1,8 +1,12 @@
 package com.test.app.repository;
 
+import com.test.app.domain.HospitalDoctorConsultaion;
 import com.test.app.domain.User;
 
 import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
@@ -23,5 +27,8 @@ public interface UserRepository extends MongoRepository<User, String> {
     User findOneByEmail(String email);
 
 	User findOneByName(String name);
-
+	
+	Page<User> findByName(String name, Pageable page);
+	
+	User findOneById(String Id);
 }

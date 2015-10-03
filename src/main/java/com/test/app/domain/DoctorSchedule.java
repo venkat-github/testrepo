@@ -74,10 +74,124 @@ public class DoctorSchedule implements Serializable {
     public int hashCode() {
         return Objects.hashCode(id);
     }
+    
 
     @Override
     public String toString() {
         return "HospitalDoctorDTO4{" +
                 "id=" + id ;
     }
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getDoctorName() {
+		return doctorName;
+	}
+
+	public void setDoctorName(String doctorName) {
+		this.doctorName = doctorName;
+	}
+
+	public String getDoctorId() {
+		return doctorId;
+	}
+
+	public void setDoctorId(String doctorId) {
+		this.doctorId = doctorId;
+	}
+
+	public String getHospitalName() {
+		return hospitalName;
+	}
+
+	public void setHospitalName(String hospitalName) {
+		this.hospitalName = hospitalName;
+	}
+
+	public String getHospitalId() {
+		return hospitalId;
+	}
+
+	public void setHospitalId(String hospitalId) {
+		this.hospitalId = hospitalId;
+	}
+
+	public LocalDate getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(LocalDate startDate) {
+		this.startDate = startDate;
+	}
+
+	public LocalDate getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(LocalDate endDate) {
+		this.endDate = endDate;
+	}
+
+	public int getFees() {
+		return fees;
+	}
+
+	public void setFees(int fees) {
+		this.fees = fees;
+	}
+
+	public int getSlotDuration() {
+		return slotDuration;
+	}
+
+	public void setSlotDuration(int slotDuration) {
+		this.slotDuration = slotDuration;
+	}
+
+	public String getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
+
+	public String getBreakStartTime() {
+		return breakStartTime;
+	}
+
+	public void setBreakStartTime(String breakStartTime) {
+		this.breakStartTime = breakStartTime;
+	}
+
+	public String getBreakEndTime() {
+		return breakEndTime;
+	}
+
+	public void setBreakEndTime(String breakEndTime) {
+		this.breakEndTime = breakEndTime;
+	}
+
+	public String getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
+
+	public Set<WorkingDay> getWorkingDays() {
+		return workingDays;
+	}
+
+	public void setWorkingDays(Set<WorkingDay> workingDays) {
+		this.workingDays = workingDays;
+	}
+    
 }

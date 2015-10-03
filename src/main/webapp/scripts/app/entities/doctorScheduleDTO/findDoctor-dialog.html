@@ -1,0 +1,74 @@
+
+<form name="editForm" role="form" novalidate ng-submit="search()">
+
+    <div>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myDoctorScheduleDTOLabel">find Doctor</h4>
+    </div>
+    
+    <div>
+      <div class="form-group">
+            <label for="doctorName">doctorName</label>
+            <input type="text" class="form-control" id="doctorName" name="doctorName"
+                    ng-model="doctorName" >
+      </div>
+    </div>
+    <div>
+        <button type="submit" ng-disabled="editForm.$invalid || editForm.$submitted" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Search</span>
+        </button>
+    </div>
+
+        <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Mobileno</th>
+                    <th>EmailId</th>
+                    <th>Sex</th>
+                    <th>Age</th>
+                    <th>Location</th>
+                    <th>City</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="userDTO in userDTOs">
+                    <td><a ui-sref="userDTO.detail({id:userDTO.id})">{{userDTO.id}}</a></td>
+                    <td>{{userDTO.name}}</td>
+                    <td>{{userDTO.mobileno}}</td>
+                    <td>{{userDTO.emailId}}</td>
+                    <td>{{userDTO.sex}}</td>
+                    <td>{{userDTO.age}}</td>
+                    <td>{{userDTO.location}}</td>
+                    <td>{{userDTO.city}}</td>
+                    <td>
+                        <button type="submit"
+                                ng-click="addDoctorToHospitalPage(userDTO)"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span> View</span>
+                        </button>
+                        
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <nav>
+            <ul class="pagination">
+                <li ng-show="links['first']" ng-click="loadPage(links['first'])"><a>&lt;&lt;</a></li>
+                <li ng-show="links['prev']" ng-click="loadPage(links['prev'])"><a>&lt;</a></li>
+                <li ng-show="page > 2" ng-click="loadPage(page - 2)"><a>{{page - 2}}</a></li>
+                <li ng-show="page > 1" ng-click="loadPage(page - 1)"><a>{{page - 1}}</a></li>
+                <li class="active"><a>{{page}}</a></li>
+                <li ng-show="page < links['last']" ng-click="loadPage(page + 1)"><a>{{page + 1}}</a></li>
+                <li ng-show="page < links['last'] - 1" ng-click="loadPage(page + 2)"><a>{{page + 2}}</a></li>
+                <li ng-show="links['next']" ng-click="loadPage(links['next'])"><a>&gt;</a></li>
+                <li ng-show="links['last']" ng-click="loadPage(links['last'])"><a>&gt;&gt;</a></li>
+            </ul>
+        </nav>
+    </div>
+
+</form>

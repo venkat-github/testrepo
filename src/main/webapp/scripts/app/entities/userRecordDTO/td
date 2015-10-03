@@ -1,0 +1,8 @@
+<tr>
+                <td>
+                    <span>placeHolder</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{doctorScheduleDTO.placeHolder}}" readonly>
+                </td>
+            </tr>

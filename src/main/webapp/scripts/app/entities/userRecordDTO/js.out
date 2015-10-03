@@ -1,0 +1,5 @@
+    <script src="scripts/app/entities/doctorScheduleDTO/doctorScheduleDTO.js"></script>
+    <script src="scripts/app/entities/doctorScheduleDTO/doctorScheduleDTO.controller.js"></script>
+    <script src="scripts/app/entities/doctorScheduleDTO/doctorScheduleDTO-dialog.controller.js"></script>
+    <script src="scripts/app/entities/doctorScheduleDTO/doctorScheduleDTO-detail.controller.js"></script>
+    <script src="scripts/components/entities/doctorScheduleDTO/doctorScheduleDTO.service.js"></script>

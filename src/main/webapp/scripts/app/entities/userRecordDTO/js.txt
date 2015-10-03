@@ -1,0 +1,5 @@
+    <script src="scripts/app/entities/userRecordDTO/userRecordDTO.js"></script>
+    <script src="scripts/app/entities/userRecordDTO/userRecordDTO.controller.js"></script>
+    <script src="scripts/app/entities/userRecordDTO/userRecordDTO-dialog.controller.js"></script>
+    <script src="scripts/app/entities/userRecordDTO/userRecordDTO-detail.controller.js"></script>
+    <script src="scripts/components/entities/userRecordDTO/userRecordDTO.service.js"></script>

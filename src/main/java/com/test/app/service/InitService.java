@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -17,19 +18,28 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.test.app.domain.Authority;
+import com.test.app.domain.DoctorSchedule;
 import com.test.app.domain.DoctorVisit;
 import com.test.app.domain.Hospital;
 import com.test.app.domain.HospitalDoctorConsultaion;
 import com.test.app.domain.User;
 import com.test.app.domain.UserDoctorVisitRecord;
+import com.test.app.domain.WorkingDay;
 import com.test.app.domain.enumeration.Sex;
 import com.test.app.domain.enumeration.Speciality;
 import com.test.app.repository.AuthorityRepository;
+import com.test.app.repository.DoctorScheduleRepository;
 import com.test.app.repository.DoctorVisitRepository;
 import com.test.app.repository.HospitalDoctorConsultaionRepository;
+import com.test.app.repository.HospitalDoctorConsultationHelperFunctions;
 import com.test.app.repository.HospitalRepository;
 import com.test.app.repository.UserRecordRepository;
 import com.test.app.repository.UserRepository;
+
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Query;
+
 
 @Service
 public class InitService {
@@ -56,6 +66,13 @@ public class InitService {
 
     @Inject
     HospitalDoctorConsultaionRepository hospitalDoctorConsultaionRepository;
+    @Inject
+    DoctorScheduleRepository doctorScheduleRepository;
+    
+    @Inject
+    HospitalDoctorConsultationHelperFunctions hospitalDoctorConsultationHelperFunctions;
+    @Inject
+    MongoTemplate mongoTemplate;
     
     @PostConstruct
     public  void init() {
@@ -72,7 +89,13 @@ public class InitService {
 	    	createHospitals();
 	    	addDoctorsToHospitals();
 	    	bookAppointments();
+
+	    	User user = userRepository.findOneByName("hosp");
 	    	
+	    	Query query = Query.query(Criteria.where("adminIds").in(user.getId()));
+	    	List<Hospital> doctor = mongoTemplate.find(query , Hospital.class);
+	    	System.out.println("found "+doctor.size()+" no of hospitals ");
+
     	} catch (javax.validation.ConstraintViolationException ex1) {
     		System.out.println("constrant name "+ex1.getConstraintViolations());
     		for (ConstraintViolation x : ex1.getConstraintViolations()) {
@@ -146,7 +169,7 @@ public class InitService {
         createUser("user4", "admin", "user4", "user","user@gmail.com","en", users);
 	}
 
-	void createUser(String name, String password, String first, String last, String email, 
+	String createUser(String name, String password, String first, String last, String email, 
 			String lang, HashSet<Authority> auths) {
 		
 		RestTemplate restTemplate = new RestTemplate();
@@ -164,7 +187,7 @@ public class InitService {
         
         Map<String, String> params = new HashMap<>();
         params.put("id", dto.getId());
-        
+        return user.getId();
 	}
 	
 	void findDoctor(String location, String speciality) {
@@ -194,7 +217,6 @@ public class InitService {
 
 	void addDoctorsToHospitals() {
 		addDoctorToHospital("koramanagala", "manipal", "doc1");
-		User doc = userRepository.findOneByName("doc1");
 		LocalDate dt = new LocalDate(2015,8,1);
 		for (HospitalDoctorConsultaion dto : 
 			hospitalDoctorConsultaionRepository.findBySpecialityAndDate(Speciality.DENTIST.toString(), dt) ) {
@@ -247,7 +269,26 @@ public class InitService {
 	void addDoctorToHospital(String location, String hospitalName, String doctorName) {
 		User doc = userRepository.findOneByName(doctorName);
 		Hospital hospital = hospitalRepository.findByNameAndLocation(hospitalName, location).get(0);
+		Set<WorkingDay> workingdays = null;
+		DoctorSchedule doctorSchedule = new DoctorSchedule();
+		doctorSchedule.setDoctorId(doc.getId());
+		doctorSchedule.setDoctorName(doc.getFullname());
+		doctorSchedule.setFees(500);
+		doctorSchedule.setBreakStartTime("12:30");
+		doctorSchedule.setBreakEndTime("13:30");
+		doctorSchedule.setStartDate(new LocalDate());
+		doctorSchedule.setEndDate(new LocalDate().plusDays(30));
+		doctorSchedule.setStartTime("8:00");
+		doctorSchedule.setEndTime("17:00");
+		doctorSchedule.setHospitalId(hospital.getId());
+		doctorSchedule.setHospitalName(hospital.getName());
+		doctorSchedule.setSlotDuration(15);
+		doctorSchedule.setWorkingDays(workingdays);
+		doctorScheduleRepository.save(doctorSchedule);
 		
+		for (int i=0; i< 1; i++) {
+			hospitalDoctorConsultationHelperFunctions.AddNextDayConsultationRecordForDoctorAndHospital(doc.getId(), hospital.getId(), i);
+		}
 		HospitalDoctorConsultaion dto = new HospitalDoctorConsultaion();
 		
 		for (int month = 8 ; month < 9; month++) {
@@ -287,7 +328,7 @@ public class InitService {
 				dto.setFreeSlots(freeSlots);
 				dto.setOccupiedSlots(new ArrayList<String>());
 				dto.setHospitalId(hospital.getId());
-				dto.setSpeciality(doc.getSpecialities().iterator().next().toString());
+				dto.setSpeciality(doc.getSpecialities());
 				hospitalDoctorConsultaionRepository.save(dto);
 				
 				
@@ -314,6 +355,13 @@ public class InitService {
 		hospitalDto.setLocation(location);
 		hospitalDto.setMobileNo(mobileno);
 		hospitalDto.setName(name);
+		
+		HashSet<String> adminIds = new HashSet<String>();
+		
+		User doc = userRepository.findOneByName("hosp");
+		adminIds.add(doc.getId());
+		hospitalDto.setAdminIds(adminIds);
+		
 		hospitalRepository.save(hospitalDto);
 		return hospitalDto;	
 	}
@@ -357,6 +405,7 @@ public class InitService {
 	
 	void createDoctors() {
 		createDoctor("doc1",40, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("doc1",45, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
 		createDoctor("doc2",41, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
 		createDoctor("doc3",42, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
 		createDoctor("doc4",43, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
