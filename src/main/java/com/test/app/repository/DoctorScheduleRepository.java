@@ -4,6 +4,9 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 import com.test.app.domain.DoctorSchedule;
 
-public interface DoctorScheduleRepository extends MongoRepository<DoctorSchedule,String>{
-
+/**
+ * Spring Data MongoDB repository for the DoctorVisitDTO entity.
+ */
+public interface DoctorScheduleRepository extends MongoRepository<DoctorSchedule,String> {
+	
 }

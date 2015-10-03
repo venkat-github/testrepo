@@ -429,33 +429,6 @@ public class MedUserResource {
         	
 			for (int day = startDate; day < endDate; day++) {
 				
-				HospitalDoctorConsultaion dto2 = new HospitalDoctorConsultaion();
-				List<String> freeSlots = new ArrayList<String>();
-				freeSlots.add("8:00");
-				freeSlots.add("8:15");
-				freeSlots.add("8:30");
-				freeSlots.add("8:45");
-
-				freeSlots.add("9:00");
-				freeSlots.add("9:15");
-				freeSlots.add("9:30");
-				freeSlots.add("9:45");
-	
-				freeSlots.add("10:00");
-				freeSlots.add("10:15");
-				freeSlots.add("10:30");
-				freeSlots.add("10:45");
-	
-				freeSlots.add("11:00");
-				freeSlots.add("11:15");
-				freeSlots.add("11:30");
-				freeSlots.add("11:45");
-	
-				LocalDate date = new LocalDate(2015, month, day);
-				
-				
-				
-				
 			}
         }
         

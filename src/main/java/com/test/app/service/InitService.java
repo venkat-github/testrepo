@@ -71,6 +71,7 @@ public class InitService {
     
     @Inject
     HospitalDoctorConsultationHelperFunctions hospitalDoctorConsultationHelperFunctions;
+    
     @Inject
     MongoTemplate mongoTemplate;
     

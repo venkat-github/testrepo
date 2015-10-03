@@ -29,6 +29,5 @@ public interface UserRepository extends MongoRepository<User, String> {
 	User findOneByName(String name);
 	
 	Page<User> findByName(String name, Pageable page);
-	
 	User findOneById(String Id);
 }
