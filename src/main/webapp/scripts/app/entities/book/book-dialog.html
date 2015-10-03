@@ -1,0 +1,76 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myDoctorVisitDTOLabel">Book</h4>
+    </div>
+    <div class="modal-body">
+    
+
+        <div class="form-group">
+                    <label for="login">mobile</label>
+                    <input type="text" class="form-control" id="login" name="login" placeholder="mobileno"
+                           ng-model="book.login" ng-minlength=1 ng-maxlength=50 ng-pattern="/^[a-z0-9]*$/" required>
+                    <div ng-show="form.login.$dirty && form.login.$invalid">
+                        <p class="help-block"
+                               ng-show="form.login.$error.required">
+                            Your login is required.
+                        </p>
+                        <p class="help-block"
+                               ng-show="form.login.$error.minlength">
+                            Your login is required to be at least 1 character.
+                        </p>
+                        <p class="help-block"
+                               ng-show="form.login.$error.maxlength">
+                            Your login cannot be longer than 50 characters.
+                        </p>
+                        <p class="help-block"
+                               ng-show="form.login.$error.pattern">
+                            Your login can only contain lower-case letters and digits.
+                    </p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Your e-mail"
+                           ng-model="doctorVisitDTO.hospitalId" ng-minlength=5 ng-maxlength=100 required>
+                    <div ng-show="form.email.$dirty && form.email.$invalid">
+                        <p class="help-block"
+                               ng-show="form.email.$error.required">
+                            Your e-mail is required.
+                        </p>
+                        <p class="help-block"
+                               ng-show="form.email.$error.email">
+                            Your e-mail is invalid.
+                        </p>
+                        <p class="help-block"
+                               ng-show="form.email.$error.minlength">
+                            Your e-mail is required to be at least 5 characters.
+                        </p>
+                        <p class="help-block"
+                               ng-show="form.email.$error.maxlength">
+                            Your e-mail cannot be longer than 100 characters.
+                        </p>
+                    </div>
+                </div>
+            <input type="hidden" name="slot" ng-model="doctorVisitDTO.slot"/>
+            <input type="hidden" name="consultId" ng-model="doctorVisitDTO.consultId"/>
+            <input type="hidden" name="hospitalId" ng-model="doctorVisitDTO.hospitalId"/>
+            <input type="hidden" name="slotNo" ng-model="doctorVisitDTO.slotNo"/>
+            <input type="hidden" name="date" ng-model="doctorVisitDTO.date"/>
+
+        </div>
+ 
+ 		
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || editForm.$submitted" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>
