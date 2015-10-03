@@ -2,22 +2,23 @@
 
 angular.module('hipster1App')
     .controller('HospitalDoctorDTO4Controller',
-    		['Auth','$scope', '$stateParams', '$state','$http', '$rootScope', 'HospitalDoctorDTO4','Principal','ParseLinks',
-    		 function (Auth,$scope, $stateParams,  $state, $http, $rootScope, HospitalDoctorDTO4,Principal, ParseLinks) {
+    		['Auth','$scope','DateUtils', '$stateParams', '$state','$http', '$rootScope', 'HospitalDoctorDTO4','Principal','ParseLinks',
+    		 function (Auth,$scope, DateUtils, $stateParams,  $state, $http, $rootScope, HospitalDoctorDTO4,Principal, ParseLinks) {
         $scope.page = 1;
         $scope.loadAll = function(speciality) {
         	if (!angular.isDefined(speciality)) {
         		speciality = $rootScope.speciality;
         	}
-        	
-            HospitalDoctorDTO4.query({page: $scope.page, per_page: 20,
-            	location: $rootScope.city, speciality : $rootScope.speciality }, function(result, headers) {
+        	HospitalDoctorDTO4.query({page: $scope.page, per_page: 20,
+            	location: $rootScope.city, date:'8/1/2015',
+                speciality : $rootScope.speciality }, function(result, headers) {
                 $scope.links = ParseLinks.parse(headers('link'));
                 $scope.hospitalDoctorDTO4s = result;
                 $scope.hospitalDoctorDTO4check = result[0];
             	
                 
             });
+            
         };
         
         $rootScope.fixAppointment = function(slot , hospitalDoctorDTO4) {
@@ -28,9 +29,20 @@ angular.module('hipster1App')
         	Principal.identity(true).then(function(account) {
                 $scope.account = account;
                 if (!angular.isDefined(account) || account == null) {
-                	account = {id:'1'};
-                }
-                $state.go('doctorVisitDTO.fix',{ 'data':{
+                    //alert('not logged in')
+                    $('#mymodal').modal('hide');
+
+                    $state.go('book',{ 
+                    'id':null,
+                    'slot':slot,
+                    'consultId':hospitalDoctorDTO4.id,
+                    'doctorId':hospitalDoctorDTO4.doctorId,
+                    'hospitalId':hospitalDoctorDTO4.hospitalId,
+                    'slotNo':1,
+                    'date': hospitalDoctorDTO4.date});
+                } else {
+                    //alert('logged in')
+                    $state.go('doctorVisitDTO.fix',{ 'data':{
             		'id':null,
             		'slot':slot,
             		'consultId':hospitalDoctorDTO4.id,
@@ -39,6 +51,7 @@ angular.module('hipster1App')
             		'hospitalId':hospitalDoctorDTO4.hospitalId,
             		'slotNo':1,
             		'date': hospitalDoctorDTO4.date}});
+                }
             
             });
         }

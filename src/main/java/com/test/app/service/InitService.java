@@ -194,6 +194,12 @@ public class InitService {
 
 	void addDoctorsToHospitals() {
 		addDoctorToHospital("koramanagala", "manipal", "doc1");
+		User doc = userRepository.findOneByName("doc1");
+		LocalDate dt = new LocalDate(2015,8,1);
+		for (HospitalDoctorConsultaion dto : 
+			hospitalDoctorConsultaionRepository.findBySpecialityAndDate(Speciality.DENTIST.toString(), dt) ) {
+			System.out.println("dto name "+dto.getDoctorName());
+		}
 		addDoctorToHospital("koramanagala", "manipal", "doc2");
 		
 		addDoctorToHospital("koramanagala", "apollo", "doc3");
@@ -268,6 +274,8 @@ public class InitService {
 				freeSlots.add("11:45");
 	
 				LocalDate date = new LocalDate(2015, month, day);
+				
+				
 				dto.setLocation(location);
 				dto.setDoctorName(doctorName);
 				HashSet<String> degrees = new HashSet<String>();

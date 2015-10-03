@@ -3,6 +3,8 @@ package com.test.app.repository;
 import java.util.List;
 
 import org.joda.time.LocalDate;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import com.test.app.domain.HospitalDoctorConsultaion;
@@ -17,6 +19,8 @@ public interface HospitalDoctorConsultaionRepository extends MongoRepository<Hos
 	List<HospitalDoctorConsultaion> findBySpecialityAndLocation(String speciality, String location);
 	List<HospitalDoctorConsultaion> findBySpecialityAndLocationAndDate(String speciality, String location, LocalDate date);
 	List<HospitalDoctorConsultaion> findByLocationAndDate(String location, LocalDate date);
+	List<HospitalDoctorConsultaion> findBySpecialityAndDate(String speciality, LocalDate date);
+	Page<HospitalDoctorConsultaion> findBySpecialityAndDate(String speciality, LocalDate date, Pageable page);
 	List<HospitalDoctorConsultaion> findByDoctorName(String doctorName);
 	
 }

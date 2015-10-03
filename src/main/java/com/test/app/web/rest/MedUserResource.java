@@ -10,9 +10,11 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 
+import org.joda.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
+import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -25,16 +27,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.test.app.domain.DoctorVisit;
 import com.test.app.domain.Hospital;
 import com.test.app.domain.HospitalDoctorConsultaion;
 import com.test.app.domain.User;
 import com.test.app.domain.UserDoctorVisitRecord;
+import com.test.app.domain.util.CustomLocalDateSerializer;
+import com.test.app.domain.util.ISO8601LocalDateDeserializer;
 import com.test.app.repository.DoctorVisitRepository;
 import com.test.app.repository.HospitalDoctorConsultaionRepository;
 import com.test.app.repository.HospitalRepository;
 import com.test.app.repository.UserRecordRepository;
 import com.test.app.repository.UserRepository;
+import com.test.app.service.UserService;
 import com.test.app.web.rest.dto.HospitalDto;
 import com.test.app.web.rest.util.HeaderUtil;
 import com.test.app.web.rest.util.PaginationUtil;
@@ -65,37 +72,7 @@ public class MedUserResource {
     private UserRecordRepository userRecordRepository;
     
     
-	@RequestMapping(value="/cities", method = RequestMethod.GET)
-	@ResponseBody
-	Map<String,String> cities() {
-		HashMap<String, String>	cities = new HashMap<String, String>();
-		cities.put("koramanagala","koramanagala");
-		cities.put("marathalli","marathalli");
-		return cities;
-	}
-
-	/*
-	@RequestMapping(value="/search", method = RequestMethod.GET)
-	List<HospitalDoctorConsultaion> search(
-			@RequestParam(value = "speciality" , required = false) String speciality,
-			@RequestParam(value = "location" , required = false) String location
-			) {
-		List<HospitalDoctorConsultaion> results = null;//repo.findBySpecialityAndLocation(speciality, location);
-		
-		List<MedUser> consultations = new ArrayList<MedUser>();
-		MedUser doc2 = new MedUser();
-		doc2.setName("hello");;
-		consultations.add(doc2);
-		
-		doc2 = new MedUser();
-		doc2.setName("hello2");;
-		consultations.add(doc2);
-		return results;
-	}
-	*/
-	
-    
-    @RequestMapping(value = "/userDTOs",
+	@RequestMapping(value = "/userDTOs",
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     
@@ -140,15 +117,32 @@ public class MedUserResource {
 
     }
 
+    
+    @RequestMapping(value="/cities", method = RequestMethod.GET)
+	@ResponseBody
+	Map<String,String> cities() {
+		HashMap<String, String>	cities = new HashMap<String, String>();
+		cities.put("koramanagala","koramanagala");
+		cities.put("marathalli","marathalli");
+		return cities;
+	}
+
+
     @RequestMapping(value = "/doctors",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     
-    public ResponseEntity<List<HospitalDoctorConsultaion>> getAllDoctors(@RequestParam(value = "page" , required = false) Integer offset,
+    public ResponseEntity<List<HospitalDoctorConsultaion>> getAllDoctors(
+    	    @RequestParam(value = "date", required = false)
+    	    @JsonSerialize(using = CustomLocalDateSerializer.class)
+    	    @JsonDeserialize(using = ISO8601LocalDateDeserializer.class)
+    	    LocalDate date,
+    		@RequestParam(value = "speciality" , required = false) String speciality,
+    		@RequestParam(value = "page" , required = false) Integer offset,
                                   @RequestParam(value = "per_page", required = false) Integer limit)
         throws URISyntaxException {
     	List<HospitalDoctorConsultaion> result = new ArrayList<HospitalDoctorConsultaion>();
-    	Page<HospitalDoctorConsultaion> page = hospitalDoctorConsultaionRepository.findAll(PaginationUtil.generatePageRequest(offset, limit));
+    	Page<HospitalDoctorConsultaion> page = hospitalDoctorConsultaionRepository.findBySpecialityAndDate(speciality, date, PaginationUtil.generatePageRequest(offset, limit));
     	result = page.getContent();
     	
     	HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/doctors", offset, limit);
@@ -170,18 +164,26 @@ public class MedUserResource {
         return new ResponseEntity<List<UserDoctorVisitRecord>>(result, headers, HttpStatus.OK);
     }
 
+    @Inject
+    UserService userService;
+
     @RequestMapping(value = "/patients",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     
-    public ResponseEntity<List<DoctorVisit>> getAllUserVisits(@RequestParam(value = "page" , required = false) Integer offset,
+    public ResponseEntity<List<DoctorVisit>> getAllUserVisits(
+    	    @RequestParam(value = "date", required = false)
+    	    @JsonSerialize(using = CustomLocalDateSerializer.class)
+    	    @JsonDeserialize(using = ISO8601LocalDateDeserializer.class)
+    	    LocalDate date,
+    		@RequestParam(value = "page" , required = false) Integer offset,
                                   @RequestParam(value = "per_page", required = false) Integer limit)
         throws URISyntaxException {
-    	List<DoctorVisit> result = new ArrayList<DoctorVisit>();
-    	Page<DoctorVisit> page = doctorVisitRepository.findAll(PaginationUtil.generatePageRequest(offset, limit));
-    	result = page.getContent();
-    	HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/patients", offset, limit);
-        return new ResponseEntity<List<DoctorVisit>>(result, headers, HttpStatus.OK);
+    	User user = userService.getUserWithAuthorities();
+    	
+        Page<DoctorVisit> page = doctorVisitRepository.findByDoctorIdAndDate(user.getId(), date, PaginationUtil.generatePageRequest(offset, limit));
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/doctorVisitDTOs", offset, limit);
+        return new ResponseEntity<List<DoctorVisit>>(page.getContent(), headers, HttpStatus.OK);
     }
 
     public ResponseEntity<List<User>>  get(int offset, int limit) throws URISyntaxException {

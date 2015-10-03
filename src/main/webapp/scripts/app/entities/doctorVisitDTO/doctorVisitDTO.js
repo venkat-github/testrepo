@@ -53,11 +53,10 @@ angular.module('hipster1App')
                 }
             })
             .state('doctorVisitDTO.detail', {
-                parent: 'doctorVisitDTO',
+                parent :'entity',
                 url: '/doctorVisitDTO/{id}',
                 data: {
-                    roles: ['ROLE_USER'],
-                    pageTitle: 'DoctorVisitDTO'
+                   roles: []
                 },
                 views: {
                     'content@': {

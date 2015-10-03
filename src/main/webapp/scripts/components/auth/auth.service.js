@@ -43,7 +43,6 @@ angular.module('hipster1App')
                                 // send them to the signin state, so you can return them when you're done
                                 $rootScope.returnToState = $rootScope.toState;
                                 $rootScope.returnToStateParams = $rootScope.toStateParams;
-
                                 // now, send them to the signin state so they can log in
                                 $state.go('login');
                             }
