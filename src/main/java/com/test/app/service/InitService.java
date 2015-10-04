@@ -176,13 +176,13 @@ public class InitService {
         Authority userAuth = authorityRepository.findOne("ROLE_USER");
         users.add(userAuth);
         
-        createUser("hosp", "admin", "hosp", "hosp","hosp@gmail.com","en", hosps);
-        createUser("admin", "admin", "admin", "admin","admin@gmail.com","en", admins);
-        createUser("user", "admin", "user", "user","user@gmail.com","en", users);
-        createUser("user1", "admin", "user1", "user","user@gmail.com","en", users);
-        createUser("user2", "admin", "user2", "user","user@gmail.com","en", users);
-        createUser("user3", "admin", "user3", "user","user@gmail.com","en", users);
-        createUser("user4", "admin", "user4", "user","user@gmail.com","en", users);
+        createUser("hosp@gmail.com", "admin", "hosp", "hosp","hosp@gmail.com","en", hosps);
+        createUser("admin@gmail.com", "admin", "admin", "admin","admin@gmail.com","en", admins);
+        createUser("user@gmail.com", "admin", "user", "user","user@gmail.com","en", users);
+        createUser("user1@gmail.com", "admin", "user1", "user","user1@gmail.com","en", users);
+        createUser("user2@gmail.com", "admin", "user2", "user","user2@gmail.com","en", users);
+        createUser("user3@gmail.com", "admin", "user3", "user","user3@gmail.com","en", users);
+        createUser("user4@gmail.com", "admin", "user4", "user","user4@gmail.com","en", users);
 	}
 
 	String createUser(String name, String password, String first, String last, String email, 
@@ -192,17 +192,6 @@ public class InitService {
         
 		User user = userService.createUserInformation(name, password , first, last,
         		email, lang, auths);
-        User dto = user;
-        dto.setId(user.getId());
-        dto.setName(user.getName());
-        dto.setLogin(user.getLogin());
-        dto.setEmailId(user.getEmail());
-        dto.setPassword(user.getPassword());
-        
-        userRepository.save(dto);
-        
-        Map<String, String> params = new HashMap<>();
-        params.put("id", dto.getId());
         return user.getId();
 	}
 	
@@ -411,7 +400,7 @@ public class InitService {
 		doctorDto.setAge(age);
 		doctorDto.setSpecialities(specialities);;
 		doctorDto.setDegrees(degrees);
-		doctorDto.setEmailId(emailId);
+		doctorDto.setEmail(emailId);
 		doctorDto.setExperience(experience);
 		doctorDto.setMobileno(mobileno);
 		doctorDto.setSex(sex);

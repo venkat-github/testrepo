@@ -66,6 +66,7 @@ public class AccountResource {
             produces = MediaType.TEXT_PLAIN_VALUE)
     @Timed
     public ResponseEntity<?> registerAccount(@Valid @RequestBody User dto, HttpServletRequest request) {
+    	dto.setLogin(dto.getEmail());
         User user = userRepository.findOneByLogin(dto.getLogin());
         if (user != null) {
             return ResponseEntity.badRequest().contentType(MediaType.TEXT_PLAIN).body("login already in use");

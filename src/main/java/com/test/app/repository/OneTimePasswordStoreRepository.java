@@ -9,5 +9,9 @@ import com.health.app.domain.OneTimePasswordStore;
 
 public interface OneTimePasswordStoreRepository 
 	extends MongoRepository<OneTimePasswordStore, String> {
-
+	 String deleteByMobileNo(String mobileNo);
+	 OneTimePasswordStore findOneByMobileNo(String mobileNo);
+	 
+	 OneTimePasswordStore findOneByMobileNoAndOtp(String mobileNo, String otp);
+	 
 }

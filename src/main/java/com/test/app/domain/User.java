@@ -41,10 +41,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Id
     private String id;
 
-    @NotNull
-    @Pattern(regexp = "^[a-z0-9]*$")
-    @Size(min = 1, max = 50)
-    private String login;
+    private String login;//email alias
 
     //@JsonIgnore
     @NotNull
@@ -58,15 +55,11 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Field("last_name")
     private String lastName;
 
-    @Field("lang_key")
+	@Field("lang_key")
     private String langKey;
 
-    @Field("name")
-    private String name;
-
-    
     @Field("fullname")
-    private String fullname;
+    private String name;
 
     @Field("uuid")
     private String uuid;
@@ -177,13 +170,15 @@ public class User extends AbstractAuditingEntity implements Serializable {
     private boolean doctorActivated = false;
 
     boolean isHospitalAdmin;
+    
     boolean isDoctor;
     
     public String getLogin() {
-		return login;
+		return email;
 	}
 
 	public void setLogin(String login) {
+		this.email = login;
 		this.login = login;
 	}
 
@@ -223,10 +218,6 @@ public class User extends AbstractAuditingEntity implements Serializable {
     
     
     public User() {
-    }
-    
-    public String getEmailId() {
-    	return email;
     }
     
 	public String getEmail() {
@@ -356,11 +347,11 @@ public class User extends AbstractAuditingEntity implements Serializable {
     }
 
 	public String getFullname() {
-		return fullname;
+		return name;
 	}
 
 	public void setFullname(String fullname) {
-		this.fullname = fullname;
+		this.name = fullname;
 	}
 
 	public String getUuid() {
@@ -595,16 +586,24 @@ public class User extends AbstractAuditingEntity implements Serializable {
 		return "en";
 	}
 
-	public String getFirstName() {
-		return name;
-	}
-
 	public void setLangKey(String langKey2) {
 		
 	}
 
-	public void setEmailId(String email2) {
-		email = email2;
+    public String getFirstName() {
+		return firstName;
 	}
-    
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
 }

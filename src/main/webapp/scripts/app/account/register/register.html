@@ -26,29 +26,6 @@
             <form ng-show="!success" name="form" role="form" novalidate ng-submit="register()" show-validation>
 
                 <div class="form-group">
-                    <label for="login">Login</label>
-                    <input type="text" class="form-control" id="login" name="login" placeholder="Your login"
-                           ng-model="registerAccount.login" ng-minlength=1 ng-maxlength=50 ng-pattern="/^[a-z0-9]*$/" required>
-                    <div ng-show="form.login.$dirty && form.login.$invalid">
-                        <p class="help-block"
-                               ng-show="form.login.$error.required">
-                            Your login is required.
-                        </p>
-                        <p class="help-block"
-                               ng-show="form.login.$error.minlength">
-                            Your login is required to be at least 1 character.
-                        </p>
-                        <p class="help-block"
-                               ng-show="form.login.$error.maxlength">
-                            Your login cannot be longer than 50 characters.
-                        </p>
-                        <p class="help-block"
-                               ng-show="form.login.$error.pattern">
-                            Your login can only contain lower-case letters and digits.
-                    </p>
-                    </div>
-                </div>
-                <div class="form-group">
                     <label for="email">E-mail</label>
                     <input type="email" class="form-control" id="email" name="email" placeholder="Your e-mail"
                            ng-model="registerAccount.email" ng-minlength=5 ng-maxlength=100 required>

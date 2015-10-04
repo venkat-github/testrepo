@@ -96,7 +96,6 @@ public class MedUserResource {
         userToStore.setAge(user.getAge());
         userToStore.setLogin(user.getLogin());
         userToStore.setEmail(user.getEmail());
-        userToStore.setEmailId(user.getEmailId());
         userToStore.setLocation(user.getLocation());
         userToStore.setCity(user.getCity());
         
