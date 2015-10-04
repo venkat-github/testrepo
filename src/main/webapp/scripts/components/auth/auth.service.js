@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('hipster1App')
-    .factory('Auth', function Auth($rootScope, $state, $q, Principal, AuthServerProvider, Account, Register, Activate, Password, PasswordResetInit, PasswordResetFinish) {
+    .factory('Auth', function Auth($rootScope, $state, $q, Principal, AuthServerProvider, Account,
+     Register, Activate, Password, RegisterOtp, PasswordResetInit, PasswordResetFinish) {
         return {
             login: function (credentials, callback) {
                 var cb = callback || angular.noop;
@@ -106,6 +107,15 @@ angular.module('hipster1App')
                 }).$promise;
             },
 
+            registerOtp: function (mail, otp, callback) {
+                var cb = callback || angular.noop;
+
+                return RegisterOtp.query({'mail':mail, 'otp':otp}, function() {
+                    return cb();
+                }, function (err) {
+                    return cb(err);
+                }).$promise;
+            },
             resetPasswordFinish: function(key, newPassword, callback) {
                 var cb = callback || angular.noop;
 

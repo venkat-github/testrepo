@@ -6,4 +6,17 @@ angular.module('hipster1App')
         });
     });
 
+angular.module('hipster1App')
+    .factory('SubmitDoctorRegistration', function ($resource) {
+        return $resource('api/register/doctor', {}, {
+        });
+    });
+
+angular.module('hipster1App')
+    .factory('SubmitHospitalRegistration', function ($resource) {
+        return $resource('api/register/hospital', {}, {
+        });
+    });
+
+
 

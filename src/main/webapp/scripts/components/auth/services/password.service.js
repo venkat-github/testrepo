@@ -17,3 +17,4 @@ angular.module('hipster1App')
         return $resource('api/account/reset_password/finish', {}, {
         })
     });
+
