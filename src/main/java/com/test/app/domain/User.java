@@ -225,6 +225,10 @@ public class User extends AbstractAuditingEntity implements Serializable {
     public User() {
     }
     
+    public String getEmailId() {
+    	return email;
+    }
+    
 	public String getEmail() {
 		return email;
 	}

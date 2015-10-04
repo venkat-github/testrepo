@@ -2,15 +2,16 @@
 
 angular.module('hipster1App')
     .controller('HospitalDoctorDTO4Controller',
-    		['Auth','$scope','DateUtils', '$stateParams', '$state','$http', '$rootScope', 'HospitalDoctorDTO4','Principal','ParseLinks',
-    		 function (Auth,$scope, DateUtils, $stateParams,  $state, $http, $rootScope, HospitalDoctorDTO4,Principal, ParseLinks) {
+    		['Auth','$scope','DateUtils', 'HospitalDoctorDTO4Check','$stateParams', '$state','$http', '$rootScope', 'HospitalDoctorDTO4','Principal','ParseLinks',
+    		 function (Auth,$scope, DateUtils, HospitalDoctorDTO4Check, $stateParams,  $state, $http, $rootScope, HospitalDoctorDTO4,Principal, ParseLinks) {
         $scope.page = 1;
         $scope.loadAll = function(speciality) {
         	if (!angular.isDefined(speciality)) {
         		speciality = $rootScope.speciality;
         	}
-        	HospitalDoctorDTO4.query({page: $scope.page, per_page: 5,
-            	location: $rootScope.city, date:'8/1/2015',
+            //date:'8/1/2015',
+            HospitalDoctorDTO4.query({page: $scope.page, per_page: 5,
+            	location: $rootScope.city, date: DateUtils.convertLocaleDateParamToServer(new Date()),
                 speciality : $rootScope.speciality }, function(result, headers) {
                 $scope.links = ParseLinks.parse(headers('link'));
                 $scope.hospitalDoctorDTO4s = result;
@@ -19,6 +20,40 @@ angular.module('hipster1App')
             
         };
         
+                              
+        $scope.today = function() {
+            $scope.startDate = new Date();
+        };
+        $scope.today();
+
+        $scope.changedt = function () {
+            HospitalDoctorDTO4Check.query({
+                doctorId: $rootScope.hospitalDoctorDTO4check.doctorId,
+                date: DateUtils.convertLocaleDateParamToServer($scope.startDate),
+                speciality : $rootScope.speciality }, function(result, headers) {
+                    $scope.hospitalDoctorDTO4check = result;
+            });
+        }
+
+        $scope.cleardt = function () {
+            $scope.startDate = null;
+        };
+
+        $scope.open1 = function($event) {
+            $scope.opened1 = true;
+        };
+
+        $scope.dateOptions = {
+            formatYear: 'yy',
+            startingDay: 1
+        };
+
+        $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+        $scope.format = $scope.formats[0];
+
+        $scope.opened1 = false;
+        $scope.opened2 = false;
+                          
         $rootScope.fixAppointment = function(slot , hospitalDoctorDTO4) {
         	$rootScope.hospitalDoctorDTO4 = hospitalDoctorDTO4;
         	$rootScope.slot = slot;
@@ -27,7 +62,7 @@ angular.module('hipster1App')
         	Principal.identity(true).then(function(account) {
                 $scope.account = account;
                 if (!angular.isDefined(account) || account == null) {
-                    //alert('not logged in')
+                    
                     $('#mymodal').modal('hide');
 
                     $state.go('book',{ 
@@ -39,7 +74,7 @@ angular.module('hipster1App')
                     'slotNo':1,
                     'date': hospitalDoctorDTO4.date});
                 } else {
-                    //alert('logged in')
+                    
                     $state.go('doctorVisitDTO.fix',{ 'data':{
             		'id':null,
             		'slot':slot,

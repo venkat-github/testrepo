@@ -26,8 +26,22 @@ public class DoctorScheduleRespositoryHelperFunctions {
 	@Inject
 	DoctorScheduleRepository dsr;
 	
-	DoctorSchedule FindDoctorScheduleByDoctorIdHospitalIdLocalDate (String doctorId, String hospitalId, int days) {
-		Criteria criteria = where("doctorId").is(doctorId).and("startDate").lte(new LocalDate().plusDays(days)).and("endDate").gte(new LocalDate().plusDays(days));
+	public DoctorSchedule findDoctorScheduleByDoctorIdHospitalIdLocalDate (String doctorId, String hospitalId,
+			LocalDate startDate, int days) {
+		Criteria criteria = where("doctorId").is(doctorId).and("startDate").
+				lte(startDate.plusDays(days)).and("endDate").gte(startDate.plusDays(days));
+		if(hospitalId != null) {
+			criteria = criteria.and("hospitalId").is(hospitalId);
+		}
+		DoctorSchedule dc =  mongoTemplate.findOne(query(criteria), DoctorSchedule.class);
+		return dc;
+	}
+
+	public DoctorSchedule findDoctorScheduleByDateAndSpecialityAndLocation (
+			String doctorId, String hospitalId,
+			LocalDate startDate, int days) {
+		Criteria criteria = where("doctorId").is(doctorId).and("startDate").
+				lte(startDate.plusDays(days)).and("endDate").gte(startDate.plusDays(days));
 
 		if(hospitalId != null) {
 			criteria = criteria.and("hospitalId").is(hospitalId);

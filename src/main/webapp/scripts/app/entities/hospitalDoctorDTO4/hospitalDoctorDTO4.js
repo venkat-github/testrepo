@@ -110,3 +110,9 @@ angular.module('hipster1App')
                 }]
             });
     });
+
+angular.module('hipster1App')
+    .factory('HospitalDoctorDTO4Check', function ($resource, DateUtils) {
+        return $resource('api/consultation/:id', {}, {
+            'query': { method: 'GET', isArray: false}});
+    });

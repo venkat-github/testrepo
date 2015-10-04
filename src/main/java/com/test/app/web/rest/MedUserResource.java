@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
@@ -39,11 +40,14 @@ import com.test.app.domain.UserDoctorVisitRecord;
 import com.test.app.domain.util.CustomLocalDateSerializer;
 import com.test.app.domain.util.ISO8601LocalDateDeserializer;
 import com.test.app.repository.DoctorScheduleRepository;
+import com.test.app.repository.DoctorScheduleRespositoryHelperFunctions;
 import com.test.app.repository.DoctorVisitRepository;
 import com.test.app.repository.HospitalDoctorConsultaionRepository;
+import com.test.app.repository.HospitalDoctorConsultationHelperFunctions;
 import com.test.app.repository.HospitalRepository;
 import com.test.app.repository.UserRecordRepository;
 import com.test.app.repository.UserRepository;
+import com.test.app.security.SecurityUtils;
 import com.test.app.service.UserService;
 import com.test.app.web.rest.dto.HospitalDto;
 import com.test.app.web.rest.util.HeaderUtil;
@@ -52,6 +56,7 @@ import com.test.app.web.rest.util.PaginationUtil;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * REST controller for managing UserDTO.
@@ -85,9 +90,17 @@ public class MedUserResource {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     
-    public ResponseEntity<User> update(@RequestBody User user) throws URISyntaxException {
+    public ResponseEntity<User> updateUser(@RequestBody User user) throws URISyntaxException {
         log.debug("REST request to update UserDTO : {}", user);
-        user = userRepository.save(user);
+        User userToStore = userRepository.findOneById(user.getId());
+        userToStore.setAge(user.getAge());
+        userToStore.setLogin(user.getLogin());
+        userToStore.setEmail(user.getEmail());
+        userToStore.setEmailId(user.getEmailId());
+        userToStore.setLocation(user.getLocation());
+        userToStore.setCity(user.getCity());
+        
+        user = userRepository.save(userToStore);
         User result = user;
         
         return ResponseEntity.ok()
@@ -125,7 +138,7 @@ public class MedUserResource {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     
-    public ResponseEntity<List<User>> findDoctor(@RequestParam(value = "page" , required = false) Integer offset,
+    public ResponseEntity<List<User>> findDoctorByName(@RequestParam(value = "page" , required = false) Integer offset,
                                   @RequestParam(value = "per_page", required = false) Integer limit, String name)
         throws URISyntaxException {
     	Page<User> page = userRepository.findByName(name, PaginationUtil.generatePageRequest(offset, limit));
@@ -140,7 +153,7 @@ public class MedUserResource {
     @Inject
     MongoTemplate mongoTemplate;
     
-    List<Hospital> getHospitals(User user) {
+    List<Hospital> getHospitalsForUser(User user) {
     	Query query = Query.query(Criteria.where("adminIds").in(user.getId()));
     	List<Hospital> doctors = mongoTemplate.find(query , Hospital.class);
     	return doctors;
@@ -154,7 +167,7 @@ public class MedUserResource {
                                   @RequestParam(value = "per_page", required = false) Integer limit)
         throws URISyntaxException {
     	User loggedinUser = userService.getUserWithAuthorities();
-    	List<Hospital> result = getHospitals(loggedinUser);
+    	List<Hospital> result = getHospitalsForUser(loggedinUser);
     	
     	HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(1,7, "/api/hospitals", offset, limit);
         return new ResponseEntity<List<Hospital>>(result, headers, HttpStatus.OK);
@@ -164,32 +177,54 @@ public class MedUserResource {
     
     @RequestMapping(value="/cities", method = RequestMethod.GET)
 	@ResponseBody
-	Map<String,String> cities() {
+	Map<String,String> getCities() {
 		HashMap<String, String>	cities = new HashMap<String, String>();
 		cities.put("koramanagala","koramanagala");
 		cities.put("marathalli","marathalli");
 		return cities;
 	}
+    
+    @Inject
+    DoctorScheduleRespositoryHelperFunctions doctorScheduleFunctions;
 
+    @RequestMapping(value = "/consultation",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<HospitalDoctorConsultaion> getFreeSlots(
+    	    @RequestParam(value = "date", required = true)
+    	    @DateTimeFormat(pattern="yyyy-MM-dd")
+    	    LocalDate date,
+    		@RequestParam(value = "doctorId" , required = true) String doctorId
+    		)
+        throws URISyntaxException {
+    	HospitalDoctorConsultaion result = null;
+    	HttpHeaders headers = new HttpHeaders();
+    	if (doctorId != null) {
+    		result = hospitalDoctorConsultaionRepository.findOneByDoctorIdAndDate(doctorId, date);
+    	}
+        return new ResponseEntity<HospitalDoctorConsultaion>(result, headers, HttpStatus.OK);
 
+    }
+    
     @RequestMapping(value = "/doctors",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    
-    public ResponseEntity<List<HospitalDoctorConsultaion>> getAllDoctors(
+    public ResponseEntity<List<HospitalDoctorConsultaion>> searchConsultations(
     	    @RequestParam(value = "date", required = false)
-    	    @JsonSerialize(using = CustomLocalDateSerializer.class)
-    	    @JsonDeserialize(using = ISO8601LocalDateDeserializer.class)
+    	    @DateTimeFormat(pattern="yyyy-MM-dd")
     	    LocalDate date,
     		@RequestParam(value = "speciality" , required = false) String speciality,
+    		@RequestParam(value = "speciality" , required = false) String doctorId,
     		@RequestParam(value = "page" , required = false) Integer offset,
-                                  @RequestParam(value = "per_page", required = false) Integer limit)
+    		@RequestParam(value = "per_page", required = false) Integer limit)
         throws URISyntaxException {
     	List<HospitalDoctorConsultaion> result = new ArrayList<HospitalDoctorConsultaion>();
-    	Page<HospitalDoctorConsultaion> page = hospitalDoctorConsultaionRepository.findBySpecialityAndDate(speciality, date, PaginationUtil.generatePageRequest(offset, limit));
-    	result = page.getContent();
-    	
-    	HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/doctors", offset, limit);
+    	Page<HospitalDoctorConsultaion> page = null;
+    	HttpHeaders headers = null;
+		page = hospitalDoctorConsultaionRepository.findBySpecialityAndDate(speciality, date, 
+			PaginationUtil.generatePageRequest(offset, limit));
+		result = page.getContent();
+		headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/doctors", offset, limit);
         return new ResponseEntity<List<HospitalDoctorConsultaion>>(result, headers, HttpStatus.OK);
 
     }
@@ -201,6 +236,7 @@ public class MedUserResource {
     public ResponseEntity<List<UserDoctorVisitRecord>> getAllUserRecords(@RequestParam(value = "page" , required = false) Integer offset,
                                   @RequestParam(value = "per_page", required = false) Integer limit)
         throws URISyntaxException {
+    	User user = userService.getUserWithAuthorities();
     	List<UserDoctorVisitRecord> result = new ArrayList<UserDoctorVisitRecord>();
     	Page<UserDoctorVisitRecord> page = userRecordRepository.findAll(PaginationUtil.generatePageRequest(offset, limit));
     	result = page.getContent();
@@ -215,16 +251,17 @@ public class MedUserResource {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     
-    public ResponseEntity<List<DoctorVisit>> getAllUserVisits(
+    public ResponseEntity<List<DoctorVisit>> getDoctorSchedule(
     	    @RequestParam(value = "date", required = false)
-    	    @JsonSerialize(using = CustomLocalDateSerializer.class)
-    	    @JsonDeserialize(using = ISO8601LocalDateDeserializer.class)
-    	    LocalDate date,
+    	    LocalDate date,//TODO
     		@RequestParam(value = "page" , required = false) Integer offset,
-                                  @RequestParam(value = "per_page", required = false) Integer limit)
+    		@RequestParam(value = "per_page", required = false) Integer limit)
         throws URISyntaxException {
     	User user = userService.getUserWithAuthorities();
-    	date = new LocalDate(2015,8,1);
+    	if (date == null) {
+    		date = new LocalDate();
+    		date = new LocalDate(date.getYear(), date.getMonthOfYear(), date.getDayOfMonth());
+    	}
         Page<DoctorVisit> page = doctorVisitRepository.findByDoctorIdAndDate(user.getId(), date, PaginationUtil.generatePageRequest(offset, limit));
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/doctorVisitDTOs", offset, limit);
         return new ResponseEntity<List<DoctorVisit>>(page.getContent(), headers, HttpStatus.OK);
@@ -253,18 +290,6 @@ public class MedUserResource {
         return new ResponseEntity<>(userDTO, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/find_doctor",
-            method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    
-    public ResponseEntity<User> findDoctor(@RequestParam("name") String name, 
-    		@RequestParam("practionerid") String practionerId, HttpServletResponse response) {
-        //TODO
-    	//return new ResponseEntity<>(null, HttpStatus.OK);
-    	return null;
-    }
-
-    
     @RequestMapping(value = "/hospitals/{id}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -281,7 +306,6 @@ public class MedUserResource {
     @RequestMapping(value = "/doctors/{id}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    
     public ResponseEntity<HospitalDoctorConsultaion> getDoctorConsultation(@PathVariable String id, HttpServletResponse response) {
     	HospitalDoctorConsultaion result = hospitalDoctorConsultaionRepository.findOne(id);
         if (result == null) {
@@ -324,6 +348,10 @@ public class MedUserResource {
         if (dto.getId() != null) {
             return ResponseEntity.badRequest().header("Failure", "A new userDTO cannot already have an ID").body(null);
         }
+        User loggedinUser = userService.getUserWithAuthorities();
+        Set<String> adminIds = new HashSet<String>();
+        adminIds.add(loggedinUser.getId());
+		dto.setAdminIds(adminIds);
         Hospital result = hospitalRepository.save(dto);
         return ResponseEntity.created(new URI("/api/hospitals/" + result.getId()))
                 .headers(HeaderUtil.createEntityCreationAlert("hospitals", result.getId().toString()))
@@ -376,11 +404,9 @@ public class MedUserResource {
     
     public ResponseEntity<List<DoctorSchedule>> getSchedules(
     	    @RequestParam(value = "date", required = false)
-    	    @JsonSerialize(using = CustomLocalDateSerializer.class)
-    	    @JsonDeserialize(using = ISO8601LocalDateDeserializer.class)
-    	    LocalDate date,
+    	    LocalDate date,//TODO
     		@RequestParam(value = "page" , required = false) Integer offset,
-                                  @RequestParam(value = "per_page", required = false) Integer limit)
+    		@RequestParam(value = "per_page", required = false) Integer limit)
         throws URISyntaxException {
     	
         Page<DoctorSchedule> page = doctorScheduleRepo.findAll(PaginationUtil.generatePageRequest(offset, limit));
@@ -388,26 +414,8 @@ public class MedUserResource {
         return new ResponseEntity<List<DoctorSchedule>>(page.getContent(), headers, HttpStatus.OK);
     }
 
-    int getEndDate(int year, int month) {
-    	switch(month) {
-    	case 1:
-    	case 3:
-    	case 5:
-    	case 7:
-    	case 8:
-    	case 10:
-    	case 12:
-    		return 31;
-    	case 2:
-    		return 28;
-    	case 4:
-    	case 6:
-    	case 9:
-    	case 11:
-    		return 30;
-    	}
-    	return 30;
-    }
+    @Inject
+    HospitalDoctorConsultationHelperFunctions hospitalDoctorConsultationHelperFunctions;
 
     @RequestMapping(value = "/doctorSchedules",
             method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
@@ -420,17 +428,9 @@ public class MedUserResource {
         
         DoctorSchedule result = doctorScheduleRepo.save(dto);
         
-        
-        for (int month = dto.getStartDate().getMonthOfYear() ; 
-        		month < dto.getEndDate().getMonthOfYear(); month++) {
-        	
-        	int startDate = dto.getStartDate().getDayOfMonth();
-        	int endDate = getEndDate(dto.getStartDate().getYear(), dto.getStartDate().getMonthOfYear());
-        	
-			for (int day = startDate; day < endDate; day++) {
-				
-			}
-        }
+        hospitalDoctorConsultationHelperFunctions.
+        addNextDayConsultationRecordForDoctorAndHospital(dto.getDoctorId(),
+        		dto.getHospitalId(), dto.getStartDate(), dto.getEndDate());
         
         return ResponseEntity.created(new URI("/api/doctorSchedules/" + result.getId()))
                 .headers(HeaderUtil.createEntityCreationAlert("doctorSchedules", result.getId().toString()))

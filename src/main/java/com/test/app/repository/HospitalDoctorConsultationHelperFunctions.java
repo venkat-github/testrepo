@@ -60,13 +60,26 @@ public class HospitalDoctorConsultationHelperFunctions {
 	}*/
 	@SuppressWarnings("deprecation")
 	private int GetTimeFromString(String time) {
+		if (time == null || time.trim().length() == 0  || !time.contains(":")) {
+			return 1200;
+		}
 		int result = 0; 
 		int temp = 0 ;
 		int i = 0;
 		String parts[] = time.split(":");
 		return Integer.parseInt(parts[0])*60 + Integer.parseInt(parts[1]);		
 	}
-	public void AddNextDayConsultationRecordForDoctorAndHospital(String doctorId, String hospitalId, int days) {
+	public void addNextDayConsultationRecordForDoctorAndHospital(String doctorId, String hospitalId, 
+			LocalDate startDate, LocalDate endDate) {
+		
+		int days = endDate.getDayOfYear() - startDate.getDayOfYear();//TODO
+		for (int day = 0; day < days; day++) {
+			addNextDayConsultationRecordForDoctorAndHospital(doctorId, hospitalId, startDate, day);
+		}
+	}
+	
+	public void addNextDayConsultationRecordForDoctorAndHospital(String doctorId, String hospitalId, 
+			LocalDate startDate, int days) {
 
 		List<String> slots = new ArrayList<String>();;
 		int startTime;
@@ -76,13 +89,15 @@ public class HospitalDoctorConsultationHelperFunctions {
 		Criteria criteria = where("doctorId").is(doctorId)
 				.and("date").lte(new LocalDate().minusDays(1));
 		mongoTemplate.findAndRemove(query(criteria), HospitalDoctorConsultaion.class);
-		DoctorSchedule ds = dshrf.FindDoctorScheduleByDoctorIdHospitalIdLocalDate(doctorId, hospitalId, days);
+		DoctorSchedule ds = dshrf.findDoctorScheduleByDoctorIdHospitalIdLocalDate(doctorId, hospitalId, startDate, days);
 		if (ds == null ) {
 			System.out.println(" Error: not able to find a schedule");
 			return; 
 		}
 		HospitalDoctorConsultaion  hdc = new HospitalDoctorConsultaion();
+		hdc.setDate(startDate.plusDays(days));
 		hdc.setDoctorId(doctorId);
+		hdc.setDoctorName(ds.getDoctorName());
 		hdc.setHospitalId(hospitalId);
 		hdc.setDoctorName(ds.getDoctorName());
 		startTime = GetTimeFromString(ds.getStartTime());
@@ -90,17 +105,23 @@ public class HospitalDoctorConsultationHelperFunctions {
 		startBreakTime = GetTimeFromString(ds.getBreakStartTime());
 		endBreakTime = GetTimeFromString(ds.getBreakEndTime());
 		
+		if (startBreakTime == 1200) {
+			startBreakTime = endTime;
+		}
 		while( startTime < startBreakTime  ) {
 			String temp = (int) startTime/60 + ":" + (int )startTime%60;
 			slots.add(temp);
 			startTime = startTime + ds.getSlotDuration();
+		}
+		if (endBreakTime == 1200) {
+			endBreakTime = endTime;
 		}
 		startTime = endBreakTime;
 		while( startTime < endTime  ) {
 			String temp = (int) startTime/60 + ":" + (int )startTime%60;
 			slots.add(temp);
 			startTime = startTime + ds.getSlotDuration();
-		}		
+		}
 		hdc.setFreeSlots(slots);
 		User user =  ur.findOneById(ds.getDoctorId());
 		if (ds.getHospitalId() != null) {

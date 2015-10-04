@@ -1,0 +1,2388 @@
+commit ae60acd37d461e713097fe09bcb6d918e5fc23f3
+Author: venkat-github <venkatasv123@gmail.com>
+Date:   Sat Oct 3 20:38:48 2015 +0530
+
+    fixed build issue
+
+diff --git a/src/main/java/com/test/app/domain/Hospital.java b/src/main/java/com/test/app/domain/Hospital.java
+index 1974ad6..4755ad6 100644
+--- a/src/main/java/com/test/app/domain/Hospital.java
++++ b/src/main/java/com/test/app/domain/Hospital.java
+@@ -269,8 +269,4 @@ public class Hospital implements Serializable {
+                 '}';
+     }
+ 
+-	public void setAdminIds(HashSet<String> adminIds2) {
+-		adminIds = adminIds2;
+-		
+-	}
+ }
+
+commit dd48f11f91e0d15db7685b76d7a4c6f89f9cd966
+Merge: 1c6dcaa 3de420b
+Author: venkat-github <venkatasv123@gmail.com>
+Date:   Sat Oct 3 20:26:12 2015 +0530
+
+    Merge branch 'master' of https://github.com/venkat-github/testrepo
+    
+    Conflicts:
+    	src/main/java/com/test/app/repository/DoctorScheduleRepository.java
+    	src/main/java/com/test/app/repository/UserRepository.java
+    	src/main/java/com/test/app/web/rest/MedUserResource.java
+
+commit 1c6dcaa2256e9df7982451df0bf1ce69986465fe
+Author: venkat-github <venkatasv123@gmail.com>
+Date:   Sat Oct 3 20:20:37 2015 +0530
+
+    adding schedule
+
+diff --git a/README.md b/README.md
+index 65846a5..adebb11 100644
+--- a/README.md
++++ b/README.md
+@@ -5,4 +5,6 @@ test5
+ test
+ test2
+ test3
+-test4
+\ No newline at end of file
++test4
++test5
++test6
+\ No newline at end of file
+diff --git a/src/main/java/com/test/app/domain/DoctorSchedule.java b/src/main/java/com/test/app/domain/DoctorSchedule.java
+index 00f4a2c..fa1027c 100644
+--- a/src/main/java/com/test/app/domain/DoctorSchedule.java
++++ b/src/main/java/com/test/app/domain/DoctorSchedule.java
+@@ -74,10 +74,124 @@ public class DoctorSchedule implements Serializable {
+     public int hashCode() {
+         return Objects.hashCode(id);
+     }
++    
+ 
+     @Override
+     public String toString() {
+         return "HospitalDoctorDTO4{" +
+                 "id=" + id ;
+     }
++
++	public String getId() {
++		return id;
++	}
++
++	public void setId(String id) {
++		this.id = id;
++	}
++
++	public String getDoctorName() {
++		return doctorName;
++	}
++
++	public void setDoctorName(String doctorName) {
++		this.doctorName = doctorName;
++	}
++
++	public String getDoctorId() {
++		return doctorId;
++	}
++
++	public void setDoctorId(String doctorId) {
++		this.doctorId = doctorId;
++	}
++
++	public String getHospitalName() {
++		return hospitalName;
++	}
++
++	public void setHospitalName(String hospitalName) {
++		this.hospitalName = hospitalName;
++	}
++
++	public String getHospitalId() {
++		return hospitalId;
++	}
++
++	public void setHospitalId(String hospitalId) {
++		this.hospitalId = hospitalId;
++	}
++
++	public LocalDate getStartDate() {
++		return startDate;
++	}
++
++	public void setStartDate(LocalDate startDate) {
++		this.startDate = startDate;
++	}
++
++	public LocalDate getEndDate() {
++		return endDate;
++	}
++
++	public void setEndDate(LocalDate endDate) {
++		this.endDate = endDate;
++	}
++
++	public int getFees() {
++		return fees;
++	}
++
++	public void setFees(int fees) {
++		this.fees = fees;
++	}
++
++	public int getSlotDuration() {
++		return slotDuration;
++	}
++
++	public void setSlotDuration(int slotDuration) {
++		this.slotDuration = slotDuration;
++	}
++
++	public String getStartTime() {
++		return startTime;
++	}
++
++	public void setStartTime(String startTime) {
++		this.startTime = startTime;
++	}
++
++	public String getBreakStartTime() {
++		return breakStartTime;
++	}
++
++	public void setBreakStartTime(String breakStartTime) {
++		this.breakStartTime = breakStartTime;
++	}
++
++	public String getBreakEndTime() {
++		return breakEndTime;
++	}
++
++	public void setBreakEndTime(String breakEndTime) {
++		this.breakEndTime = breakEndTime;
++	}
++
++	public String getEndTime() {
++		return endTime;
++	}
++
++	public void setEndTime(String endTime) {
++		this.endTime = endTime;
++	}
++
++	public Set<WorkingDay> getWorkingDays() {
++		return workingDays;
++	}
++
++	public void setWorkingDays(Set<WorkingDay> workingDays) {
++		this.workingDays = workingDays;
++	}
++    
+ }
+diff --git a/src/main/java/com/test/app/domain/Hospital.java b/src/main/java/com/test/app/domain/Hospital.java
+index deca841..1974ad6 100644
+--- a/src/main/java/com/test/app/domain/Hospital.java
++++ b/src/main/java/com/test/app/domain/Hospital.java
+@@ -5,6 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
+ import org.springframework.data.mongodb.core.mapping.Field;
+ 
+ import java.io.Serializable;
++import java.util.HashSet;
+ import java.util.Objects;
+ import java.util.Set;
+ 
+@@ -113,7 +114,128 @@ public class Hospital implements Serializable {
+         this.zipcode = zipcode;
+     }
+ 
+-    @Override
++    
++    public String getRegistrationId() {
++		return registrationId;
++	}
++
++	public void setRegistrationId(String registrationId) {
++		this.registrationId = registrationId;
++	}
++
++	public String getLandmark() {
++		return landmark;
++	}
++
++	public void setLandmark(String landmark) {
++		this.landmark = landmark;
++	}
++
++	public Set<String> getDoctorIds() {
++		return doctorIds;
++	}
++
++	public void setDoctorIds(Set<String> doctorIds) {
++		this.doctorIds = doctorIds;
++	}
++
++	public Set<String> getAdminIds() {
++		return adminIds;
++	}
++
++	public void setAdminIds(Set<String> adminIds) {
++		this.adminIds = adminIds;
++	}
++
++	public Set<String> getEmergencyNos() {
++		return emergencyNos;
++	}
++
++	public void setEmergencyNos(Set<String> emergencyNos) {
++		this.emergencyNos = emergencyNos;
++	}
++
++	public Set<Facility> getFacilities() {
++		return facilities;
++	}
++
++	public void setFacilities(Set<Facility> facilities) {
++		this.facilities = facilities;
++	}
++
++	public Set<HospitalService> getEmergencyServices() {
++		return emergencyServices;
++	}
++
++	public void setEmergencyServices(Set<HospitalService> emergencyServices) {
++		this.emergencyServices = emergencyServices;
++	}
++
++	public String getCaption() {
++		return caption;
++	}
++
++	public void setCaption(String caption) {
++		this.caption = caption;
++	}
++
++	public Set<String> getPhotoIds() {
++		return photoIds;
++	}
++
++	public void setPhotoIds(Set<String> photoIds) {
++		this.photoIds = photoIds;
++	}
++
++	public Set<String> getNurseIds() {
++		return nurseIds;
++	}
++
++	public void setNurseIds(Set<String> nurseIds) {
++		this.nurseIds = nurseIds;
++	}
++
++	public String getStartTime() {
++		return startTime;
++	}
++
++	public void setStartTime(String startTime) {
++		this.startTime = startTime;
++	}
++
++	public String getEndTime() {
++		return endTime;
++	}
++
++	public void setEndTime(String endTime) {
++		this.endTime = endTime;
++	}
++
++	public Set<WorkingDay> getWorkingDays() {
++		return workingDays;
++	}
++
++	public void setWorkingDays(Set<WorkingDay> workingDays) {
++		this.workingDays = workingDays;
++	}
++
++	public long getLangitude() {
++		return langitude;
++	}
++
++	public void setLangitude(long langitude) {
++		this.langitude = langitude;
++	}
++
++	public long getLatitude() {
++		return latitude;
++	}
++
++	public void setLatitude(long latitude) {
++		this.latitude = latitude;
++	}
++
++	@Override
+     public boolean equals(Object o) {
+         if (this == o) {
+             return true;
+@@ -146,4 +268,9 @@ public class Hospital implements Serializable {
+                 ", zipcode='" + zipcode + "'" +
+                 '}';
+     }
++
++	public void setAdminIds(HashSet<String> adminIds2) {
++		adminIds = adminIds2;
++		
++	}
+ }
+diff --git a/src/main/java/com/test/app/domain/HospitalDoctorConsultaion.java b/src/main/java/com/test/app/domain/HospitalDoctorConsultaion.java
+index f9fef34..728e7ff 100644
+--- a/src/main/java/com/test/app/domain/HospitalDoctorConsultaion.java
++++ b/src/main/java/com/test/app/domain/HospitalDoctorConsultaion.java
+@@ -2,6 +2,7 @@ package com.test.app.domain;
+ 
+ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
++import com.test.app.domain.enumeration.Speciality;
+ import com.test.app.domain.util.CustomLocalDateSerializer;
+ import com.test.app.domain.util.ISO8601LocalDateDeserializer;
+ 
+@@ -39,8 +40,22 @@ public class HospitalDoctorConsultaion implements Serializable {
+ 
+     private String hospitalName;
+ 
+-    @Field("speciality")
+-    private String speciality;
++    public String getHospitalName() {
++		return hospitalName;
++	}
++	public void setHospitalName(String hospitalName) {
++		this.hospitalName = hospitalName;
++	}
++	public Set<String> getDegrees() {
++		return degrees;
++	}
++	public void setDegrees(Set<String> degrees) {
++		this.degrees = degrees;
++	}
++
++
++	@Field("speciality")
++    private Set<Speciality> speciality;
+ 
+     @Field("experience")
+     private Integer experience;
+@@ -68,10 +83,39 @@ public class HospitalDoctorConsultaion implements Serializable {
+     @Field("location")
+     private String location;
+ 
++    @Field("city")
++    private String city;
++
++    private List<String> degree;
++    
+     long langitude;
+     long latitude;
+     
+-    public String getId() {
++    public String getCity() {
++		return city;
++	}
++	public void setCity(String city) {
++		this.city = city;
++	}
++	public List<String> getDegree() {
++		return degree;
++	}
++	public void setDegree(List<String> degree) {
++		this.degree = degree;
++	}
++	public long getLangitude() {
++		return langitude;
++	}
++	public void setLangitude(long langitude) {
++		this.langitude = langitude;
++	}
++	public long getLatitude() {
++		return latitude;
++	}
++	public void setLatitude(long latitude) {
++		this.latitude = latitude;
++	}
++	public String getId() {
+         return id;
+     }
+ 
+@@ -87,11 +131,11 @@ public class HospitalDoctorConsultaion implements Serializable {
+         this.doctorName = doctorName;
+     }
+ 
+-    public String getSpeciality() {
++    public Set<Speciality> getSpeciality() {
+         return speciality;
+     }
+ 
+-    public void setSpeciality(String speciality) {
++    public void setSpeciality(Set<Speciality> speciality) {
+         this.speciality = speciality;
+     }
+ 
+diff --git a/src/main/java/com/test/app/repository/DoctorScheduleRepository.java b/src/main/java/com/test/app/repository/DoctorScheduleRepository.java
+new file mode 100644
+index 0000000..7fd28eb
+--- /dev/null
++++ b/src/main/java/com/test/app/repository/DoctorScheduleRepository.java
+@@ -0,0 +1,9 @@
++package com.test.app.repository;
++
++import org.springframework.data.mongodb.repository.MongoRepository;
++
++import com.test.app.domain.DoctorSchedule;
++
++public interface DoctorScheduleRepository extends MongoRepository<DoctorSchedule,String>{
++
++}
+diff --git a/src/main/java/com/test/app/repository/DoctorScheduleRespositoryHelperFunctions.java b/src/main/java/com/test/app/repository/DoctorScheduleRespositoryHelperFunctions.java
+new file mode 100644
+index 0000000..2dca9fa
+--- /dev/null
++++ b/src/main/java/com/test/app/repository/DoctorScheduleRespositoryHelperFunctions.java
+@@ -0,0 +1,40 @@
++package com.test.app.repository;
++
++import static org.springframework.data.mongodb.core.query.Criteria.where;
++import static org.springframework.data.mongodb.core.query.Query.query;
++
++import javax.inject.Inject;
++
++import org.joda.time.LocalDate;
++import org.springframework.beans.factory.annotation.Autowired;
++import org.springframework.data.mongodb.core.MongoTemplate;
++import org.springframework.data.mongodb.core.query.Criteria;
++import org.springframework.stereotype.Service;
++
++import com.mongodb.WriteResult;
++import com.test.app.domain.DoctorSchedule;
++import com.test.app.domain.HospitalDoctorConsultaion;
++
++@Service
++public class DoctorScheduleRespositoryHelperFunctions {
++	@Inject
++	HospitalDoctorConsultaionRepository hdcr;
++	
++	@Autowired
++	MongoTemplate mongoTemplate;
++	
++	@Inject
++	DoctorScheduleRepository dsr;
++	
++	DoctorSchedule FindDoctorScheduleByDoctorIdHospitalIdLocalDate (String doctorId, String hospitalId, int days) {
++		Criteria criteria = where("doctorId").is(doctorId).and("startDate").lte(new LocalDate().plusDays(days)).and("endDate").gte(new LocalDate().plusDays(days));
++
++		if(hospitalId != null) {
++			criteria = criteria.and("hospitalId").is(hospitalId);
++		}
++		DoctorSchedule dc =  mongoTemplate.findOne(query(criteria), DoctorSchedule.class);
++	
++		return dc;
++	}
++
++}
+diff --git a/src/main/java/com/test/app/repository/HospitalDoctorConsultaionRepository.java b/src/main/java/com/test/app/repository/HospitalDoctorConsultaionRepository.java
+index 1632298..c4cd9c2 100644
+--- a/src/main/java/com/test/app/repository/HospitalDoctorConsultaionRepository.java
++++ b/src/main/java/com/test/app/repository/HospitalDoctorConsultaionRepository.java
+@@ -15,7 +15,6 @@ import com.test.app.domain.HospitalDoctorConsultaion;
+ public interface HospitalDoctorConsultaionRepository extends MongoRepository<HospitalDoctorConsultaion,String> {
+ 
+ 	List<HospitalDoctorConsultaion> findBySpecialityOrLocation(String speciality, String location);
+-
+ 	List<HospitalDoctorConsultaion> findBySpecialityAndLocation(String speciality, String location);
+ 	List<HospitalDoctorConsultaion> findBySpecialityAndLocationAndDate(String speciality, String location, LocalDate date);
+ 	List<HospitalDoctorConsultaion> findByLocationAndDate(String location, LocalDate date);
+diff --git a/src/main/java/com/test/app/repository/HospitalDoctorConsultationHelperFunctions.java b/src/main/java/com/test/app/repository/HospitalDoctorConsultationHelperFunctions.java
+new file mode 100644
+index 0000000..efc6997
+--- /dev/null
++++ b/src/main/java/com/test/app/repository/HospitalDoctorConsultationHelperFunctions.java
+@@ -0,0 +1,121 @@
++package com.test.app.repository;
++
++import static org.springframework.data.mongodb.core.query.Criteria.where;
++import static org.springframework.data.mongodb.core.query.Query.query;
++
++import java.util.ArrayList;
++import java.util.Date;
++import java.util.List;
++import java.util.Set;
++
++import javax.inject.Inject;
++
++import org.joda.time.LocalDate;
++import org.springframework.data.mongodb.core.MongoTemplate;
++import org.springframework.data.mongodb.core.query.Criteria;
++import org.springframework.data.mongodb.core.query.Update;
++import org.springframework.stereotype.Service;
++
++import com.health.app.domain.DoctorConsultation;
++import com.mongodb.WriteResult;
++import com.test.app.domain.DoctorSchedule;
++import com.test.app.domain.Hospital;
++import com.test.app.domain.HospitalDoctorConsultaion;
++import com.test.app.domain.User;
++@Service
++public class HospitalDoctorConsultationHelperFunctions {
++	@Inject
++	HospitalDoctorConsultaionRepository hdcr;
++	@Inject
++	DoctorScheduleRepository dsr;
++	@Inject
++	UserRepository ur;
++
++	@Inject
++	MongoTemplate mongoTemplate;
++	@Inject
++	DoctorScheduleRespositoryHelperFunctions dshrf;
++	
++	@Inject
++	HospitalRepository hr;
++	
++	WriteResult RemoveAllPastRecordsByLocalDateBasedOnDoctorId(String doctorId) {
++		
++		Criteria criteria = where("doctorId").is(doctorId)
++				.and("date").lte(new LocalDate().minusDays(1));
++
++		WriteResult dc =  mongoTemplate.remove(query(criteria), HospitalDoctorConsultaion.class);
++	
++		return dc;
++	}
++	/*
++   List<HospitalDoctorConsultaion> RemoveAllPastRecordsByLocalDate() {
++		
++		Criteria criteria = where("date".);
++
++		List<HospitalDoctorConsultaion> dc = mongoTemplate.find(query(criteria),
++				HospitalDoctorConsultaion.class);
++	
++		return dc;
++	}*/
++	@SuppressWarnings("deprecation")
++	private int GetTimeFromString(String time) {
++		int result = 0; 
++		int temp = 0 ;
++		int i = 0;
++		String parts[] = time.split(":");
++		return Integer.parseInt(parts[0])*60 + Integer.parseInt(parts[1]);		
++	}
++	public void AddNextDayConsultationRecordForDoctorAndHospital(String doctorId, String hospitalId, int days) {
++
++		List<String> slots = new ArrayList<String>();;
++		int startTime;
++		int endTime;
++		int startBreakTime;
++		int endBreakTime;
++		Criteria criteria = where("doctorId").is(doctorId)
++				.and("date").lte(new LocalDate().minusDays(1));
++		mongoTemplate.findAndRemove(query(criteria), HospitalDoctorConsultaion.class);
++		DoctorSchedule ds = dshrf.FindDoctorScheduleByDoctorIdHospitalIdLocalDate(doctorId, hospitalId, days);
++		if (ds == null ) {
++			System.out.println(" Error: not able to find a schedule");
++			return; 
++		}
++		HospitalDoctorConsultaion  hdc = new HospitalDoctorConsultaion();
++		hdc.setDoctorId(doctorId);
++		hdc.setHospitalId(hospitalId);
++		hdc.setDoctorName(ds.getDoctorName());
++		startTime = GetTimeFromString(ds.getStartTime());
++		endTime = GetTimeFromString(ds.getEndTime());
++		startBreakTime = GetTimeFromString(ds.getBreakStartTime());
++		endBreakTime = GetTimeFromString(ds.getBreakEndTime());
++		
++		while( startTime < startBreakTime  ) {
++			String temp = (int) startTime/60 + ":" + (int )startTime%60;
++			slots.add(temp);
++			startTime = startTime + ds.getSlotDuration();
++		}
++		startTime = endBreakTime;
++		while( startTime < endTime  ) {
++			String temp = (int) startTime/60 + ":" + (int )startTime%60;
++			slots.add(temp);
++			startTime = startTime + ds.getSlotDuration();
++		}		
++		hdc.setFreeSlots(slots);
++		User user =  ur.findOneById(ds.getDoctorId());
++		if (ds.getHospitalId() != null) {
++			
++			Hospital hospital = hr.findOneById(ds.getHospitalId());
++			hdc.setLocation(hospital.getLocation());
++			hdc.setHospitalName(hospital.getName());
++			hdc.setCity(hospital.getCity());
++		} else {
++			hdc.setLocation(user.getLocation());
++			hdc.setCity(user.getCity());
++		}
++		hdc.setName(user.getFullname());
++		hdc.setSpeciality(user.getSpecialities());
++		hdc.setExperience(user.getExperience());
++		mongoTemplate.save(hdc);
++	}
++}
+diff --git a/src/main/java/com/test/app/repository/HospitalRepository.java b/src/main/java/com/test/app/repository/HospitalRepository.java
+index 6d5c712..7d2b598 100644
+--- a/src/main/java/com/test/app/repository/HospitalRepository.java
++++ b/src/main/java/com/test/app/repository/HospitalRepository.java
+@@ -5,10 +5,12 @@ import java.util.List;
+ import org.springframework.data.mongodb.repository.MongoRepository;
+ 
+ import com.test.app.domain.Hospital;
++import com.test.app.domain.User;
+ 
+ /**
+  * Spring Data MongoDB repository for the HospitalDTO entity.
+  */
+ public interface HospitalRepository extends MongoRepository<Hospital,String> {
+ 	List<Hospital> findByNameAndLocation(String name, String location);
++	Hospital findOneById(String Id);
+ }
+diff --git a/src/main/java/com/test/app/repository/UserRepository.java b/src/main/java/com/test/app/repository/UserRepository.java
+index 5bf2a46..2938687 100644
+--- a/src/main/java/com/test/app/repository/UserRepository.java
++++ b/src/main/java/com/test/app/repository/UserRepository.java
+@@ -1,8 +1,12 @@
+ package com.test.app.repository;
+ 
++import com.test.app.domain.HospitalDoctorConsultaion;
+ import com.test.app.domain.User;
+ 
+ import org.joda.time.DateTime;
++import org.joda.time.LocalDate;
++import org.springframework.data.domain.Page;
++import org.springframework.data.domain.Pageable;
+ import org.springframework.data.mongodb.repository.MongoRepository;
+ 
+ import java.util.List;
+@@ -23,5 +27,8 @@ public interface UserRepository extends MongoRepository<User, String> {
+     User findOneByEmail(String email);
+ 
+ 	User findOneByName(String name);
+-
++	
++	Page<User> findByName(String name, Pageable page);
++	
++	User findOneById(String Id);
+ }
+diff --git a/src/main/java/com/test/app/service/InitService.java b/src/main/java/com/test/app/service/InitService.java
+index 0b09ab8..f3e3874 100644
+--- a/src/main/java/com/test/app/service/InitService.java
++++ b/src/main/java/com/test/app/service/InitService.java
+@@ -5,6 +5,7 @@ import java.util.HashMap;
+ import java.util.HashSet;
+ import java.util.List;
+ import java.util.Map;
++import java.util.Set;
+ 
+ import javax.annotation.PostConstruct;
+ import javax.inject.Inject;
+@@ -17,20 +18,29 @@ import org.springframework.stereotype.Service;
+ import org.springframework.web.client.RestTemplate;
+ 
+ import com.test.app.domain.Authority;
++import com.test.app.domain.DoctorSchedule;
+ import com.test.app.domain.DoctorVisit;
+ import com.test.app.domain.Hospital;
+ import com.test.app.domain.HospitalDoctorConsultaion;
+ import com.test.app.domain.User;
+ import com.test.app.domain.UserDoctorVisitRecord;
++import com.test.app.domain.WorkingDay;
+ import com.test.app.domain.enumeration.Sex;
+ import com.test.app.domain.enumeration.Speciality;
+ import com.test.app.repository.AuthorityRepository;
++import com.test.app.repository.DoctorScheduleRepository;
+ import com.test.app.repository.DoctorVisitRepository;
+ import com.test.app.repository.HospitalDoctorConsultaionRepository;
++import com.test.app.repository.HospitalDoctorConsultationHelperFunctions;
+ import com.test.app.repository.HospitalRepository;
+ import com.test.app.repository.UserRecordRepository;
+ import com.test.app.repository.UserRepository;
+ 
++import org.springframework.data.mongodb.core.query.Criteria;
++import org.springframework.data.mongodb.core.MongoTemplate;
++import org.springframework.data.mongodb.core.query.Query;
++
++
+ @Service
+ public class InitService {
+ 
+@@ -56,6 +66,13 @@ public class InitService {
+ 
+     @Inject
+     HospitalDoctorConsultaionRepository hospitalDoctorConsultaionRepository;
++    @Inject
++    DoctorScheduleRepository doctorScheduleRepository;
++    
++    @Inject
++    HospitalDoctorConsultationHelperFunctions hospitalDoctorConsultationHelperFunctions;
++    @Inject
++    MongoTemplate mongoTemplate;
+     
+     @PostConstruct
+     public  void init() {
+@@ -72,7 +89,13 @@ public class InitService {
+ 	    	createHospitals();
+ 	    	addDoctorsToHospitals();
+ 	    	bookAppointments();
++
++	    	User user = userRepository.findOneByName("hosp");
+ 	    	
++	    	Query query = Query.query(Criteria.where("adminIds").in(user.getId()));
++	    	List<Hospital> doctor = mongoTemplate.find(query , Hospital.class);
++	    	System.out.println("found "+doctor.size()+" no of hospitals ");
++
+     	} catch (javax.validation.ConstraintViolationException ex1) {
+     		System.out.println("constrant name "+ex1.getConstraintViolations());
+     		for (ConstraintViolation x : ex1.getConstraintViolations()) {
+@@ -146,7 +169,7 @@ public class InitService {
+         createUser("user4", "admin", "user4", "user","user@gmail.com","en", users);
+ 	}
+ 
+-	void createUser(String name, String password, String first, String last, String email, 
++	String createUser(String name, String password, String first, String last, String email, 
+ 			String lang, HashSet<Authority> auths) {
+ 		
+ 		RestTemplate restTemplate = new RestTemplate();
+@@ -164,7 +187,7 @@ public class InitService {
+         
+         Map<String, String> params = new HashMap<>();
+         params.put("id", dto.getId());
+-        
++        return user.getId();
+ 	}
+ 	
+ 	void findDoctor(String location, String speciality) {
+@@ -194,7 +217,6 @@ public class InitService {
+ 
+ 	void addDoctorsToHospitals() {
+ 		addDoctorToHospital("koramanagala", "manipal", "doc1");
+-		User doc = userRepository.findOneByName("doc1");
+ 		LocalDate dt = new LocalDate(2015,8,1);
+ 		for (HospitalDoctorConsultaion dto : 
+ 			hospitalDoctorConsultaionRepository.findBySpecialityAndDate(Speciality.DENTIST.toString(), dt) ) {
+@@ -247,7 +269,26 @@ public class InitService {
+ 	void addDoctorToHospital(String location, String hospitalName, String doctorName) {
+ 		User doc = userRepository.findOneByName(doctorName);
+ 		Hospital hospital = hospitalRepository.findByNameAndLocation(hospitalName, location).get(0);
++		Set<WorkingDay> workingdays = null;
++		DoctorSchedule doctorSchedule = new DoctorSchedule();
++		doctorSchedule.setDoctorId(doc.getId());
++		doctorSchedule.setDoctorName(doc.getFullname());
++		doctorSchedule.setFees(500);
++		doctorSchedule.setBreakStartTime("12:30");
++		doctorSchedule.setBreakEndTime("13:30");
++		doctorSchedule.setStartDate(new LocalDate());
++		doctorSchedule.setEndDate(new LocalDate().plusDays(30));
++		doctorSchedule.setStartTime("8:00");
++		doctorSchedule.setEndTime("17:00");
++		doctorSchedule.setHospitalId(hospital.getId());
++		doctorSchedule.setHospitalName(hospital.getName());
++		doctorSchedule.setSlotDuration(15);
++		doctorSchedule.setWorkingDays(workingdays);
++		doctorScheduleRepository.save(doctorSchedule);
+ 		
++		for (int i=0; i< 1; i++) {
++			hospitalDoctorConsultationHelperFunctions.AddNextDayConsultationRecordForDoctorAndHospital(doc.getId(), hospital.getId(), i);
++		}
+ 		HospitalDoctorConsultaion dto = new HospitalDoctorConsultaion();
+ 		
+ 		for (int month = 8 ; month < 9; month++) {
+@@ -287,7 +328,7 @@ public class InitService {
+ 				dto.setFreeSlots(freeSlots);
+ 				dto.setOccupiedSlots(new ArrayList<String>());
+ 				dto.setHospitalId(hospital.getId());
+-				dto.setSpeciality(doc.getSpecialities().iterator().next().toString());
++				dto.setSpeciality(doc.getSpecialities());
+ 				hospitalDoctorConsultaionRepository.save(dto);
+ 				
+ 				
+@@ -314,6 +355,13 @@ public class InitService {
+ 		hospitalDto.setLocation(location);
+ 		hospitalDto.setMobileNo(mobileno);
+ 		hospitalDto.setName(name);
++		
++		HashSet<String> adminIds = new HashSet<String>();
++		
++		User doc = userRepository.findOneByName("hosp");
++		adminIds.add(doc.getId());
++		hospitalDto.setAdminIds(adminIds);
++		
+ 		hospitalRepository.save(hospitalDto);
+ 		return hospitalDto;	
+ 	}
+@@ -357,6 +405,7 @@ public class InitService {
+ 	
+ 	void createDoctors() {
+ 		createDoctor("doc1",40, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
++		createDoctor("doc1",45, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+ 		createDoctor("doc2",41, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+ 		createDoctor("doc3",42, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+ 		createDoctor("doc4",43, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+diff --git a/src/main/java/com/test/app/web/rest/MedUserResource.java b/src/main/java/com/test/app/web/rest/MedUserResource.java
+index 318fb90..c25815b 100644
+--- a/src/main/java/com/test/app/web/rest/MedUserResource.java
++++ b/src/main/java/com/test/app/web/rest/MedUserResource.java
+@@ -4,6 +4,7 @@ import java.net.URI;
+ import java.net.URISyntaxException;
+ import java.util.ArrayList;
+ import java.util.HashMap;
++import java.util.HashSet;
+ import java.util.List;
+ import java.util.Map;
+ 
+@@ -29,6 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
+ 
+ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
++import com.test.app.domain.DoctorSchedule;
+ import com.test.app.domain.DoctorVisit;
+ import com.test.app.domain.Hospital;
+ import com.test.app.domain.HospitalDoctorConsultaion;
+@@ -36,6 +38,7 @@ import com.test.app.domain.User;
+ import com.test.app.domain.UserDoctorVisitRecord;
+ import com.test.app.domain.util.CustomLocalDateSerializer;
+ import com.test.app.domain.util.ISO8601LocalDateDeserializer;
++import com.test.app.repository.DoctorScheduleRepository;
+ import com.test.app.repository.DoctorVisitRepository;
+ import com.test.app.repository.HospitalDoctorConsultaionRepository;
+ import com.test.app.repository.HospitalRepository;
+@@ -46,6 +49,10 @@ import com.test.app.web.rest.dto.HospitalDto;
+ import com.test.app.web.rest.util.HeaderUtil;
+ import com.test.app.web.rest.util.PaginationUtil;
+ 
++import org.springframework.data.mongodb.core.query.Criteria;
++import org.springframework.data.mongodb.core.MongoTemplate;
++import org.springframework.data.mongodb.core.query.Query;
++
+ /**
+  * REST controller for managing UserDTO.
+  */
+@@ -71,6 +78,8 @@ public class MedUserResource {
+     @Inject
+     private UserRecordRepository userRecordRepository;
+     
++    @Inject
++    private DoctorScheduleRepository doctorScheduleRepository;
+     
+ 	@RequestMapping(value = "/userDTOs",
+         method = RequestMethod.PUT,
+@@ -93,27 +102,62 @@ public class MedUserResource {
+             method = RequestMethod.GET,
+             produces = MediaType.APPLICATION_JSON_VALUE)
+     
+-    public ResponseEntity<List<User>> getAll(@RequestParam(value = "page" , required = false) Integer offset,
++    public ResponseEntity<List<User>> getAllUsers(
++    		@RequestParam(value = "name" , required = false) String name,
++    		@RequestParam(value = "page" , required = false) Integer offset,
+                                   @RequestParam(value = "per_page", required = false) Integer limit)
+         throws URISyntaxException {
+-    	return get(offset, limit);
++    	Page<User> page = null;
++    	if (name != null) {
++    		page = userRepository.findByName(name, PaginationUtil.generatePageRequest(offset, limit));
++    	} else {
++    		page = userRepository.findAll(PaginationUtil.generatePageRequest(offset, limit));
++    	}
++    	
++    	List<User> result = page.getContent();
++    	
++    	HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/userDTOs", offset, limit);
++        return new ResponseEntity<List<User>>(result, headers, HttpStatus.OK);
++
+     }
+ 
++    @RequestMapping(value = "/doctor",
++            method = RequestMethod.GET,
++            produces = MediaType.APPLICATION_JSON_VALUE)
++    
++    public ResponseEntity<List<User>> findDoctor(@RequestParam(value = "page" , required = false) Integer offset,
++                                  @RequestParam(value = "per_page", required = false) Integer limit, String name)
++        throws URISyntaxException {
++    	Page<User> page = userRepository.findByName(name, PaginationUtil.generatePageRequest(offset, limit));
++    	
++    	List<User> result = page.getContent();
++    	
++    	HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/userDTOs", offset, limit);
++        return new ResponseEntity<List<User>>(result, headers, HttpStatus.OK);
++
++    }
++    
++    @Inject
++    MongoTemplate mongoTemplate;
++    
++    List<Hospital> getHospitals(User user) {
++    	Query query = Query.query(Criteria.where("adminIds").in(user.getId()));
++    	List<Hospital> doctors = mongoTemplate.find(query , Hospital.class);
++    	return doctors;
++    }
++    
+     @RequestMapping(value = "/hospitals",
+             method = RequestMethod.GET,
+             produces = MediaType.APPLICATION_JSON_VALUE)
+     
+-    public ResponseEntity<List<HospitalDto>> getAllHospitals(@RequestParam(value = "page" , required = false) Integer offset,
++    public ResponseEntity<List<Hospital>> getAllHospitals(@RequestParam(value = "page" , required = false) Integer offset,
+                                   @RequestParam(value = "per_page", required = false) Integer limit)
+         throws URISyntaxException {
+-    	List<HospitalDto> result = new ArrayList<HospitalDto>();
+-    	Page<Hospital> page = hospitalRepository.findAll(PaginationUtil.generatePageRequest(offset, limit));
+-    	for (Hospital user: page.getContent()) {
+-    		result.add(new HospitalDto(user));
+-    	}
++    	User loggedinUser = userService.getUserWithAuthorities();
++    	List<Hospital> result = getHospitals(loggedinUser);
+     	
+-    	HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/hospitals", offset, limit);
+-        return new ResponseEntity<List<HospitalDto>>(result, headers, HttpStatus.OK);
++    	HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(1,7, "/api/hospitals", offset, limit);
++        return new ResponseEntity<List<Hospital>>(result, headers, HttpStatus.OK);
+ 
+     }
+ 
+@@ -180,7 +224,7 @@ public class MedUserResource {
+                                   @RequestParam(value = "per_page", required = false) Integer limit)
+         throws URISyntaxException {
+     	User user = userService.getUserWithAuthorities();
+-    	
++    	date = new LocalDate(2015,8,1);
+         Page<DoctorVisit> page = doctorVisitRepository.findByDoctorIdAndDate(user.getId(), date, PaginationUtil.generatePageRequest(offset, limit));
+         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/doctorVisitDTOs", offset, limit);
+         return new ResponseEntity<List<DoctorVisit>>(page.getContent(), headers, HttpStatus.OK);
+@@ -310,6 +354,116 @@ public class MedUserResource {
+                 .body(result);
+     }
+ 
++    @Inject
++    DoctorScheduleRepository doctorScheduleRepo;
++    
++    @RequestMapping(value = "/doctorSchedules/{id}",
++            method = RequestMethod.GET,
++            produces = MediaType.APPLICATION_JSON_VALUE)
++    
++    public ResponseEntity<DoctorSchedule> getSchedule(@PathVariable String id, HttpServletResponse response) {
++        log.debug("REST request to get UserDTO : {}", id);
++        DoctorSchedule userDTO = doctorScheduleRepo.findOne(id);
++        if (userDTO == null) {
++            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
++        }
++        return new ResponseEntity<>(userDTO, HttpStatus.OK);
++    }
++
++    @RequestMapping(value = "/doctorSchedules",
++            method = RequestMethod.GET,
++            produces = MediaType.APPLICATION_JSON_VALUE)
++    
++    public ResponseEntity<List<DoctorSchedule>> getSchedules(
++    	    @RequestParam(value = "date", required = false)
++    	    @JsonSerialize(using = CustomLocalDateSerializer.class)
++    	    @JsonDeserialize(using = ISO8601LocalDateDeserializer.class)
++    	    LocalDate date,
++    		@RequestParam(value = "page" , required = false) Integer offset,
++                                  @RequestParam(value = "per_page", required = false) Integer limit)
++        throws URISyntaxException {
++    	
++        Page<DoctorSchedule> page = doctorScheduleRepo.findAll(PaginationUtil.generatePageRequest(offset, limit));
++        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/doctorSchedules", offset, limit);
++        return new ResponseEntity<List<DoctorSchedule>>(page.getContent(), headers, HttpStatus.OK);
++    }
++
++    int getEndDate(int year, int month) {
++    	switch(month) {
++    	case 1:
++    	case 3:
++    	case 5:
++    	case 7:
++    	case 8:
++    	case 10:
++    	case 12:
++    		return 31;
++    	case 2:
++    		return 28;
++    	case 4:
++    	case 6:
++    	case 9:
++    	case 11:
++    		return 30;
++    	}
++    	return 30;
++    }
++
++    @RequestMapping(value = "/doctorSchedules",
++            method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
++    public ResponseEntity<DoctorSchedule> createDoctorSchedule(@RequestBody DoctorSchedule dto) throws URISyntaxException {
++        if (dto.getId() != null) {
++            return ResponseEntity.badRequest().header("Failure", "A new userDTO cannot already have an ID").body(null);
++        }
++        Hospital hospital = hospitalRepository.findOne(dto.getHospitalId());
++        dto.setHospitalName(hospital.getName());
++        
++        DoctorSchedule result = doctorScheduleRepo.save(dto);
++        
++        
++        for (int month = dto.getStartDate().getMonthOfYear() ; 
++        		month < dto.getEndDate().getMonthOfYear(); month++) {
++        	
++        	int startDate = dto.getStartDate().getDayOfMonth();
++        	int endDate = getEndDate(dto.getStartDate().getYear(), dto.getStartDate().getMonthOfYear());
++        	
++			for (int day = startDate; day < endDate; day++) {
++				
++				HospitalDoctorConsultaion dto2 = new HospitalDoctorConsultaion();
++				List<String> freeSlots = new ArrayList<String>();
++				freeSlots.add("8:00");
++				freeSlots.add("8:15");
++				freeSlots.add("8:30");
++				freeSlots.add("8:45");
++
++				freeSlots.add("9:00");
++				freeSlots.add("9:15");
++				freeSlots.add("9:30");
++				freeSlots.add("9:45");
++	
++				freeSlots.add("10:00");
++				freeSlots.add("10:15");
++				freeSlots.add("10:30");
++				freeSlots.add("10:45");
++	
++				freeSlots.add("11:00");
++				freeSlots.add("11:15");
++				freeSlots.add("11:30");
++				freeSlots.add("11:45");
++	
++				LocalDate date = new LocalDate(2015, month, day);
++				
++				
++				
++				
++			}
++        }
++        
++        return ResponseEntity.created(new URI("/api/doctorSchedules/" + result.getId()))
++                .headers(HeaderUtil.createEntityCreationAlert("doctorSchedules", result.getId().toString()))
++                .body(result);
++    }
++    
+     @RequestMapping(value = "/patients",
+             method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
+     public ResponseEntity<DoctorVisit> createDoctorVisit(@RequestBody DoctorVisit dto) throws URISyntaxException {
+@@ -375,4 +529,27 @@ public class MedUserResource {
+                 .headers(HeaderUtil.createEntityCreationAlert("patients", result.getId().toString()))
+                 .body(result);
+     }
++    @RequestMapping(value = "/doctor_schedule",
++            method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
++    public ResponseEntity<DoctorSchedule> createDoctorConsultaion(@RequestBody DoctorSchedule dto) throws URISyntaxException {
++        if (dto.getId() != null) {
++            return ResponseEntity.badRequest().header("Failure", "A new doctorSchdule cannot already have an ID").body(null);
++        }
++        DoctorSchedule result = doctorScheduleRepository.save(dto);
++        return ResponseEntity.created(new URI("/api/doctors/" + result.getId()))
++                .headers(HeaderUtil.createEntityCreationAlert("doctors", result.getId().toString()))
++                .body(result);
++    }
++
++    @RequestMapping(value = "/doctor_schedule",
++            method = RequestMethod.PUT,produces = MediaType.APPLICATION_JSON_VALUE)
++    public ResponseEntity<DoctorSchedule> updateDoctorConsultaion(@RequestBody DoctorSchedule dto) throws URISyntaxException {
++        if (dto.getId() == null) {
++            return ResponseEntity.badRequest().header("Failure", "Cannot update doctorSchedule with out ID").body(null);
++        }
++        DoctorSchedule result = doctorScheduleRepository.save(dto);
++        return ResponseEntity.created(new URI("/api/doctors/" + result.getId()))
++                .headers(HeaderUtil.createEntityCreationAlert("doctors", result.getId().toString()))
++                .body(result);
++    }
+ }
+diff --git a/src/main/java/com/test/app/web/rest/util/PaginationUtil.java b/src/main/java/com/test/app/web/rest/util/PaginationUtil.java
+index f2f5ce0..144c352 100644
+--- a/src/main/java/com/test/app/web/rest/util/PaginationUtil.java
++++ b/src/main/java/com/test/app/web/rest/util/PaginationUtil.java
+@@ -35,6 +35,35 @@ public class PaginationUtil {
+         }
+         return new PageRequest(offset - 1, limit);
+     }
++    
++    public static HttpHeaders generatePaginationHttpHeaders(int totalPages, int totalElements, String baseUrl, Integer offset, Integer limit)
++            throws URISyntaxException {
++
++            if (offset == null || offset < MIN_OFFSET) {
++                offset = DEFAULT_OFFSET;
++            }
++            if (limit == null || limit > MAX_LIMIT) {
++                limit = DEFAULT_LIMIT;
++            }
++            HttpHeaders headers = new HttpHeaders();
++            headers.add("X-Total-Count", "" + totalElements);
++            String link = "";
++            if (offset < totalPages) {
++                link = "<" + (new URI(baseUrl +"?page=" + (offset + 1) + "&per_page=" + limit)).toString()
++                    + ">; rel=\"next\",";
++            }
++            if (offset > 1) {
++                link += "<" + (new URI(baseUrl +"?page=" + (offset - 1) + "&per_page=" + limit)).toString()
++                    + ">; rel=\"prev\",";
++            }
++            link += "<" + (new URI(baseUrl +"?page=" + totalPages + "&per_page=" + limit)).toString()
++                + ">; rel=\"last\"," +
++                "<" + (new URI(baseUrl +"?page=" + 1 + "&per_page=" + limit)).toString()
++                + ">; rel=\"first\"";
++            headers.add(HttpHeaders.LINK, link);
++            return headers;
++        }
++
+ 
+     public static HttpHeaders generatePaginationHttpHeaders(Page<?> page, String baseUrl, Integer offset, Integer limit)
+         throws URISyntaxException {
+diff --git a/src/main/webapp/bower_components/modernizr/media/Modernizr 2 Logo.ai b/src/main/webapp/bower_components/modernizr/media/Modernizr 2 Logo.ai
+index 60874e0..e041060 100644
+Binary files a/src/main/webapp/bower_components/modernizr/media/Modernizr 2 Logo.ai and b/src/main/webapp/bower_components/modernizr/media/Modernizr 2 Logo.ai differ
+diff --git a/src/main/webapp/bower_components/modernizr/media/Modernizr 2 Logo.pdf b/src/main/webapp/bower_components/modernizr/media/Modernizr 2 Logo.pdf
+index 60874e0..e041060 100644
+Binary files a/src/main/webapp/bower_components/modernizr/media/Modernizr 2 Logo.pdf and b/src/main/webapp/bower_components/modernizr/media/Modernizr 2 Logo.pdf differ
+diff --git a/src/main/webapp/bower_components/ng-file-upload/FileAPI.flash.swf b/src/main/webapp/bower_components/ng-file-upload/FileAPI.flash.swf
+index ab28572..d95c4f9 100644
+Binary files a/src/main/webapp/bower_components/ng-file-upload/FileAPI.flash.swf and b/src/main/webapp/bower_components/ng-file-upload/FileAPI.flash.swf differ
+diff --git a/src/main/webapp/hospital.html b/src/main/webapp/hospital.html
+index 1264f17..dc8aa7d 100644
+--- a/src/main/webapp/hospital.html
++++ b/src/main/webapp/hospital.html
+@@ -167,6 +167,13 @@
+     <script src="scripts/components/entities/hospitalDoctorDTO4/hospitalDoctorDTO4.service.js"></script>
+     <!-- endbuild -->
+ 
++    <script src="scripts/app/entities/doctorScheduleDTO/doctorScheduleDTO.js"></script>
++    <script src="scripts/app/entities/doctorScheduleDTO/doctorScheduleDTO.controller.js"></script>
++    <script src="scripts/app/entities/doctorScheduleDTO/doctorScheduleDTO-dialog.controller.js"></script>
++    <script src="scripts/app/entities/doctorScheduleDTO/doctorScheduleDTO-detail.controller.js"></script>
++    <script src="scripts/app/entities/doctorScheduleDTO/doctorScheduleDTO.service.js"></script>
++    <script src="scripts/app/entities/doctorScheduleDTO/findDoctor.controller.js"></script>
++
+     <script src="scripts/app/entities/book/book.js"></script>
+     <script src="scripts/app/entities/book/book.controller.js"></script>
+     <script src="scripts/app/entities/book/book-dialog.controller.js"></script>
+diff --git a/src/main/webapp/scratchpad b/src/main/webapp/scratchpad
+index e161e9d..f04794f 100644
+--- a/src/main/webapp/scratchpad
++++ b/src/main/webapp/scratchpad
+@@ -1,4 +1,49 @@
+ angular.forEach(response.data, function(value, key) {
+             		  console.log(key)
+             		  console.log(value)
+-            		});
+\ No newline at end of file
++            		
++
++http://docs.spring.io/spring-data/mongodb/docs/1.3.3.RELEASE/reference/html/mongo.repositories.html
++http://docs.spring.io/spring-data/mongodb/docs/current/reference/html/
++
++GreaterThan	findByAgeGreaterThan(int age)	{"age" : {"$gt" : age}}
++LessThan	findByAgeLessThan(int age)	{"age" : {"$lt" : age}}
++Between	findByAgeBetween(int from, int to)	{"age" : {"$gt" : from, "$lt" : to}}
++IsNotNull, NotNull	findByFirstnameNotNull()	{"age" : {"$ne" : null}}
++IsNull, Null	findByFirstnameNull()	{"age" : null}
++Like	findByFirstnameLike(String name)	{"age" : age} ( age as regex)
++Regex	findByFirstnameRegex(String firstname)	{"firstname" : {"$regex" : firstname }}
++(No keyword)	findByFirstname(String name)	{"age" : name}
++Not	findByFirstnameNot(String name)	{"age" : {"$ne" : name}}
++Near	findByLocationNear(Point point)	{"location" : {"$near" : [x,y]}}
++Within	findByLocationWithin(Circle circle)	{"location" : {"$within" : {"$center" : [ [x, y], distance]}}}
++Within	findByLocationWithin(Box box)	{"location" : {"$within" : {"$box" : [ [x1, y1], x2, y2]}}}True
++IsTrue, True	findByActiveIsTrue()	{"active" : true}
++IsFalse, False	findByActiveIsFalse()	{"active" : false}
++Exists	findByLocationExists(boolean exists)	{"location" : {"$exists" : exists }}
++
++findByBirthdateAfter(Date date) {"birthdate" : {"$gt" : date}}
++findByAgeGreaterThan(int age) {"age" : {"$gt" : age}}
++findByAgeGreaterThanEqual(int age){"age" : {"$gte" : age}}
++findByBirthdateBefore(Date date) {"birthdate" : {"$lt" : date}}
++findByAgeLessThan(int age) {"age" : {"$lt" : age}}
++findByAgeLessThanEqual(int age) {"age" : {"$lte" : age}}
++findByAgeBetween(int from, int to) {"age" : {"$gt" : from, "$lt" : to}}
++findByAgeIn(Collection ages) {"age" : {"$in" : [ages…​]}}
++findByAgeNotIn(Collection ages) {"age" : {"$nin" : [ages…​]}}
++findByFirstnameNotNull() {"firstname" : {"$ne" : null}}
++findByFirstnameNull() {"firstname" : null}
++findByFirstnameLike(String name) {"firstname" : name} ( name as regex)
++findByFirstnameContaining(String name) {"firstname" : name} (name as regex)
++findByAddressesContaining(Address address) {"addresses" : { "$in" : address}}
++findByFirstnameRegex(String firstname) {"firstname" : {"$regex" : firstname }}
++findByFirstname(String name) {"firstname" : name}
++findByFirstnameNot(String name) {"firstname" : {"$ne" : name}}
++findByLocationNear(Point point) {"location" : {"$near" : [x,y]}}
++findByLocationNear(Point point, Distance max) {"location" : {"$near" : [x,y], "$maxDistance" : max}}
++findByLocationNear(Point point, Distance min, Distance max) {"location" : {"$near" : [x,y], "$minDistance" : min, "$maxDistance" : max}}
++findByLocationWithin(Circle circle) {"location" : {"$geoWithin" : {"$center" : [ [x, y], distance]}}}
++findByLocationWithin(Box box) {"location" : {"$geoWithin" : {"$box" : [ [x1, y1], x2, y2]}}}
++findByActiveIsTrue() {"active" : true}
++findByActiveIsFalse() {"active" : false}
++findByLocationExists(boolean exists) {"location" : {"$exists" : exists }}
+\ No newline at end of file
+diff --git a/src/main/webapp/scripts/app/entities/doctorScheduleDTO/doctorScheduleDTO-detail.controller.js b/src/main/webapp/scripts/app/entities/doctorScheduleDTO/doctorScheduleDTO-detail.controller.js
+new file mode 100644
+index 0000000..2c011ff
+--- /dev/null
++++ b/src/main/webapp/scripts/app/entities/doctorScheduleDTO/doctorScheduleDTO-detail.controller.js
+@@ -0,0 +1,14 @@
++'use strict';
++
++angular.module('hipster1App')
++    .controller('DoctorScheduleDTODetailController', function ($scope, $rootScope, $stateParams, entity, DoctorScheduleDTO) {
++        $scope.doctorScheduleDTO = entity;
++        $scope.load = function (id) {
++            DoctorScheduleDTO.get({id: id}, function(result) {
++                $scope.doctorScheduleDTO = result;
++            });
++        };
++        $rootScope.$on('hipster1App:doctorScheduleDTOUpdate', function(event, result) {
++            $scope.doctorScheduleDTO = result;
++        });
++    });
+diff --git a/src/main/webapp/scripts/app/entities/doctorScheduleDTO/doctorScheduleDTO-detail.html b/src/main/webapp/scripts/app/entities/doctorScheduleDTO/doctorScheduleDTO-detail.html
+new file mode 100644
+index 0000000..6856a9a
+--- /dev/null
++++ b/src/main/webapp/scripts/app/entities/doctorScheduleDTO/doctorScheduleDTO-detail.html
+@@ -0,0 +1,193 @@
++
++<div>
++    <!--<h2><span>DoctorScheduleDTO</span> {{doctorScheduleDTO.id}}</h2>
++    
++    <div class="table-responsive">
++        <table class="table table-striped">
++            <thead>
++            <tr>
++                <th>doctorName</th>
++				<th>doctorId</th>
++				<th>hospitalName</th>
++				<th>hospitalId</th>
++				<th>startDate</th>
++				<th>endDate</th>
++				<th>fees</th>
++				<th>slotDuration</th>
++				<th>startTime</th>
++				<th>breakStartTime</th>
++				<th>breakEndTime</th>
++				<th>endTime</th>
++            </tr>
++            </thead>
++            <tbody>
++<tr>
++                <td>
++                    <span>doctorName</span>
++                </td>
++                <td>
++                    <input type="text" class="input-sm form-control" value="{{doctorScheduleDTO.doctorName}}" readonly>
++                </td>
++            </tr>
++<tr>
++                <td>
++                    <span>doctorId</span>
++                </td>
++                <td>
++                    <input type="text" class="input-sm form-control" value="{{doctorScheduleDTO.doctorId}}" readonly>
++                </td>
++            </tr>
++<tr>
++                <td>
++                    <span>hospitalName</span>
++                </td>
++                <td>
++                    <input type="text" class="input-sm form-control" value="{{doctorScheduleDTO.hospitalName}}" readonly>
++                </td>
++            </tr>
++<tr>
++                <td>
++                    <span>hospitalId</span>
++                </td>
++                <td>
++                    <input type="text" class="input-sm form-control" value="{{doctorScheduleDTO.hospitalId}}" readonly>
++                </td>
++            </tr>
++<tr>
++                <td>
++                    <span>startDate</span>
++                </td>
++                <td>
++                    <input type="text" class="input-sm form-control" value="{{doctorScheduleDTO.startDate}}" readonly>
++                </td>
++            </tr>
++<tr>
++                <td>
++                    <span>endDate</span>
++                </td>
++                <td>
++                    <input type="text" class="input-sm form-control" value="{{doctorScheduleDTO.endDate}}" readonly>
++                </td>
++            </tr>
++<tr>
++                <td>
++                    <span>fees</span>
++                </td>
++                <td>
++                    <input type="text" class="input-sm form-control" value="{{doctorScheduleDTO.fees}}" readonly>
++                </td>
++            </tr>
++<tr>
++                <td>
++                    <span>slotDuration</span>
++                </td>
++                <td>
++                    <input type="text" class="input-sm form-control" value="{{doctorScheduleDTO.slotDuration}}" readonly>
++                </td>
++            </tr>
++<tr>
++                <td>
++                    <span>startTime</span>
++                </td>
++                <td>
++                    <input type="text" class="input-sm form-control" value="{{doctorScheduleDTO.startTime}}" readonly>
++                </td>
++            </tr>
++<tr>
++                <td>
++                    <span>breakStartTime</span>
++                </td>
++                <td>
++                    <input type="text" class="input-sm form-control" value="{{doctorScheduleDTO.breakStartTime}}" readonly>
++                </td>
++            </tr>
++<tr>
++                <td>
++                    <span>breakEndTime</span>
++                </td>
++                <td>
++                    <input type="text" class="input-sm form-control" value="{{doctorScheduleDTO.breakEndTime}}" readonly>
++                </td>
++            </tr>
++<tr>
++                <td>
++                    <span>endTime</span>
++                </td>
++                <td>
++                    <input type="text" class="input-sm form-control" value="{{doctorScheduleDTO.endTime}}" readonly>
++                </td>
++            </tr>
++            
++            </tbody>
++        </table>
++    
++    </div>
++-->
++
++
++<div class="form-group">
++            <label for="doctorName">doctorName</label>
++            <input type="text" class="form-control" id="doctorName" name="doctorName"
++                    ng-model="doctorScheduleDTO.doctorName" readonly >
++      </div>
++      <div class="form-group">
++            <label for="doctorId">doctorId</label>
++            <input type="text" class="form-control" id="doctorId" name="doctorId"
++                    ng-model="doctorScheduleDTO.doctorId" readonly>
++      </div>
++      <div class="form-group">
++            <label for="hospitalName">hospitalName</label>
++            <input  type="text" id="hospitalName" name="hospitalName"
++                    ng-model="doctorScheduleDTO.hospitalId"  
++                    readonly />
++      </div>
++      
++      <div class="form-group">
++            <label for="startDate">startDate</label>
++              <input type="text" class="form-control"  ng-model="doctorScheduleDTO.startDate" 
++            readonly   />
++
++      </div>
++      
++      <div class="form-group">
++            <label for="fees">fees</label>
++            <input type="text" class="form-control" id="fees" name="fees"
++                    ng-model="doctorScheduleDTO.fees" readonly >
++      </div>
++      <div class="form-group">
++            <label for="slotDuration">slotDuration</label>
++            <input type="text" class="form-control" id="slotDuration" name="slotDuration"
++                    ng-model="doctorScheduleDTO.slotDuration" readonly >
++      </div>
++    
++      <div class="form-group">
++            <label for="startTime">startTime</label>
++
++            <input type="text" class="form-control" id="startTime" name="startTime"
++                    ng-model="doctorScheduleDTO.startTime"  readonly
++                    />
++
++      </div>
++
++      <div class="form-group">
++            <label for="breakStartTime">breakStartTime</label>
++            <input type="text" class="form-control" id="breakStartTime" name="breakStartTime"
++                    ng-model="doctorScheduleDTO.breakStartTime" readonly >
++      </div>
++      <div class="form-group">
++            <label for="breakEndTime">breakEndTime</label>
++            <input type="text" class="form-control" id="breakEndTime" name="breakEndTime"
++                    ng-model="doctorScheduleDTO.breakEndTime" readonly>
++      </div>
++      <div class="form-group">
++            <label for="endTime">endTime</label>
++            <input type="text" class="form-control" id="endTime" name="endTime"
++                    ng-model="doctorScheduleDTO.endTime" readonly >
++      </div>
++
++    <button type="submit"
++            ui-sref="doctorScheduleDTO"
++            class="btn btn-info">
++        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
++    </button>
++</div>
+diff --git a/src/main/webapp/scripts/app/entities/doctorScheduleDTO/doctorScheduleDTO-dialog.controller.js b/src/main/webapp/scripts/app/entities/doctorScheduleDTO/doctorScheduleDTO-dialog.controller.js
+new file mode 100644
+index 0000000..4879308
+--- /dev/null
++++ b/src/main/webapp/scripts/app/entities/doctorScheduleDTO/doctorScheduleDTO-dialog.controller.js
+@@ -0,0 +1,86 @@
++'use strict';
++
++angular.module('hipster1App').controller('DoctorScheduleDTODialogController',
++    ['$scope', '$stateParams', '$state', 'entity', 'hospitals', 'DoctorScheduleDTO',
++        function($scope, $stateParams, $state, entity, hospitals, DoctorScheduleDTO) {
++
++        $scope.doctorScheduleDTO = entity;
++        
++        angular.forEach(hospitals, function(value, key) {
++                      alert(key);});
++
++        $scope.hospitals2 = hospitals;
++        
++        $scope.times = [{name:"8:00"}, {name:"8:30"},{name:"9:00"}];
++        $scope.load = function(id) {
++            DoctorScheduleDTO.get({id : id}, function(result) {
++                $scope.doctorScheduleDTO = result;
++
++            });
++        };
++
++        var onSaveFinished = function (result) {
++            $scope.$emit('hipster1App:doctorScheduleDTOUpdate', result);
++            //$modalInstance.close(result);
++            $state.go('doctorScheduleDTO');
++        };
++
++        $scope.save = function () {
++            if ($scope.doctorScheduleDTO.id != null) {
++                DoctorScheduleDTO.update($scope.doctorScheduleDTO, onSaveFinished);
++            } else {
++                DoctorScheduleDTO.save($scope.doctorScheduleDTO, onSaveFinished);
++            }
++        };
++/*
++        $scope.clear = function() {
++            $modalInstance.dismiss('cancel');
++        };
++*/
++
++              $scope.today = function() {
++            $scope.doctorScheduleDTO.startDate = new Date();
++            $scope.doctorScheduleDTO.endDate = new Date();
++        };
++        $scope.today();
++
++  $scope.clear = function () {
++    $scope.dt = null;
++  };
++
++  
++  $scope.open2 = function($event) {
++    $scope.opened2 = true;
++  };
++
++$scope.open1 = function($event) {
++    $scope.opened1 = true;
++  };
++
++  $scope.dateOptions = {
++    formatYear: 'yy',
++    startingDay: 1
++  };
++
++  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
++  $scope.format = $scope.formats[0];
++
++  $scope.opened1 = false;
++    $scope.opened2 = false;
++  $scope.getDayClass = function(date, mode) {
++    if (mode === 'day') {
++      var dayToCheck = new Date(date).setHours(0,0,0,0);
++
++      for (var i=0;i<$scope.events.length;i++){
++        var currentDay = new Date($scope.events[i].date).setHours(0,0,0,0);
++
++        if (dayToCheck === currentDay) {
++          return $scope.events[i].status;
++        }
++      }
++    }
++
++    return '';
++    };
++  
++}]);
+diff --git a/src/main/webapp/scripts/app/entities/doctorScheduleDTO/doctorScheduleDTO-dialog.html b/src/main/webapp/scripts/app/entities/doctorScheduleDTO/doctorScheduleDTO-dialog.html
+new file mode 100644
+index 0000000..8db5814
+--- /dev/null
++++ b/src/main/webapp/scripts/app/entities/doctorScheduleDTO/doctorScheduleDTO-dialog.html
+@@ -0,0 +1,106 @@
++
++<form name="editForm" role="form" novalidate ng-submit="save()">
++
++    <div>
++        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
++                ng-click="clear()">&times;</button>
++        <h4 class="modal-title" id="myDoctorScheduleDTOLabel">Create or edit a DoctorScheduleDTO</h4>
++    </div>
++    
++    <div>
++      <div class="form-group">
++            <label for="doctorName">doctorName</label>
++            <input type="text" class="form-control" id="doctorName" name="doctorName"
++                    ng-model="doctorScheduleDTO.doctorName" >
++      </div>
++      <div class="form-group">
++            <label for="doctorId">doctorId</label>
++            <input type="text" class="form-control" id="doctorId" name="doctorId"
++                    ng-model="doctorScheduleDTO.doctorId" >
++      </div>
++      <div class="form-group">
++            <label for="hospitalName">hospitalName</label>
++            <select class="form-control" id="hospitalName" name="hospitalName"
++                    ng-model="doctorScheduleDTO.hospitalId"  
++                    ng-options="h.id as h.name for (pos,h) in hospitals2" />
++      </div>
++      
++      <div class="form-group">
++            <label for="startDate">startDate</label>
++
++            <p class="input-group">
++              <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="doctorScheduleDTO.startDate" 
++               is-open="opened1" ng-click="open1($event)"  />
++               <span class="input-group-btn" >
++          <button style="height:34px;" class="btn btn-default" ng-click="open2($event)">
++          <i class="glyphicon glyphicon-calendar"></i></button> 
++          </span>
++            </p>
++
++      </div>
++      <div class="form-group">
++            <label for="endDate">endDate</label>
++                    <p class="input-group">
++              <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="doctorScheduleDTO.endDate" 
++               is-open="opened2" ng-click="open2($event)"  />
++               <span class="input-group-btn" >
++          <button style="height:34px;" class="btn btn-default" ng-click="open2($event)">
++          <i class="glyphicon glyphicon-calendar"></i></button> 
++          </span>
++            </p>
++      </div>
++      <div class="form-group">
++            <label for="fees">fees</label>
++            <input type="text" class="form-control" id="fees" name="fees"
++                    ng-model="doctorScheduleDTO.fees" >
++      </div>
++      <div class="form-group">
++            <label for="slotDuration">slotDuration</label>
++            <input type="text" class="form-control" id="slotDuration" name="slotDuration"
++                    ng-model="doctorScheduleDTO.slotDuration" >
++      </div>
++    
++      <div class="form-group">
++            <label for="startTime">startTime</label>
++
++            <select class="form-control" id="startTime" name="startTime"
++                    ng-model="doctorScheduleDTO.startTime"  
++                    ng-options="h.name  as h.name for h in times" />
++
++      </div>
++
++      <div class="form-group">
++            <label for="breakStartTime">breakStartTime</label>
++            <select class="form-control" id="breakStartTime" name="breakStartTime"
++                    ng-model="doctorScheduleDTO.breakStartTime"  
++                    ng-options="h.name  as h.name for h in times" />
++
++            
++      </div>
++      <div class="form-group">
++            <label for="breakEndTime">breakEndTime</label>
++
++            <select class="form-control" id="breakEndTime" name="breakEndTime"
++                    ng-model="doctorScheduleDTO.breakEndTime"  
++                    ng-options="h.name  as h.name for h in times" />
++
++            
++      </div>
++      <div class="form-group">
++            <label for="endTime">endTime</label>
++            <select class="form-control" id="endTime" name="endTime"
++                    ng-model="doctorScheduleDTO.endTime"  
++                    ng-options="h.name  as h.name for h in times" />
++            
++      </div>
++
++    </div>
++    <div>
++        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
++            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
++        </button>
++        <button type="submit" ng-disabled="editForm.$invalid || editForm.$submitted" class="btn btn-primary">
++            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
++        </button>
++    </div>
++</form>
+diff --git a/src/main/webapp/scripts/app/entities/doctorScheduleDTO/doctorScheduleDTO.controller.js b/src/main/webapp/scripts/app/entities/doctorScheduleDTO/doctorScheduleDTO.controller.js
+new file mode 100644
+index 0000000..70c2309
+--- /dev/null
++++ b/src/main/webapp/scripts/app/entities/doctorScheduleDTO/doctorScheduleDTO.controller.js
+@@ -0,0 +1,45 @@
++'use strict';
++
++angular.module('hipster1App')
++    .controller('DoctorScheduleDTOController', function ($scope, DoctorScheduleDTO, ParseLinks) {
++        $scope.doctorScheduleDTOs = [];
++        $scope.page = 1;
++        $scope.loadAll = function() {
++            DoctorScheduleDTO.query({page: $scope.page, per_page: 20}, function(result, headers) {
++                $scope.links = ParseLinks.parse(headers('link'));
++                $scope.doctorScheduleDTOs = result;
++            });
++        };
++        $scope.loadPage = function(page) {
++            $scope.page = page;
++            $scope.loadAll();
++        };
++        $scope.loadAll();
++
++        $scope.delete = function (id) {
++            DoctorScheduleDTO.get({id: id}, function(result) {
++                $scope.doctorScheduleDTO = result;
++                $('#deleteDoctorScheduleDTOConfirmation').modal('show');
++            });
++        };
++
++        $scope.confirmDelete = function (id) {
++            DoctorScheduleDTO.delete({id: id},
++                function () {
++                    $scope.loadAll();
++                    $('#deleteDoctorScheduleDTOConfirmation').modal('hide');
++                    $scope.clear();
++                });
++        };
++
++        $scope.refresh = function () {
++            $scope.loadAll();
++            $scope.clear();
++        };
++
++      $scope.clear = function () {
++            $scope.doctorScheduleDTO = {userId: null, visitId: null, symptoms: null, diagnosis: null, prescription: null, tests: null, id: null};
++        };
++
++
++    });
+diff --git a/src/main/webapp/scripts/app/entities/doctorScheduleDTO/doctorScheduleDTO.js b/src/main/webapp/scripts/app/entities/doctorScheduleDTO/doctorScheduleDTO.js
+new file mode 100644
+index 0000000..8053e09
+--- /dev/null
++++ b/src/main/webapp/scripts/app/entities/doctorScheduleDTO/doctorScheduleDTO.js
+@@ -0,0 +1,115 @@
++'use strict';
++
++angular.module('hipster1App')
++    .config(function ($stateProvider) {
++        $stateProvider
++            .state('doctorScheduleDTO', {
++                parent: 'home',
++                url: '/doctorScheduleDTOs',
++                data: {
++                    roles: ['ROLE_USER'],
++                    pageTitle: 'DoctorScheduleDTOs'
++                },
++                views: {
++                    'content@': {
++                        templateUrl: 'scripts/app/entities/doctorScheduleDTO/doctorScheduleDTOs.html',
++                        controller: 'DoctorScheduleDTOController'
++                    }
++                },
++                resolve: {
++                }
++            })
++            .state('doctorScheduleDTO.detail', {
++                parent: 'doctorScheduleDTO',
++                url: '/doctorScheduleDTO/{id}',
++                data: {
++                    roles: ['ROLE_USER'],
++                    pageTitle: 'DoctorScheduleDTO'
++                },
++                views: {
++                    'content@': {
++                        templateUrl: 'scripts/app/entities/doctorScheduleDTO/doctorScheduleDTO-detail.html',
++                        controller: 'DoctorScheduleDTODetailController'
++                    }
++                },
++                resolve: {
++                    entity: ['$stateParams', 'DoctorScheduleDTO', function($stateParams, DoctorScheduleDTO) {
++                        return DoctorScheduleDTO.get({id : $stateParams.id});
++                    }]
++                }
++            })
++            .state('doctorScheduleDTO.new.start', {
++            	parent: 'doctorScheduleDTO',
++                url: '/new_start',
++                params : { userId : null, visitId:null},
++                data: {
++                    roles: ['ROLE_USER'],
++                },
++                views: {
++                    'content@': {
++                        templateUrl: 'scripts/app/entities/doctorScheduleDTO/findDoctor-dialog.html',
++                        controller: 'FindDoctorController'
++                    }
++                },
++                resolve: {
++                    entity: ['$state', '$stateParams', 'DoctorScheduleDTO', function($state, $stateParams, DoctorScheduleDTO) {
++                        return {doctorName:null}
++                    }],
++                }
++            })
++
++            .state('doctorScheduleDTO.new', {
++            	parent: 'doctorScheduleDTO',
++                url: '/new',
++                params : { userId : null, visitId:null, data:null},
++                data: {
++                    roles: ['ROLE_USER'],
++                },
++                views: {
++                    'content@': {
++                        templateUrl: 'scripts/app/entities/doctorScheduleDTO/doctorScheduleDTO-dialog.html',
++                        controller: 'DoctorScheduleDTODialogController'
++                    }
++                },
++                resolve: {
++                    entity: ['$state', '$stateParams', 'DoctorScheduleDTO', function($state, $stateParams, DoctorScheduleDTO) {
++                        
++                    	return {doctorId: $stateParams.data.id, doctorName : $stateParams.data.name}
++                    }],
++                    
++
++                    hospitals : ['$state', 'ParseLinks','$stateParams', 'HospitalDTO', function(
++                        $state, ParseLinks, $stateParams, HospitalDTO) {
++                        
++                        return HospitalDTO.query({}, 
++                            function(result, headers) {
++                                result.links = ParseLinks.parse(headers('link'));
++                                return result;
++                            });
++                    }]
++                }
++            })
++            .state('doctorScheduleDTO.edit', {
++                parent: 'doctorScheduleDTO',
++                url: '/{id}/edit',
++                data: {
++                    roles: ['ROLE_USER'],
++                },
++                onEnter: ['$stateParams', '$state', '$modal', function($stateParams, $state, $modal) {
++                    $modal.open({
++                        templateUrl: 'scripts/app/entities/doctorScheduleDTO/doctorScheduleDTO-dialog.html',
++                        controller: 'DoctorScheduleDTODialogController',
++                        size: 'lg',
++                        resolve: {
++                            entity: ['DoctorScheduleDTO', function(DoctorScheduleDTO) {
++                                return DoctorScheduleDTO.get({id : $stateParams.id});
++                            }]
++                        }
++                    }).result.then(function(result) {
++                        $state.go('doctorScheduleDTO', null, { reload: true });
++                    }, function() {
++                        $state.go('^');
++                    })
++                }]
++            });
++    });
+diff --git a/src/main/webapp/scripts/app/entities/doctorScheduleDTO/doctorScheduleDTO.service.js b/src/main/webapp/scripts/app/entities/doctorScheduleDTO/doctorScheduleDTO.service.js
+new file mode 100644
+index 0000000..b41d927
+--- /dev/null
++++ b/src/main/webapp/scripts/app/entities/doctorScheduleDTO/doctorScheduleDTO.service.js
+@@ -0,0 +1,34 @@
++'use strict';
++
++angular.module('hipster1App')
++    .factory('DoctorScheduleDTO', function ($resource, DateUtils) {
++        return $resource('api/doctorSchedules/:id', {}, {
++            'query': { method: 'GET', isArray: true},
++            'get': {
++                method: 'GET',
++                transformResponse: function (data) {
++                    data = angular.fromJson(data);
++                    return data;
++                }
++            },
++            'update': {
++                method: 'PUT',
++                transformRequest: function (data) {
++                    data.startDate = DateUtils.convertLocaleDateToServer(data.startDate);
++                    data.endDate = DateUtils.convertLocaleDateToServer(data.endDate);
++                    alert(data.startDate);
++                    return angular.toJson(data);
++                }
++            },
++            'save': {
++                method: 'POST',
++                transformRequest: function (data) {
++                    data.startDate = DateUtils.convertLocaleDateToServer(data.startDate);
++                    data.endDate = DateUtils.convertLocaleDateToServer(data.endDate);
++                    alert(data.startDate);
++                    return angular.toJson(data);
++                }
++            }
++            
++        });
++    });
+diff --git a/src/main/webapp/scripts/app/entities/doctorScheduleDTO/doctorScheduleDTOs.html b/src/main/webapp/scripts/app/entities/doctorScheduleDTO/doctorScheduleDTOs.html
+new file mode 100644
+index 0000000..dadfab6
+--- /dev/null
++++ b/src/main/webapp/scripts/app/entities/doctorScheduleDTO/doctorScheduleDTOs.html
+@@ -0,0 +1,61 @@
++<div>
++
++    <h2>Records</h2>
++
++        
++    <div class="table-responsive">
++        <table class="table table-striped">
++            <thead>
++                <tr>
++                    <th>ID</th>
++                    <th>UserId</th>
++                    <th>VisitId</th>
++                    <th>Symptoms</th>
++                    <th>Diagnosis</th>
++                    <th>Prescription</th>
++                    <th>Tests</th>
++                    <th></th>
++                </tr>
++            </thead>
++            <tbody>
++                <tr ng-repeat="doctorScheduleDTO in doctorScheduleDTOs">
++                    <td><a ui-sref="doctorScheduleDTO.detail({id:doctorScheduleDTO.id})">{{doctorScheduleDTO.id}}</a></td>
++                    <td>{{doctorScheduleDTO.userId}}</td>
++                    <td>{{doctorScheduleDTO.visitId}}</td>
++                    <td>{{doctorScheduleDTO.symptoms}}</td>
++                    <td>{{doctorScheduleDTO.diagnosis}}</td>
++                    <td>{{doctorScheduleDTO.prescription}}</td>
++                    <td>{{doctorScheduleDTO.tests}}</td>
++                    <td>
++                        <button type="submit"
++                                ui-sref="doctorScheduleDTO.detail({id:doctorScheduleDTO.id})"
++                                class="btn btn-info btn-sm">
++                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span> View</span>
++                        </button>
++                        <a href="/hipster1/download_record/{{doctorScheduleDTO.id}}.pdf">
++                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span> Download</span>
++                        </a>
++                        <button type="submit"
++                                ng-click="delete(doctorScheduleDTO.id)"
++                                class="btn btn-danger btn-sm">
++                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span> Delete</span>
++                        </button>
++                    </td>
++                </tr>
++            </tbody>
++        </table>
++        <nav>
++            <ul class="pagination">
++                <li ng-show="links['first']" ng-click="loadPage(links['first'])"><a>&lt;&lt;</a></li>
++                <li ng-show="links['prev']" ng-click="loadPage(links['prev'])"><a>&lt;</a></li>
++                <li ng-show="page > 2" ng-click="loadPage(page - 2)"><a>{{page - 2}}</a></li>
++                <li ng-show="page > 1" ng-click="loadPage(page - 1)"><a>{{page - 1}}</a></li>
++                <li class="active"><a>{{page}}</a></li>
++                <li ng-show="page < links['last']" ng-click="loadPage(page + 1)"><a>{{page + 1}}</a></li>
++                <li ng-show="page < links['last'] - 1" ng-click="loadPage(page + 2)"><a>{{page + 2}}</a></li>
++                <li ng-show="links['next']" ng-click="loadPage(links['next'])"><a>&gt;</a></li>
++                <li ng-show="links['last']" ng-click="loadPage(links['last'])"><a>&gt;&gt;</a></li>
++            </ul>
++        </nav>
++    </div>
++</div>
+diff --git a/src/main/webapp/scripts/app/entities/doctorScheduleDTO/findDoctor-dialog.html b/src/main/webapp/scripts/app/entities/doctorScheduleDTO/findDoctor-dialog.html
+new file mode 100644
+index 0000000..16c9f8b
+--- /dev/null
++++ b/src/main/webapp/scripts/app/entities/doctorScheduleDTO/findDoctor-dialog.html
+@@ -0,0 +1,74 @@
++
++<form name="editForm" role="form" novalidate ng-submit="search()">
++
++    <div>
++        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
++                ng-click="clear()">&times;</button>
++        <h4 class="modal-title" id="myDoctorScheduleDTOLabel">find Doctor</h4>
++    </div>
++    
++    <div>
++      <div class="form-group">
++            <label for="doctorName">doctorName</label>
++            <input type="text" class="form-control" id="doctorName" name="doctorName"
++                    ng-model="doctorName" >
++      </div>
++    </div>
++    <div>
++        <button type="submit" ng-disabled="editForm.$invalid || editForm.$submitted" class="btn btn-primary">
++            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Search</span>
++        </button>
++    </div>
++
++        <div class="table-responsive">
++        <table class="table table-striped">
++            <thead>
++                <tr>
++                    <th>ID</th>
++                    <th>Name</th>
++                    <th>Mobileno</th>
++                    <th>EmailId</th>
++                    <th>Sex</th>
++                    <th>Age</th>
++                    <th>Location</th>
++                    <th>City</th>
++                    <th></th>
++                </tr>
++            </thead>
++            <tbody>
++                <tr ng-repeat="userDTO in userDTOs">
++                    <td><a ui-sref="userDTO.detail({id:userDTO.id})">{{userDTO.id}}</a></td>
++                    <td>{{userDTO.name}}</td>
++                    <td>{{userDTO.mobileno}}</td>
++                    <td>{{userDTO.emailId}}</td>
++                    <td>{{userDTO.sex}}</td>
++                    <td>{{userDTO.age}}</td>
++                    <td>{{userDTO.location}}</td>
++                    <td>{{userDTO.city}}</td>
++                    <td>
++                        <button type="submit"
++                                ng-click="addDoctorToHospitalPage(userDTO)"
++                                class="btn btn-info btn-sm">
++                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span> View</span>
++                        </button>
++                        
++                    </td>
++                </tr>
++            </tbody>
++        </table>
++        <nav>
++            <ul class="pagination">
++                <li ng-show="links['first']" ng-click="loadPage(links['first'])"><a>&lt;&lt;</a></li>
++                <li ng-show="links['prev']" ng-click="loadPage(links['prev'])"><a>&lt;</a></li>
++                <li ng-show="page > 2" ng-click="loadPage(page - 2)"><a>{{page - 2}}</a></li>
++                <li ng-show="page > 1" ng-click="loadPage(page - 1)"><a>{{page - 1}}</a></li>
++                <li class="active"><a>{{page}}</a></li>
++                <li ng-show="page < links['last']" ng-click="loadPage(page + 1)"><a>{{page + 1}}</a></li>
++                <li ng-show="page < links['last'] - 1" ng-click="loadPage(page + 2)"><a>{{page + 2}}</a></li>
++                <li ng-show="links['next']" ng-click="loadPage(links['next'])"><a>&gt;</a></li>
++                <li ng-show="links['last']" ng-click="loadPage(links['last'])"><a>&gt;&gt;</a></li>
++            </ul>
++        </nav>
++    </div>
++
++</form>
+diff --git a/src/main/webapp/scripts/app/entities/doctorScheduleDTO/findDoctor.controller.js b/src/main/webapp/scripts/app/entities/doctorScheduleDTO/findDoctor.controller.js
+new file mode 100644
+index 0000000..983c825
+--- /dev/null
++++ b/src/main/webapp/scripts/app/entities/doctorScheduleDTO/findDoctor.controller.js
+@@ -0,0 +1,36 @@
++'use strict';
++
++angular.module('hipster1App').controller('FindDoctorController',
++    ['$scope', '$stateParams', '$state', 'entity', 'ParseLinks', 'DoctorScheduleDTO',
++    'UserDTO',
++        function($scope, $stateParams, $state, entity, ParseLinks, DoctorScheduleDTO, UserDTO) {
++
++        $scope.doctorName = '';
++
++        $scope.load = function(id) {
++            DoctorScheduleDTO.get({id : id}, function(result) {
++                $scope.doctorScheduleDTO = result;
++            });
++        };
++
++        var onSaveFinished = function (result) {
++            $scope.$emit('hipster1App:doctorScheduleDTOUpdate', result);
++            //$modalInstance.close(result);
++            $state.go('doctorScheduleDTO');
++        };
++
++        $scope.addDoctorToHospitalPage = function (item) {
++            $state.go('doctorScheduleDTO.new',{data:item});
++        }
++
++        $scope.search = function () {
++            UserDTO.query({page: $scope.page, per_page: 5, name: $scope.doctorName}, function(result, headers) {
++                $scope.links = ParseLinks.parse(headers('link'));
++                $scope.userDTOs = result;
++            });
++        };
++
++        $scope.clear = function() {
++            $modalInstance.dismiss('cancel');
++        };
++}]);
+diff --git a/src/main/webapp/scripts/app/entities/hospitalDoctorDTO4/hospitalDoctorDTO4.controller.js b/src/main/webapp/scripts/app/entities/hospitalDoctorDTO4/hospitalDoctorDTO4.controller.js
+index 46d2c55..c80cf21 100644
+--- a/src/main/webapp/scripts/app/entities/hospitalDoctorDTO4/hospitalDoctorDTO4.controller.js
++++ b/src/main/webapp/scripts/app/entities/hospitalDoctorDTO4/hospitalDoctorDTO4.controller.js
+@@ -9,14 +9,12 @@ angular.module('hipster1App')
+         	if (!angular.isDefined(speciality)) {
+         		speciality = $rootScope.speciality;
+         	}
+-        	HospitalDoctorDTO4.query({page: $scope.page, per_page: 20,
++        	HospitalDoctorDTO4.query({page: $scope.page, per_page: 5,
+             	location: $rootScope.city, date:'8/1/2015',
+                 speciality : $rootScope.speciality }, function(result, headers) {
+                 $scope.links = ParseLinks.parse(headers('link'));
+                 $scope.hospitalDoctorDTO4s = result;
+                 $scope.hospitalDoctorDTO4check = result[0];
+-            	
+-                
+             });
+             
+         };
+diff --git a/src/main/webapp/scripts/app/entities/userRecordDTO/fields b/src/main/webapp/scripts/app/entities/userRecordDTO/fields
+new file mode 100644
+index 0000000..75ad145
+--- /dev/null
++++ b/src/main/webapp/scripts/app/entities/userRecordDTO/fields
+@@ -0,0 +1,12 @@
++doctorName
++doctorId
++hospitalName
++hospitalId
++startDate
++endDate
++fees
++slotDuration
++startTime
++breakStartTime
++breakEndTime
++endTime
+diff --git a/src/main/webapp/scripts/app/entities/userRecordDTO/js.out b/src/main/webapp/scripts/app/entities/userRecordDTO/js.out
+new file mode 100644
+index 0000000..76c9209
+--- /dev/null
++++ b/src/main/webapp/scripts/app/entities/userRecordDTO/js.out
+@@ -0,0 +1,5 @@
++    <script src="scripts/app/entities/doctorScheduleDTO/doctorScheduleDTO.js"></script>
++    <script src="scripts/app/entities/doctorScheduleDTO/doctorScheduleDTO.controller.js"></script>
++    <script src="scripts/app/entities/doctorScheduleDTO/doctorScheduleDTO-dialog.controller.js"></script>
++    <script src="scripts/app/entities/doctorScheduleDTO/doctorScheduleDTO-detail.controller.js"></script>
++    <script src="scripts/components/entities/doctorScheduleDTO/doctorScheduleDTO.service.js"></script>
+diff --git a/src/main/webapp/scripts/app/entities/userRecordDTO/js.txt b/src/main/webapp/scripts/app/entities/userRecordDTO/js.txt
+new file mode 100644
+index 0000000..5d84d10
+--- /dev/null
++++ b/src/main/webapp/scripts/app/entities/userRecordDTO/js.txt
+@@ -0,0 +1,5 @@
++    <script src="scripts/app/entities/userRecordDTO/userRecordDTO.js"></script>
++    <script src="scripts/app/entities/userRecordDTO/userRecordDTO.controller.js"></script>
++    <script src="scripts/app/entities/userRecordDTO/userRecordDTO-dialog.controller.js"></script>
++    <script src="scripts/app/entities/userRecordDTO/userRecordDTO-detail.controller.js"></script>
++    <script src="scripts/components/entities/userRecordDTO/userRecordDTO.service.js"></script>
+diff --git a/src/main/webapp/scripts/app/entities/userRecordDTO/model b/src/main/webapp/scripts/app/entities/userRecordDTO/model
+new file mode 100644
+index 0000000..b5541d0
+--- /dev/null
++++ b/src/main/webapp/scripts/app/entities/userRecordDTO/model
+@@ -0,0 +1,5 @@
++      <div class="form-group">
++            <label for="placeHolder">placeHolder</label>
++            <input type="text" class="form-control" id="placeHolder" name="placeHolder"
++                    ng-model="doctorScheduleDTO.placeHolder" readonly>
++      </div>
+diff --git a/src/main/webapp/scripts/app/entities/userRecordDTO/out b/src/main/webapp/scripts/app/entities/userRecordDTO/out
+new file mode 100644
+index 0000000..f5a9411
+--- /dev/null
++++ b/src/main/webapp/scripts/app/entities/userRecordDTO/out
+@@ -0,0 +1,60 @@
++      <div class="form-group">
++            <label for="doctorName">doctorName</label>
++            <input type="text" class="form-control" id="doctorName" name="doctorName"
++                    ng-model="doctorScheduleDTO.doctorName" readonly>
++      </div>
++      <div class="form-group">
++            <label for="doctorId">doctorId</label>
++            <input type="text" class="form-control" id="doctorId" name="doctorId"
++                    ng-model="doctorScheduleDTO.doctorId" readonly>
++      </div>
++      <div class="form-group">
++            <label for="hospitalName">hospitalName</label>
++            <input type="text" class="form-control" id="hospitalName" name="hospitalName"
++                    ng-model="doctorScheduleDTO.hospitalName" readonly>
++      </div>
++      <div class="form-group">
++            <label for="hospitalId">hospitalId</label>
++            <input type="text" class="form-control" id="hospitalId" name="hospitalId"
++                    ng-model="doctorScheduleDTO.hospitalId" readonly>
++      </div>
++      <div class="form-group">
++            <label for="startDate">startDate</label>
++            <input type="text" class="form-control" id="startDate" name="startDate"
++                    ng-model="doctorScheduleDTO.startDate" readonly>
++      </div>
++      <div class="form-group">
++            <label for="endDate">endDate</label>
++            <input type="text" class="form-control" id="endDate" name="endDate"
++                    ng-model="doctorScheduleDTO.endDate" readonly>
++      </div>
++      <div class="form-group">
++            <label for="fees">fees</label>
++            <input type="text" class="form-control" id="fees" name="fees"
++                    ng-model="doctorScheduleDTO.fees" readonly>
++      </div>
++      <div class="form-group">
++            <label for="slotDuration">slotDuration</label>
++            <input type="text" class="form-control" id="slotDuration" name="slotDuration"
++                    ng-model="doctorScheduleDTO.slotDuration" readonly>
++      </div>
++      <div class="form-group">
++            <label for="startTime">startTime</label>
++            <input type="text" class="form-control" id="startTime" name="startTime"
++                    ng-model="doctorScheduleDTO.startTime" readonly>
++      </div>
++      <div class="form-group">
++            <label for="breakStartTime">breakStartTime</label>
++            <input type="text" class="form-control" id="breakStartTime" name="breakStartTime"
++                    ng-model="doctorScheduleDTO.breakStartTime" readonly>
++      </div>
++      <div class="form-group">
++            <label for="breakEndTime">breakEndTime</label>
++            <input type="text" class="form-control" id="breakEndTime" name="breakEndTime"
++                    ng-model="doctorScheduleDTO.breakEndTime" readonly>
++      </div>
++      <div class="form-group">
++            <label for="endTime">endTime</label>
++            <input type="text" class="form-control" id="endTime" name="endTime"
++                    ng-model="doctorScheduleDTO.endTime" readonly>
++      </div>
+diff --git a/src/main/webapp/scripts/app/entities/userRecordDTO/scripts.txt b/src/main/webapp/scripts/app/entities/userRecordDTO/scripts.txt
+new file mode 100644
+index 0000000..d91a815
+--- /dev/null
++++ b/src/main/webapp/scripts/app/entities/userRecordDTO/scripts.txt
+@@ -0,0 +1,13 @@
++
++for i in `ls *`; do j=`echo $i |sed 's/userRecord/doctorSchedule/g'`;echo $j; mv $i $j;done
++for i in `ls *`; do echo $i;sed -i 's/userRecord/doctorSchedule/g' $i;done
++for i in `ls *`; do echo $i;sed -i 's/UserRecord/DoctorSchedule/g' $i;done
++
++sed 's/userRecord/doctorSchedule/g' js.txt > js.out
++
++for i in `cat fields`; do sed 's/placeHolder/'"$i"'/g' model; done > model.out
++
++for i in `cat fields`; do sed 's/placeHolder/'"$i"'/g' th; done > th.out
++for i in `cat fields`; do sed 's/placeHolder/'"$i"'/g' td; done > td.out
++
++
+diff --git a/src/main/webapp/scripts/app/entities/userRecordDTO/td b/src/main/webapp/scripts/app/entities/userRecordDTO/td
+new file mode 100644
+index 0000000..3827776
+--- /dev/null
++++ b/src/main/webapp/scripts/app/entities/userRecordDTO/td
+@@ -0,0 +1,8 @@
++<tr>
++                <td>
++                    <span>placeHolder</span>
++                </td>
++                <td>
++                    <input type="text" class="input-sm form-control" value="{{doctorScheduleDTO.placeHolder}}" readonly>
++                </td>
++            </tr>
+diff --git a/src/main/webapp/scripts/app/entities/userRecordDTO/td.out b/src/main/webapp/scripts/app/entities/userRecordDTO/td.out
+new file mode 100644
+index 0000000..d155479
+--- /dev/null
++++ b/src/main/webapp/scripts/app/entities/userRecordDTO/td.out
+@@ -0,0 +1,96 @@
++<tr>
++                <td>
++                    <span>doctorName</span>
++                </td>
++                <td>
++                    <input type="text" class="input-sm form-control" value="{{doctorScheduleDTO.doctorName}}" readonly>
++                </td>
++            </tr>
++<tr>
++                <td>
++                    <span>doctorId</span>
++                </td>
++                <td>
++                    <input type="text" class="input-sm form-control" value="{{doctorScheduleDTO.doctorId}}" readonly>
++                </td>
++            </tr>
++<tr>
++                <td>
++                    <span>hospitalName</span>
++                </td>
++                <td>
++                    <input type="text" class="input-sm form-control" value="{{doctorScheduleDTO.hospitalName}}" readonly>
++                </td>
++            </tr>
++<tr>
++                <td>
++                    <span>hospitalId</span>
++                </td>
++                <td>
++                    <input type="text" class="input-sm form-control" value="{{doctorScheduleDTO.hospitalId}}" readonly>
++                </td>
++            </tr>
++<tr>
++                <td>
++                    <span>startDate</span>
++                </td>
++                <td>
++                    <input type="text" class="input-sm form-control" value="{{doctorScheduleDTO.startDate}}" readonly>
++                </td>
++            </tr>
++<tr>
++                <td>
++                    <span>endDate</span>
++                </td>
++                <td>
++                    <input type="text" class="input-sm form-control" value="{{doctorScheduleDTO.endDate}}" readonly>
++                </td>
++            </tr>
++<tr>
++                <td>
++                    <span>fees</span>
++                </td>
++                <td>
++                    <input type="text" class="input-sm form-control" value="{{doctorScheduleDTO.fees}}" readonly>
++                </td>
++            </tr>
++<tr>
++                <td>
++                    <span>slotDuration</span>
++                </td>
++                <td>
++                    <input type="text" class="input-sm form-control" value="{{doctorScheduleDTO.slotDuration}}" readonly>
++                </td>
++            </tr>
++<tr>
++                <td>
++                    <span>startTime</span>
++                </td>
++                <td>
++                    <input type="text" class="input-sm form-control" value="{{doctorScheduleDTO.startTime}}" readonly>
++                </td>
++            </tr>
++<tr>
++                <td>
++                    <span>breakStartTime</span>
++                </td>
++                <td>
++                    <input type="text" class="input-sm form-control" value="{{doctorScheduleDTO.breakStartTime}}" readonly>
++                </td>
++            </tr>
++<tr>
++                <td>
++                    <span>breakEndTime</span>
++                </td>
++                <td>
++                    <input type="text" class="input-sm form-control" value="{{doctorScheduleDTO.breakEndTime}}" readonly>
++                </td>
++            </tr>
++<tr>
++                <td>
++                    <span>endTime</span>
++                </td>
++                <td>
++                    <input type="text" class="input-sm form-control" value="{{doctorScheduleDTO.endTime}}" readonly>
++                </td>
++            </tr>
+diff --git a/src/main/webapp/scripts/app/entities/userRecordDTO/th b/src/main/webapp/scripts/app/entities/userRecordDTO/th
+new file mode 100644
+index 0000000..2c1ef4e
+--- /dev/null
++++ b/src/main/webapp/scripts/app/entities/userRecordDTO/th
+@@ -0,0 +1 @@
++<th>placeHolder</th>
+diff --git a/src/main/webapp/scripts/app/entities/userRecordDTO/th.out b/src/main/webapp/scripts/app/entities/userRecordDTO/th.out
+new file mode 100644
+index 0000000..2929417
+--- /dev/null
++++ b/src/main/webapp/scripts/app/entities/userRecordDTO/th.out
+@@ -0,0 +1,12 @@
++<th>doctorName</th>
++<th>doctorId</th>
++<th>hospitalName</th>
++<th>hospitalId</th>
++<th>startDate</th>
++<th>endDate</th>
++<th>fees</th>
++<th>slotDuration</th>
++<th>startTime</th>
++<th>breakStartTime</th>
++<th>breakEndTime</th>
++<th>endTime</th>
+diff --git a/src/main/webapp/scripts/app/entities/userRecordDTO/userRecordDTO.service.js b/src/main/webapp/scripts/app/entities/userRecordDTO/userRecordDTO.service.js
+new file mode 100644
+index 0000000..59cf752
+--- /dev/null
++++ b/src/main/webapp/scripts/app/entities/userRecordDTO/userRecordDTO.service.js
+@@ -0,0 +1,16 @@
++'use strict';
++
++angular.module('hipster1App')
++    .factory('UserRecordDTO', function ($resource, DateUtils) {
++        return $resource('api/userRecords/:id', {}, {
++            'query': { method: 'GET', isArray: true},
++            'get': {
++                method: 'GET',
++                transformResponse: function (data) {
++                    data = angular.fromJson(data);
++                    return data;
++                }
++            },
++            'update': { method:'PUT' }
++        });
++    });
+diff --git a/src/main/webapp/scripts/components/navbar/navbar.html b/src/main/webapp/scripts/components/navbar/navbar.html
+index c0f7cf2..56b5cb4 100644
+--- a/src/main/webapp/scripts/components/navbar/navbar.html
++++ b/src/main/webapp/scripts/components/navbar/navbar.html
+@@ -133,9 +133,16 @@
+                         &#xA0;<span >listUserRecords</span></a></li>
+                         <li ui-sref-active="active" ><a ui-sref="doctorVisitDTO"><span class="glyphicon glyphicon-asterisk"></span>
+                         &#xA0;<span >listPatients</span></a></li>
+-                        <li ui-sref-active="active" ><a ui-sref="hospitalDoctorDTO4"><span class="glyphicon glyphicon-asterisk"></span>
+-                        &#xA0;<span >listDoctors</span></a></li>
++
++                        <li ui-sref-active="active" ><a ui-sref="doctorScheduleDTO"><span class="glyphicon glyphicon-asterisk"></span>
++                        &#xA0;<span >schedules</span></a></li>
+                         
++                        <li ui-sref-active="active" ><a ui-sref="doctorScheduleDTO.new.start"><span class="glyphicon glyphicon-asterisk"></span>
++                        &#xA0;<span >create schedule</span></a></li>
++
++                        <li ui-sref-active="active" ><a ui-sref="doctorScheduleDTO.detail/1"><span class="glyphicon glyphicon-asterisk"></span>
++                        &#xA0;<span >view schedule</span></a></li>
++
+                     </ul>
+                     
+                     

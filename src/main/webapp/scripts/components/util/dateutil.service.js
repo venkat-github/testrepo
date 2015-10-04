@@ -2,6 +2,16 @@
 
 angular.module('hipster1App')
     .service('DateUtils', function () {
+    	this.convertLocaleDateParamToServer = function(date) {
+            if (date) {
+              var utcDate = '';
+              var month = date.getMonth() + 1;
+              utcDate = date.getFullYear() + "-" + month + "-" +date.getDate();
+              return utcDate;
+            } else {
+              return null;
+            }
+          };
       this.convertLocaleDateToServer = function(date) {
         if (date) {
           var utcDate = new Date();

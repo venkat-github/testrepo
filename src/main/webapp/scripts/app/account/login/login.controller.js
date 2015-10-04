@@ -14,10 +14,10 @@ angular.module('hipster1App')
                 password: $scope.password,
                 rememberMe: $scope.rememberMe
             }).then(function () {
+                
                 $scope.authenticationError = false;
                 Account.get().$promise.then(function(user) {
                 	$rootScope.user = user.data;
-                	
                 });
                 if ($rootScope.previousStateName === 'register') {
                     $state.go('home');
@@ -25,6 +25,7 @@ angular.module('hipster1App')
                     $rootScope.back();
                 }
             }).catch(function () {
+                alert('auth error ');
                 $scope.authenticationError = true;
             });
         };

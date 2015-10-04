@@ -35,7 +35,9 @@ import com.test.app.repository.HospitalDoctorConsultationHelperFunctions;
 import com.test.app.repository.HospitalRepository;
 import com.test.app.repository.UserRecordRepository;
 import com.test.app.repository.UserRepository;
+import com.test.app.web.rest.util.PaginationUtil;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
@@ -80,6 +82,7 @@ public class InitService {
     	try {
     		userRepository.deleteAll();
     		userRecordDTORepository.deleteAll();
+    		doctorScheduleRepository.deleteAll();
     		hospitalDoctorConsultaionRepository.deleteAll();
     		doctorVisitRepository.deleteAll();
     		hospitalRepository.deleteAll();
@@ -91,12 +94,14 @@ public class InitService {
 	    	addDoctorsToHospitals();
 	    	bookAppointments();
 
+	    	List result = hospitalDoctorConsultaionRepository.findBySpecialityAndDate("DENTIST", new LocalDate());
 	    	User user = userRepository.findOneByName("hosp");
 	    	
 	    	Query query = Query.query(Criteria.where("adminIds").in(user.getId()));
 	    	List<Hospital> doctor = mongoTemplate.find(query , Hospital.class);
 	    	System.out.println("found "+doctor.size()+" no of hospitals ");
 
+	    	
     	} catch (javax.validation.ConstraintViolationException ex1) {
     		System.out.println("constrant name "+ex1.getConstraintViolations());
     		for (ConstraintViolation x : ex1.getConstraintViolations()) {
@@ -124,12 +129,22 @@ public class InitService {
     	User userDto = userRepository.findOneByName(userName);
 		HospitalDoctorConsultaion consultDto = findConsultation("koramanagala", "DENTIST", docName);
 		DoctorVisit visitDto = bookAppointment(consultDto, userDto.getId(), slot);
-		
+
+    	
+		LocalDate date = new LocalDate();
+		date = new LocalDate(date.getYear(), date.getMonthOfYear(), date.getDayOfMonth());
+	
+        Page<DoctorVisit> page = doctorVisitRepository.findByDoctorIdAndDate(consultDto.getDoctorId(), 
+        		date, PaginationUtil.generatePageRequest(0, 5));
+
+        System.out.println(page.getContent().size());;
+        
 		UserDoctorVisitRecord userRecord = new UserDoctorVisitRecord();
 		userRecord.setSymptoms("hand pain");
 		userRecord.setPrescription("use moov pain relief balm");
 		userRecord.setVisitId(visitDto.getId());
 		userRecord.setUserId(userDto.getId());
+		
 		userRecordDTORepository.save(userRecord);
     }
 	
@@ -273,7 +288,7 @@ public class InitService {
 		Set<WorkingDay> workingdays = null;
 		DoctorSchedule doctorSchedule = new DoctorSchedule();
 		doctorSchedule.setDoctorId(doc.getId());
-		doctorSchedule.setDoctorName(doc.getFullname());
+		doctorSchedule.setDoctorName(doc.getName());
 		doctorSchedule.setFees(500);
 		doctorSchedule.setBreakStartTime("12:30");
 		doctorSchedule.setBreakEndTime("13:30");
@@ -287,9 +302,11 @@ public class InitService {
 		doctorSchedule.setWorkingDays(workingdays);
 		doctorScheduleRepository.save(doctorSchedule);
 		
-		for (int i=0; i< 1; i++) {
-			hospitalDoctorConsultationHelperFunctions.AddNextDayConsultationRecordForDoctorAndHospital(doc.getId(), hospital.getId(), i);
-		}
+		hospitalDoctorConsultationHelperFunctions.
+		addNextDayConsultationRecordForDoctorAndHospital(doc.getId(), hospital.getId(),
+				new LocalDate(), new LocalDate().plusDays(30));
+		
+		/*
 		HospitalDoctorConsultaion dto = new HospitalDoctorConsultaion();
 		
 		for (int month = 8 ; month < 9; month++) {
@@ -335,6 +352,7 @@ public class InitService {
 				
 			}
 		}
+		*/
 	}
 
 	void createHospitals() {

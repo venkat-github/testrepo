@@ -58,6 +58,20 @@
 						<h4 class="modal-title" id="myDoctorVisitDTOLabel">Book Appointment</h4>
 					</div>
 					<div class="modal-body">
+						<div class="form-group">
+				            <label for="startDate">startDate</label>
+
+				            <p class="input-group">
+				              <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="startDate" ng-change="changedt()"
+				               is-open="opened1" ng-click="open1($event)"  />
+				               <span class="input-group-btn" >
+				          <button style="height:34px;" class="btn btn-default" ng-click="open1($event)">
+				          <i class="glyphicon glyphicon-calendar"></i></button> 
+				          </span>
+				            </p>
+
+      					</div>
+
 						<table class="table">
 							<tr ng-repeat="slot in hospitalDoctorDTO4check.freeSlots">
 								>

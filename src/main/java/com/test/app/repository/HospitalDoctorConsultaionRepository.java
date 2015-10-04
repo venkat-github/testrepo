@@ -22,4 +22,6 @@ public interface HospitalDoctorConsultaionRepository extends MongoRepository<Hos
 	Page<HospitalDoctorConsultaion> findBySpecialityAndDate(String speciality, LocalDate date, Pageable page);
 	List<HospitalDoctorConsultaion> findByDoctorName(String doctorName);
 	
+	HospitalDoctorConsultaion findOneByDoctorIdAndDate(String doctorId, LocalDate date);
+	
 }

@@ -37,8 +37,13 @@ angular.module('hipster1App')
                     }
                 },
                 resolve: {
-                    entity: ['$stateParams', 'UserDTO', function($stateParams, UserDTO) {
-                        return UserDTO.get({id : $stateParams.id});
+                    entity: ['$stateParams', '$rootScope' ,'UserDTO', 
+                    function($stateParams, $rootScope, UserDTO) {
+                        //alert('check 1');
+                        //alert(' user id is '+$rootScope.user.id);
+                        //alert(' state param id id is '+$stateParams.id);
+                        return UserDTO.get({id : $rootScope.user.id});
+
                     }]
                 }
             })
@@ -74,9 +79,11 @@ angular.module('hipster1App')
                     }
                 },
                 resolve: {
-                    entity: ['$state', '$stateParams', 'UserDTO', function($state, $stateParams, UserDTO) {
+                    entity: ['$state', '$stateParams', '$rootScope','UserDTO',
+                     function($state, $stateParams, $rootScope, UserDTO) {
                     	//return {name: null, mobileno: null, emailId: null, password: null, sex: null, age: null, dateOfBirth: null, bloodGroup: null, location: null, city: null, id: null};
-                    	return UserDTO.get({id : $stateParams.id});
+                    	//return UserDTO.get({id : $stateParams.id});
+                        return UserDTO.get({id : $rootScope.user.id});
                     }]
                 }
             });

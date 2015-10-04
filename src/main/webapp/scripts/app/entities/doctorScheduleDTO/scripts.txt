@@ -1,0 +1,13 @@
+
+for i in `ls *`; do j=`echo $i |sed 's/userRecord/doctorSchedule/g'`;echo $j; mv $i $j;done
+for i in `ls *`; do echo $i;sed -i 's/userRecord/doctorSchedule/g' $i;done
+for i in `ls *`; do echo $i;sed -i 's/UserRecord/DoctorSchedule/g' $i;done
+
+sed 's/userRecord/doctorSchedule/g' js.txt > js.out
+
+for i in `cat fields`; do sed 's/placeHolder/'"$i"'/g' model; done > model.out
+
+for i in `cat fields`; do sed 's/placeHolder/'"$i"'/g' th; done > th.out
+for i in `cat fields`; do sed 's/placeHolder/'"$i"'/g' td; done > td.out
+
+
