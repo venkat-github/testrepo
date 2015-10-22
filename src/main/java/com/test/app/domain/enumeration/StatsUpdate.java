@@ -1,4 +1,4 @@
-package com.test.app.domain;
+package com.test.app.domain.enumeration;
 
 public enum StatsUpdate {
 TOTAL_SLOTS,

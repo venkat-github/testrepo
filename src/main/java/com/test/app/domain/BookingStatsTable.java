@@ -2,6 +2,8 @@ package com.test.app.domain;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.test.app.domain.enumeration.StatsUpdate;
+
 @Document(collection="BOOKING_STATS_TABLE")
 public class BookingStatsTable {
 	String hospitalId;
