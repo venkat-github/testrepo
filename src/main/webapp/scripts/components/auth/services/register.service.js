@@ -8,14 +8,22 @@ angular.module('hipster1App')
 
 angular.module('hipster1App')
     .factory('SubmitDoctorRegistration', function ($resource) {
-        return $resource('api/register/doctor', {}, {
+        return $resource('api/account/register/doctor', {}, {
         });
     });
 
 angular.module('hipster1App')
     .factory('SubmitHospitalRegistration', function ($resource) {
-        return $resource('api/register/hospital', {}, {
+        return $resource('api/account/register/hospital', {}, {
         });
+    });
+
+angular.module('hipster1App')
+    .factory('RegisterOtp', function ($resource) {
+        return $resource('api/account/register/otp', {}, 
+            {
+            'query': { method: 'GET', isArray: false}
+            })
     });
 
 

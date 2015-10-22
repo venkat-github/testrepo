@@ -222,32 +222,38 @@ public class AccountResource {
         }
     }
 
-    	@RequestMapping(value = "/account/register/otp",
-            method = RequestMethod.GET,
-            produces = MediaType.TEXT_PLAIN_VALUE)
-        @Timed
-        public ResponseEntity<?> submitRegisterOtp(@RequestParam String mail,
-        		@RequestParam String otp,
-        		HttpServletRequest request) {
-            
-    		return new ResponseEntity<>("registered ", HttpStatus.OK);
-        }
+	@RequestMapping(value = "/account/register/otp",
+        method = RequestMethod.GET,
+        produces = MediaType.TEXT_PLAIN_VALUE)
+    @Timed
+    public ResponseEntity<?> submitRegisterOtp(@RequestParam String mail,
+    		@RequestParam String otp,
+    		HttpServletRequest request) {
+        
+		return new ResponseEntity<>("registered ", HttpStatus.OK);
+    }
 
 	@RequestMapping(value = "/account/register/doctor",
 	        method = RequestMethod.POST,
 	        produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> registerDoctor(@RequestBody User doctor) {
-        return null;
+    public ResponseEntity<User> registerDoctor(@RequestBody User doctor) {
+        User user2 = userRepository.findOneByEmail(doctor.getEmail());
+        user2.setExperience(doctor.getExperience());;
+        userRepository.save(user2);
+        return new ResponseEntity<>(user2, HttpStatus.OK);
     }
 
 	@RequestMapping(value = "/account/register/hospital",
 	        method = RequestMethod.POST,
 	        produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> registerHospitalAdmin(@RequestBody User doctor) {
-        return null;
+    public ResponseEntity<User> registerHospitalAdmin(@RequestBody User doctor) {
+		User user2 = userRepository.findOneByEmail(doctor.getEmail());
+        doctor.setId(user2.getId());
+        user2.setLocation(doctor.getLocation());
+        userRepository.save(user2);
+        return new ResponseEntity<>(user2, HttpStatus.OK);
     }
-	    	
-    
+
     @RequestMapping(value = "/account/reset_password/init",
         method = RequestMethod.POST,
         produces = MediaType.TEXT_PLAIN_VALUE)

@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('hipster1App')
-    .controller('RegisterController', function ($scope, $rootScope, $timeout, Auth) {
+    .controller('RegisterController', function ($scope, $rootScope, $timeout, Auth,
+     SubmitHospitalRegistration,
+     SubmitDoctorRegistration) {
         $scope.success = null;
         $scope.error = null;
         $scope.showregister = true;
@@ -20,17 +22,26 @@ angular.module('hipster1App')
         $rootScope.doctorDTO = {};
         $rootScope.hospitalAdminDTO = {};
 
+
         $timeout(function (){angular.element('[ng-model="registerAccount.login"]').focus();});
 
         $scope.submitDoctor = function () {
             return SubmitDoctorRegistration.save($rootScope.doctorDTO, function () {
+                    alert('succeeded 1');
+                    $scope.success = true;
+                    $rootScope.showDoctorForm = false;
                 }, function (err) {
+                    alert('failed 1');
                 }).$promise;
         }
 
         $scope.submitHospital = function () {
             return SubmitHospitalRegistration.save($rootScope.hospitalAdminDTO, function () {
+                    alert('succeeded 2');
+                    $scope.success = true;
+                    $rootScope.showHospitalForm = false;
                 }, function (err) {
+                    alert('failed 1');
                 }).$promise;
         }
 
@@ -40,8 +51,10 @@ angular.module('hipster1App')
                     $scope.showotp = false;
                     
                     if ($rootScope.isDoctor) {
+                        $rootScope.doctorDTO.email = $rootScope.email;
                         $rootScope.showDoctorForm = true;
                     } else if ($rootScope.isHospital) {
+                        $rootScope.hospitalAdminDTO.email = $rootScope.email;
                         $rootScope.showHospitalForm = true;
                     } else {
                         $scope.success = true;

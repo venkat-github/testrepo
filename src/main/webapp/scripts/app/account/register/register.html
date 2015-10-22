@@ -114,22 +114,64 @@
 
 
 <form ng-show="showDoctorForm" name="form3" role="form" novalidate ng-submit="submitDoctor()" show-validation>
-                <div class="form-group">
-                    <label for="otp">otp</label>
-                    <input type="text" class="form-control" id="otp" name="otp" placeholder="otp"
-                           ng-model="otp"  required>
-                </div>
+                      <div class="form-group">
+            <label for="firstName">firstName</label>
+            <input type="text" class="form-control" id="firstName" name="firstName"
+                    ng-model="doctorDTO.firstName" >
+      </div>
+      <div class="form-group">
+            <label for="lastName">lastName</label>
+            <input type="text" class="form-control" id="lastName" name="lastName"
+                    ng-model="doctorDTO.lastName" >
+      </div>
+      <div class="form-group">
+            <label for="degrees">degrees</label>
+            <input type="text" class="form-control" id="degrees" name="degrees"
+                    ng-model="doctorDTO.degrees" >
+      </div>
+      <div class="form-group">
+            <label for="specialities">specialities</label>
+            <input type="text" class="form-control" id="specialities" name="specialities"
+                    ng-model="doctorDTO.specialities" >
+      </div>
+      <div class="form-group">
+            <label for="languages">languages</label>
+            <input type="text" class="form-control" id="languages" name="languages"
+                    ng-model="doctorDTO.languages" >
+      </div>
+      <div class="form-group">
+            <label for="experience">experience</label>
+            <input type="text" class="form-control" id="experience" name="experience"
+                    ng-model="doctorDTO.experience" >
+      </div>
+
                 <button type="submit" ng-disabled="form3.$invalid" class="btn btn-primary">Submit Doctor</button>
             </form>
 
 
 
 <form ng-show="showHospitalForm" name="form4" role="form" novalidate ng-submit="submitHospital()" show-validation>
-                <div class="form-group">
-                    <label for="otp">otp</label>
-                    <input type="text" class="form-control" id="otp" name="otp" placeholder="otp"
-                           ng-model="otp"  required>
-                </div>
+                      <div class="form-group">
+            <label for="firstName">firstName</label>
+            <input type="text" class="form-control" id="firstName" name="firstName"
+                    ng-model="doctorScheduleDTO.firstName" >
+      </div>
+      <div class="form-group">
+            <label for="lastName">lastName</label>
+            <input type="text" class="form-control" id="lastName" name="lastName"
+                    ng-model="doctorScheduleDTO.lastName" >
+      </div>
+      <div class="form-group">
+            <label for="specialities">specialities</label>
+            <input type="text" class="form-control" id="specialities" name="specialities"
+                    ng-model="doctorScheduleDTO.specialities" >
+      </div>
+      <div class="form-group">
+            <label for="location">location</label>
+            <input type="text" class="form-control" id="location" name="location"
+                    ng-model="doctorScheduleDTO.location" >
+      </div>
+
                 <button type="submit" ng-disabled="form4.$invalid" class="btn btn-primary">Submit Hospital</button>
             </form>
 

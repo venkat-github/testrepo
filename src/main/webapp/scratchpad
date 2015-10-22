@@ -1,3 +1,18 @@
+
+doctorName
+doctorId
+hospitalName
+hospitalId
+startDate
+endDate
+fees
+slotDuration
+startTime
+breakStartTime
+breakEndTime
+endTime
+
+
 angular.forEach(response.data, function(value, key) {
             		  console.log(key)
             		  console.log(value)
