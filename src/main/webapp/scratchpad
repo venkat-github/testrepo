@@ -2,6 +2,73 @@ angular.forEach(response.data, function(value, key) {
             		  console.log(key)
             		  console.log(value)
             		
+angular.module('hipster1App')
+    .factory('PasswordResetInit', function ($resource) {
+        return $resource('api/account/reset_password/init', {}, {
+        })
+    });
+
+            resetPasswordInit: function (mail, callback) {
+                var cb = callback || angular.noop;
+
+                return PasswordResetInit.save(mail, function() {
+                    return cb();
+                }, function (err) {
+                    return cb(err);
+                }).$promise;
+            },
+
+createAccount: function (account, callback) {
+                var cb = callback || angular.noop;
+
+                return Register.save(account,
+                    function () {
+                        return cb(account);
+                    },
+                    function (err) {
+                        this.logout();
+                        return cb(err);
+                    }.bind(this)).$promise;
+            },
+
+angular.module('hipster1App')
+    .factory('RegisterOtp', function ($resource) {
+        return $resource('api/account/register/otp', {}, 
+            {
+            'query': { method: 'GET', isArray: false}
+            })
+    });
+
+
+angular.module('hipster1App')
+    .factory('DoctorVisitDTO', function ($resource, DateUtils) {
+        return $resource('api/patients/:id', {}, {
+            'query': { method: 'GET', isArray: true},
+            'get': {
+                method: 'GET',
+                transformResponse: function (data) {
+                    data = angular.fromJson(data);
+                    data.date = DateUtils.convertLocaleDateFromServer(data.date);
+                    return data;
+                }
+            },
+            'update': {
+                method: 'PUT',
+                transformRequest: function (data) {
+                    data.date = DateUtils.convertLocaleDateToServer(data.date);
+                    return angular.toJson(data);
+                }
+            },
+            'save': {
+                method: 'POST',
+                transformRequest: function (data) {
+                    //alert('successfully booking for date '+data.date);
+                    data.date = DateUtils.convertLocaleDateFromServer(data.date);
+                    return angular.toJson(data);
+                }
+            }
+        });
+    });
 
 http://docs.spring.io/spring-data/mongodb/docs/1.3.3.RELEASE/reference/html/mongo.repositories.html
 http://docs.spring.io/spring-data/mongodb/docs/current/reference/html/

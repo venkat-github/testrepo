@@ -7,6 +7,10 @@
                 <strong>Registration saved!</strong> Please check your email for confirmation.
             </div>
 
+            <div class="alert alert-danger" ng-show="invalid_otp">
+                <strong>Invalid otp</strong> 
+            </div>
+
             <div class="alert alert-danger" ng-show="error">
                 <strong>Registration failed!</strong> Please try again later.
             </div>
@@ -23,7 +27,7 @@
                 The password and its confirmation do not match!
             </div>
 
-            <form ng-show="!success" name="form" role="form" novalidate ng-submit="register()" show-validation>
+            <form ng-show="showregister" name="form" role="form" novalidate ng-submit="register()" show-validation>
 
                 <div class="form-group">
                     <label for="email">E-mail</label>
@@ -97,6 +101,39 @@
                 <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary">Register</button>
             </form>
             <p></p>
+
+            <form ng-show="showotp" name="form2" role="form" novalidate ng-submit="submitOtp()" show-validation>
+                <div class="form-group">
+                    <label for="otp">otp</label>
+                    <input type="text" class="form-control" id="otp" name="otp" placeholder="otp"
+                           ng-model="otp"  required>
+                </div>
+                <button type="submit" ng-disabled="form2.$invalid" class="btn btn-primary">Submit Otp</button>
+            </form>
+
+
+
+<form ng-show="showDoctorForm" name="form3" role="form" novalidate ng-submit="submitDoctor()" show-validation>
+                <div class="form-group">
+                    <label for="otp">otp</label>
+                    <input type="text" class="form-control" id="otp" name="otp" placeholder="otp"
+                           ng-model="otp"  required>
+                </div>
+                <button type="submit" ng-disabled="form3.$invalid" class="btn btn-primary">Submit Doctor</button>
+            </form>
+
+
+
+<form ng-show="showHospitalForm" name="form4" role="form" novalidate ng-submit="submitHospital()" show-validation>
+                <div class="form-group">
+                    <label for="otp">otp</label>
+                    <input type="text" class="form-control" id="otp" name="otp" placeholder="otp"
+                           ng-model="otp"  required>
+                </div>
+                <button type="submit" ng-disabled="form4.$invalid" class="btn btn-primary">Submit Hospital</button>
+            </form>
+
+
             <div class="alert alert-warning">
                 If you want to <a href="#/login">authenticate</a>, you can try the default accounts:<br/>- Administrator (login="admin" and password="admin") <br/>- User (login="user" and password="user").
             </div>
