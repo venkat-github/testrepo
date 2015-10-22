@@ -18,12 +18,13 @@ import org.springframework.data.geo.Metrics;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.NearQuery;
 import org.springframework.data.mongodb.core.query.Query;
+
 import static org.springframework.data.mongodb.core.query.Criteria.where;
 import static org.springframework.data.mongodb.core.query.Query.query;
 
 import com.test.app.domain.BookingStats;
 import com.test.app.domain.BookingStatsTable;
-import com.test.app.domain.StatsUpdate;
+import com.test.app.domain.enumeration.StatsUpdate;
 
 
 @Service
