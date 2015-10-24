@@ -4,7 +4,8 @@ import java.math.BigInteger;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.repository.CrudRepository;
 
-import com.health.app.domain.OneTimePasswordStore;
+import com.test.app.domain.OneTimePasswordStore;
+
 
 
 public interface OneTimePasswordStoreRepository 

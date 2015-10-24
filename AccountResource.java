@@ -88,9 +88,7 @@ public class AccountResource {
             authorities.add(authorityRepository.findOne("ROLE_USER"));
             user = userService.createUserInformation(dto.getLogin(), dto.getPassword(),
             dto.getName(), dto.getName(), dto.getEmail().toLowerCase(),
-            null, authorities, dto.isDoctor(), dto.isHospitalAdmin(), dto.getMobileno(), false);
-            
-            onetimepassword.generateStoreOTP(dto.getMobileno());
+            null, authorities, dto.isDoctor(), dto.isHospitalAdmin(), dto.getMobileno());
             
             System.out.println("successfully saved ");
             String baseUrl = request.getScheme() + // "http"
@@ -99,8 +97,8 @@ public class AccountResource {
             ":" +                              // ":"
             request.getServerPort();           // "80"
 
-            
-            //mailService.sendActivationEmail(user, baseUrl);
+            onetimepassword.generateStoreOTP(dto.getMobileno());
+            mailService.sendActivationEmail(user, baseUrl);
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
     }
@@ -233,21 +231,24 @@ public class AccountResource {
             method = RequestMethod.GET,
             produces = MediaType.TEXT_PLAIN_VALUE)
         @Timed
-	public ResponseEntity<?> submitRegisterOtp(@RequestParam String mobileno,
-			 @RequestParam String otp,
+	public ResponseEntity<?> submitRegisterOtp(@RequestParam String mailId,
+			@RequestParam String mobileNo, @RequestParam String otp,
 			HttpServletRequest request) {
-    		System.out.println("verifying otp for "+mobileno);
-    		System.out.println("verify otp "+otp);
-		if (mobileno == null) {
+		if (mobileNo == null && mailId == null) {
 			return new ResponseEntity<>("registered ", HttpStatus.NOT_FOUND);
 		}
-		
-		if (onetimepassword.verifOTP(mobileno, otp) == true) {
-			System.out.println("successfully verified otp ");
-			onetimepassword.deleteOTP(mobileno);
+		if (mobileNo == null) {
+			User user = userRepository.findOneByEmail(mailId);
+			if (user != null) {
+				mobileNo = user.getMobileno();
+			}
+			if (mobileNo == null) {
+				return new ResponseEntity<>("registered ", HttpStatus.NOT_FOUND);
+			}
+		}
+		if (onetimepassword.verifOTP(mobileNo, otp) == true) {
+			onetimepassword.deleteOTP(mobileNo);
 			return new ResponseEntity<>("registered ", HttpStatus.OK);
-		} else {
-			System.out.println("failed to verify otp");
 		}
 		return new ResponseEntity<>("registered ", HttpStatus.NOT_FOUND);
 	}

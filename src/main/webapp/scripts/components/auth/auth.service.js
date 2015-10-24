@@ -107,10 +107,10 @@ angular.module('hipster1App')
                 }).$promise;
             },
 
-            registerOtp: function (mail, otp, callback) {
+            registerOtp: function (mobileno, otp, callback) {
                 var cb = callback || angular.noop;
-
-                return RegisterOtp.query({'mail':mail, 'otp':otp}, function() {
+                alert('new code');
+                return RegisterOtp.query({'mobileno':mobileno, 'otp':otp}, function() {
                     return cb();
                 }, function (err) {
                     return cb(err);

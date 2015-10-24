@@ -2,9 +2,13 @@ package com.test.app.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import org.springframework.data.domain.Page;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Query;
+
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.PostConstruct;
@@ -36,11 +40,6 @@ import com.test.app.repository.HospitalRepository;
 import com.test.app.repository.UserRecordRepository;
 import com.test.app.repository.UserRepository;
 import com.test.app.web.rest.util.PaginationUtil;
-
-import org.springframework.data.domain.Page;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Query;
 
 
 @Service
@@ -176,22 +175,22 @@ public class InitService {
         Authority userAuth = authorityRepository.findOne("ROLE_USER");
         users.add(userAuth);
         
-        createUser("hosp@gmail.com", "admin", "hosp", "hosp","hosp@gmail.com","en", hosps);
-        createUser("admin@gmail.com", "admin", "admin", "admin","admin@gmail.com","en", admins);
-        createUser("user@gmail.com", "admin", "user", "user","user@gmail.com","en", users);
-        createUser("user1@gmail.com", "admin", "user1", "user","user1@gmail.com","en", users);
-        createUser("user2@gmail.com", "admin", "user2", "user","user2@gmail.com","en", users);
-        createUser("user3@gmail.com", "admin", "user3", "user","user3@gmail.com","en", users);
-        createUser("user4@gmail.com", "admin", "user4", "user","user4@gmail.com","en", users);
+        createUser("hosp@gmail.com", "admin", "hosp", "hosp","hosp@gmail.com","en", hosps, "1234567890");
+        createUser("admin@gmail.com", "admin", "admin", "admin","admin@gmail.com","en", admins, "1234567891");
+        createUser("user@gmail.com", "admin", "user", "user","user@gmail.com","en", users, "1234567892");
+        createUser("user1@gmail.com", "admin", "user1", "user","user1@gmail.com","en", users, "1234567893");
+        createUser("user2@gmail.com", "admin", "user2", "user","user2@gmail.com","en", users, "1234567894");
+        createUser("user3@gmail.com", "admin", "user3", "user","user3@gmail.com","en", users, "1234567895");
+        createUser("user4@gmail.com", "admin", "user4", "user","user4@gmail.com","en", users, "1234567896");
 	}
 
 	String createUser(String name, String password, String first, String last, String email, 
-			String lang, HashSet<Authority> auths) {
+			String lang, HashSet<Authority> auths, String mobileNo) {
 		
 		RestTemplate restTemplate = new RestTemplate();
         
 		User user = userService.createUserInformation(name, password , first, last,
-        		email, lang, auths);
+        		email, lang, auths, mobileNo);
         return user.getId();
 	}
 	
@@ -392,7 +391,7 @@ public class InitService {
         auths.add(docAuth);
         
 		User user = userService.createUserInformation(name, "admin" , name, name,
-				emailId, "en", auths);
+				emailId, "en", auths, mobileno);
         
 		User doctorDto = user;
 		doctorDto.setLogin(name);

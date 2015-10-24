@@ -1,4 +1,4 @@
-package com.health.app.domain;
+package com.test.app.domain;
 
 import java.util.Random;
 

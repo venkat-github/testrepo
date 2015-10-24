@@ -9,6 +9,7 @@ angular.module('hipster1App')
         $scope.showregister = true;
         $scope.showotp = false;
         $rootScope.email = '';
+        $rootScope.mobileno = '1234567890';
         $scope.otp = '';
         $scope.doNotMatch = null;
         $scope.errorUserExists = null;
@@ -46,14 +47,17 @@ angular.module('hipster1App')
         }
 
         $scope.submitOtp = function () {
-            Auth.registerOtp($rootScope.email, $scope.otp).then(function () {
+        	alert('submitting mobile no '+$rootScope.mobileno);
+            Auth.registerOtp($rootScope.mobileno, $scope.otp).then(function () {
                     alert('succesfully validated otp 2');
                     $scope.showotp = false;
                     
                     if ($rootScope.isDoctor) {
                         $rootScope.doctorDTO.email = $rootScope.email;
+                        $rootScope.doctorDTO.mobileno = $rootScope.mobileno;
                         $rootScope.showDoctorForm = true;
                     } else if ($rootScope.isHospital) {
+                        $rootScope.hospitalAdminDTO.mobileno = $rootScope.mobileno;
                         $rootScope.hospitalAdminDTO.email = $rootScope.email;
                         $rootScope.showHospitalForm = true;
                     } else {
@@ -75,6 +79,8 @@ angular.module('hipster1App')
                 $scope.errorUserExists = null;
                 $scope.errorEmailExists = null;
                 $rootScope.email = $scope.registerAccount.email;
+                $rootScope.mobileno = $scope.registerAccount.mobileno;
+                $scope.mobileno = $scope.registerAccount.mobileno;
                 $rootScope.isDoctor = $scope.registerAccount.doctor;
                 $rootScope.isHospital = $scope.registerAccount.hospitalAdmin;
                 Auth.createAccount($scope.registerAccount).then(function () {

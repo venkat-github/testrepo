@@ -86,17 +86,18 @@ public class UserService {
     }
 
     public User createUserInformation(String login, String password, String firstName, String lastName, String email,
-            String langKey) {
-    	return createUserInformation(login, password, firstName, lastName, email, langKey, null);
+            String langKey ,String mobileNo) {
+    	return createUserInformation(login, password, firstName, lastName, email, langKey, null, mobileNo);
     }
 
     public User createUserInformation(String login, String password, String firstName, String lastName, String email,
-            String langKey, Set<Authority> authorities) {
-    	return createUserInformation(login, password, firstName, lastName, email, langKey, authorities, false,false);
+            String langKey, Set<Authority> authorities, String mobileNo) {
+    	return createUserInformation(login, password, firstName, lastName, email, langKey, authorities, false,false, mobileNo, true);
     }
     
+  
     public User createUserInformation(String login, String password, String firstName, String lastName, String email,
-                                      String langKey, Set<Authority> authorities, boolean isDoctor, boolean isHospitalAdmin) {
+                                      String langKey, Set<Authority> authorities, boolean isDoctor, boolean isHospitalAdmin, String mobileNo, boolean activate) {
 
         User newUser = new User();
         Authority authority = authorityRepository.findOne("ROLE_USER");
@@ -116,7 +117,8 @@ public class UserService {
         newUser.setDoctor(isDoctor);
         newUser.setHospitalAdmin(isHospitalAdmin);
         // new user is not active
-        newUser.setActivated(true);
+        newUser.setActivated(false);
+        newUser.setMobileno(mobileNo);
         // new user gets registration key
         //newUser.setActivationKey(RandomUtil.generateActivationKey());
         newUser.setAuthorities(authorities);
@@ -145,6 +147,9 @@ public class UserService {
 
     public User getUserWithAuthorities() {
         User currentUser = userRepository.findOneByLogin(SecurityUtils.getCurrentLogin());
+        if (currentUser == null) {
+        	return null;
+        }
         currentUser.getAuthorities().size(); // eagerly load the association
         return currentUser;
     }

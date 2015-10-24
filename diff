@@ -1,0 +1,439 @@
+diff --git a/src/main/java/com/test/app/repository/BookingStatsTableRepositoryHelperFunctions.java b/src/main/java/com/test/app/repository/BookingStatsTableRepositoryHelperFunctions.java
+index f6f02c0..6631540 100644
+--- a/src/main/java/com/test/app/repository/BookingStatsTableRepositoryHelperFunctions.java
++++ b/src/main/java/com/test/app/repository/BookingStatsTableRepositoryHelperFunctions.java
+@@ -5,7 +5,7 @@ import java.util.ArrayList;
+ import java.util.Date;
+ import java.util.List;
+ 
+-import org.boon.criteria.Update;
++//import org.boon.criteria.Update;
+ import org.joda.time.LocalDate;
+ import org.springframework.data.mongodb.core.query.Criteria;
+ import org.springframework.stereotype.Service;
+@@ -26,7 +26,6 @@ import com.test.app.domain.BookingStats;
+ import com.test.app.domain.BookingStatsTable;
+ import com.test.app.domain.enumeration.StatsUpdate;
+ 
+-
+ @Service
+ public class BookingStatsTableRepositoryHelperFunctions {
+ 	
+diff --git a/src/main/java/com/test/app/repository/OneTimePasswordStoreHelperFunctions.java b/src/main/java/com/test/app/repository/OneTimePasswordStoreHelperFunctions.java
+index 69063de..6d5cad1 100644
+--- a/src/main/java/com/test/app/repository/OneTimePasswordStoreHelperFunctions.java
++++ b/src/main/java/com/test/app/repository/OneTimePasswordStoreHelperFunctions.java
+@@ -32,22 +32,21 @@ public class OneTimePasswordStoreHelperFunctions {
+ 	
+ 	@SuppressWarnings("deprecation")
+ 	public String generateStoreOTP(String mobileNo) {
+-		
++
+ 		OneTimePasswordStore otps = new OneTimePasswordStore();
+-		
++
+ 		String otp = OneTimePassword.generateOtp(4);
+ 		otps.setOtp(otp);
+ 		User user = userRepo.findOneByMobileno(mobileNo);
+-		
++
+ 		otps.setUserId(user.getId());
+ 		otps.setMobileNo(mobileNo);
+-		
+-		
++
+ 		LocalDateTime ldt = new LocalDateTime();
+ 		ldt.plusMinutes(15);
+-		
++
+ 		otps.setValidity(ldt);
+-		
++
+ 		mongoTemplate.save(otps);
+ 		return otp;
+ 	}
+@@ -60,14 +59,14 @@ public class OneTimePasswordStoreHelperFunctions {
+ 		try {
+ 			OneTimePasswordStore usr = otpr.findOneByMobileNo(mobileNo);
+ 			LocalDateTime dt = new LocalDateTime();
+-			
++
+ 			if (otp.equals(usr.getOtp())) {
+ 				if (usr.getValidity().isAfter(dt)) {
+ 					deleteOTP(mobileNo);
+ 					return true;
+ 				}
+ 			}
+-		} catch(Throwable e) {
++		} catch (Throwable e) {
+ 		}
+ 		return false;
+ 	}
+diff --git a/src/main/java/com/test/app/service/InitService.java b/src/main/java/com/test/app/service/InitService.java
+index f0f9746..b71b220 100644
+--- a/src/main/java/com/test/app/service/InitService.java
++++ b/src/main/java/com/test/app/service/InitService.java
+@@ -2,9 +2,13 @@ package com.test.app.service;
+ 
+ import java.util.ArrayList;
+ import java.util.HashMap;
++import org.springframework.data.domain.Page;
++import org.springframework.data.mongodb.core.query.Criteria;
++import org.springframework.data.mongodb.core.MongoTemplate;
++import org.springframework.data.mongodb.core.query.Query;
++
+ import java.util.HashSet;
+ import java.util.List;
+-import java.util.Map;
+ import java.util.Set;
+ 
+ import javax.annotation.PostConstruct;
+@@ -37,11 +41,6 @@ import com.test.app.repository.UserRecordRepository;
+ import com.test.app.repository.UserRepository;
+ import com.test.app.web.rest.util.PaginationUtil;
+ 
+-import org.springframework.data.domain.Page;
+-import org.springframework.data.mongodb.core.query.Criteria;
+-import org.springframework.data.mongodb.core.MongoTemplate;
+-import org.springframework.data.mongodb.core.query.Query;
+-
+ 
+ @Service
+ public class InitService {
+@@ -176,22 +175,22 @@ public class InitService {
+         Authority userAuth = authorityRepository.findOne("ROLE_USER");
+         users.add(userAuth);
+         
+-        createUser("hosp@gmail.com", "admin", "hosp", "hosp","hosp@gmail.com","en", hosps);
+-        createUser("admin@gmail.com", "admin", "admin", "admin","admin@gmail.com","en", admins);
+-        createUser("user@gmail.com", "admin", "user", "user","user@gmail.com","en", users);
+-        createUser("user1@gmail.com", "admin", "user1", "user","user1@gmail.com","en", users);
+-        createUser("user2@gmail.com", "admin", "user2", "user","user2@gmail.com","en", users);
+-        createUser("user3@gmail.com", "admin", "user3", "user","user3@gmail.com","en", users);
+-        createUser("user4@gmail.com", "admin", "user4", "user","user4@gmail.com","en", users);
++        createUser("hosp@gmail.com", "admin", "hosp", "hosp","hosp@gmail.com","en", hosps, "1234567890");
++        createUser("admin@gmail.com", "admin", "admin", "admin","admin@gmail.com","en", admins, "1234567891");
++        createUser("user@gmail.com", "admin", "user", "user","user@gmail.com","en", users, "1234567892");
++        createUser("user1@gmail.com", "admin", "user1", "user","user1@gmail.com","en", users, "1234567893");
++        createUser("user2@gmail.com", "admin", "user2", "user","user2@gmail.com","en", users, "1234567894");
++        createUser("user3@gmail.com", "admin", "user3", "user","user3@gmail.com","en", users, "1234567895");
++        createUser("user4@gmail.com", "admin", "user4", "user","user4@gmail.com","en", users, "1234567896");
+ 	}
+ 
+ 	String createUser(String name, String password, String first, String last, String email, 
+-			String lang, HashSet<Authority> auths) {
++			String lang, HashSet<Authority> auths, String mobileNo) {
+ 		
+ 		RestTemplate restTemplate = new RestTemplate();
+         
+ 		User user = userService.createUserInformation(name, password , first, last,
+-        		email, lang, auths);
++        		email, lang, auths, mobileNo);
+         return user.getId();
+ 	}
+ 	
+@@ -392,7 +391,7 @@ public class InitService {
+         auths.add(docAuth);
+         
+ 		User user = userService.createUserInformation(name, "admin" , name, name,
+-				emailId, "en", auths);
++				emailId, "en", auths, mobileno);
+         
+ 		User doctorDto = user;
+ 		doctorDto.setLogin(name);
+diff --git a/src/main/java/com/test/app/service/UserService.java b/src/main/java/com/test/app/service/UserService.java
+index 5ec5332..0622e2c 100644
+--- a/src/main/java/com/test/app/service/UserService.java
++++ b/src/main/java/com/test/app/service/UserService.java
+@@ -86,17 +86,18 @@ public class UserService {
+     }
+ 
+     public User createUserInformation(String login, String password, String firstName, String lastName, String email,
+-            String langKey) {
+-    	return createUserInformation(login, password, firstName, lastName, email, langKey, null);
++            String langKey ,String mobileNo) {
++    	return createUserInformation(login, password, firstName, lastName, email, langKey, null, mobileNo);
+     }
+ 
+     public User createUserInformation(String login, String password, String firstName, String lastName, String email,
+-            String langKey, Set<Authority> authorities) {
+-    	return createUserInformation(login, password, firstName, lastName, email, langKey, authorities, false,false);
++            String langKey, Set<Authority> authorities, String mobileNo) {
++    	return createUserInformation(login, password, firstName, lastName, email, langKey, authorities, false,false, mobileNo);
+     }
+     
++  
+     public User createUserInformation(String login, String password, String firstName, String lastName, String email,
+-                                      String langKey, Set<Authority> authorities, boolean isDoctor, boolean isHospitalAdmin) {
++                                      String langKey, Set<Authority> authorities, boolean isDoctor, boolean isHospitalAdmin, String mobileNo) {
+ 
+         User newUser = new User();
+         Authority authority = authorityRepository.findOne("ROLE_USER");
+@@ -116,7 +117,8 @@ public class UserService {
+         newUser.setDoctor(isDoctor);
+         newUser.setHospitalAdmin(isHospitalAdmin);
+         // new user is not active
+-        newUser.setActivated(true);
++        newUser.setActivated(false);
++        newUser.setMobileno(mobileNo);
+         // new user gets registration key
+         //newUser.setActivationKey(RandomUtil.generateActivationKey());
+         newUser.setAuthorities(authorities);
+diff --git a/src/main/java/com/test/app/web/rest/AccountResource.java b/src/main/java/com/test/app/web/rest/AccountResource.java
+index 1e16582..51b8f7e 100644
+--- a/src/main/java/com/test/app/web/rest/AccountResource.java
++++ b/src/main/java/com/test/app/web/rest/AccountResource.java
+@@ -28,6 +28,7 @@ import com.test.app.domain.Authority;
+ import com.test.app.domain.PersistentToken;
+ import com.test.app.domain.User;
+ import com.test.app.repository.AuthorityRepository;
++import com.test.app.repository.OneTimePasswordStoreHelperFunctions;
+ import com.test.app.repository.PersistentTokenRepository;
+ import com.test.app.repository.UserRepository;
+ import com.test.app.security.SecurityUtils;
+@@ -57,6 +58,9 @@ public class AccountResource {
+ 
+     @Inject
+     private AuthorityRepository authorityRepository;
++    
++    @Inject
++    private OneTimePasswordStoreHelperFunctions onetimepassword;
+ 
+     /**
+      * POST  /register -> register the user.
+@@ -84,7 +88,7 @@ public class AccountResource {
+             authorities.add(authorityRepository.findOne("ROLE_USER"));
+             user = userService.createUserInformation(dto.getLogin(), dto.getPassword(),
+             dto.getName(), dto.getName(), dto.getEmail().toLowerCase(),
+-            null, authorities, dto.isDoctor(), dto.isHospitalAdmin());
++            null, authorities, dto.isDoctor(), dto.isHospitalAdmin(), dto.getMobileno());
+             
+             System.out.println("successfully saved ");
+             String baseUrl = request.getScheme() + // "http"
+@@ -93,6 +97,7 @@ public class AccountResource {
+             ":" +                              // ":"
+             request.getServerPort();           // "80"
+ 
++            onetimepassword.generateStoreOTP(dto.getMobileno());
+             mailService.sendActivationEmail(user, baseUrl);
+             return new ResponseEntity<>(HttpStatus.CREATED);
+         }
+@@ -226,12 +231,27 @@ public class AccountResource {
+             method = RequestMethod.GET,
+             produces = MediaType.TEXT_PLAIN_VALUE)
+         @Timed
+-        public ResponseEntity<?> submitRegisterOtp(@RequestParam String mail,
+-        		@RequestParam String otp,
+-        		HttpServletRequest request) {
+-            
+-    		return new ResponseEntity<>("registered ", HttpStatus.OK);
+-        }
++	public ResponseEntity<?> submitRegisterOtp(@RequestParam String mailId,
++			@RequestParam String mobileNo, @RequestParam String otp,
++			HttpServletRequest request) {
++		if (mobileNo == null && mailId == null) {
++			return new ResponseEntity<>("registered ", HttpStatus.NOT_FOUND);
++		}
++		if (mobileNo == null) {
++			User user = userRepository.findOneByEmail(mailId);
++			if (user != null) {
++				mobileNo = user.getMobileno();
++			}
++			if (mobileNo == null) {
++				return new ResponseEntity<>("registered ", HttpStatus.NOT_FOUND);
++			}
++		}
++		if (onetimepassword.verifOTP(mobileNo, otp) == true) {
++			onetimepassword.deleteOTP(mobileNo);
++			return new ResponseEntity<>("registered ", HttpStatus.OK);
++		}
++		return new ResponseEntity<>("registered ", HttpStatus.NOT_FOUND);
++	}
+ 
+ 	@RequestMapping(value = "/account/register/doctor",
+ 	        method = RequestMethod.POST,
+diff --git a/src/main/webapp/scratchpad b/src/main/webapp/scratchpad
+index 7e4d98c..afb06d4 100644
+--- a/src/main/webapp/scratchpad
++++ b/src/main/webapp/scratchpad
+@@ -1,3 +1,18 @@
++
++doctorName
++doctorId
++hospitalName
++hospitalId
++startDate
++endDate
++fees
++slotDuration
++startTime
++breakStartTime
++breakEndTime
++endTime
++
++
+ angular.forEach(response.data, function(value, key) {
+             		  console.log(key)
+             		  console.log(value)
+diff --git a/src/main/webapp/scripts/app/account/register/register.controller.js b/src/main/webapp/scripts/app/account/register/register.controller.js
+index bad5502..48680ae 100644
+--- a/src/main/webapp/scripts/app/account/register/register.controller.js
++++ b/src/main/webapp/scripts/app/account/register/register.controller.js
+@@ -1,7 +1,9 @@
+ 'use strict';
+ 
+ angular.module('hipster1App')
+-    .controller('RegisterController', function ($scope, $rootScope, $timeout, Auth) {
++    .controller('RegisterController', function ($scope, $rootScope, $timeout, Auth,
++     SubmitHospitalRegistration,
++     SubmitDoctorRegistration) {
+         $scope.success = null;
+         $scope.error = null;
+         $scope.showregister = true;
+@@ -20,17 +22,26 @@ angular.module('hipster1App')
+         $rootScope.doctorDTO = {};
+         $rootScope.hospitalAdminDTO = {};
+ 
++
+         $timeout(function (){angular.element('[ng-model="registerAccount.login"]').focus();});
+ 
+         $scope.submitDoctor = function () {
+             return SubmitDoctorRegistration.save($rootScope.doctorDTO, function () {
++                    alert('succeeded 1');
++                    $scope.success = true;
++                    $rootScope.showDoctorForm = false;
+                 }, function (err) {
++                    alert('failed 1');
+                 }).$promise;
+         }
+ 
+         $scope.submitHospital = function () {
+             return SubmitHospitalRegistration.save($rootScope.hospitalAdminDTO, function () {
++                    alert('succeeded 2');
++                    $scope.success = true;
++                    $rootScope.showHospitalForm = false;
+                 }, function (err) {
++                    alert('failed 1');
+                 }).$promise;
+         }
+ 
+@@ -40,8 +51,10 @@ angular.module('hipster1App')
+                     $scope.showotp = false;
+                     
+                     if ($rootScope.isDoctor) {
++                        $rootScope.doctorDTO.email = $rootScope.email;
+                         $rootScope.showDoctorForm = true;
+                     } else if ($rootScope.isHospital) {
++                        $rootScope.hospitalAdminDTO.email = $rootScope.email;
+                         $rootScope.showHospitalForm = true;
+                     } else {
+                         $scope.success = true;
+diff --git a/src/main/webapp/scripts/app/account/register/register.html b/src/main/webapp/scripts/app/account/register/register.html
+index 9a265e1..8660f60 100644
+--- a/src/main/webapp/scripts/app/account/register/register.html
++++ b/src/main/webapp/scripts/app/account/register/register.html
+@@ -114,22 +114,64 @@
+ 
+ 
+ <form ng-show="showDoctorForm" name="form3" role="form" novalidate ng-submit="submitDoctor()" show-validation>
+-                <div class="form-group">
+-                    <label for="otp">otp</label>
+-                    <input type="text" class="form-control" id="otp" name="otp" placeholder="otp"
+-                           ng-model="otp"  required>
+-                </div>
++                      <div class="form-group">
++            <label for="firstName">firstName</label>
++            <input type="text" class="form-control" id="firstName" name="firstName"
++                    ng-model="doctorDTO.firstName" >
++      </div>
++      <div class="form-group">
++            <label for="lastName">lastName</label>
++            <input type="text" class="form-control" id="lastName" name="lastName"
++                    ng-model="doctorDTO.lastName" >
++      </div>
++      <div class="form-group">
++            <label for="degrees">degrees</label>
++            <input type="text" class="form-control" id="degrees" name="degrees"
++                    ng-model="doctorDTO.degrees" >
++      </div>
++      <div class="form-group">
++            <label for="specialities">specialities</label>
++            <input type="text" class="form-control" id="specialities" name="specialities"
++                    ng-model="doctorDTO.specialities" >
++      </div>
++      <div class="form-group">
++            <label for="languages">languages</label>
++            <input type="text" class="form-control" id="languages" name="languages"
++                    ng-model="doctorDTO.languages" >
++      </div>
++      <div class="form-group">
++            <label for="experience">experience</label>
++            <input type="text" class="form-control" id="experience" name="experience"
++                    ng-model="doctorDTO.experience" >
++      </div>
++
+                 <button type="submit" ng-disabled="form3.$invalid" class="btn btn-primary">Submit Doctor</button>
+             </form>
+ 
+ 
+ 
+ <form ng-show="showHospitalForm" name="form4" role="form" novalidate ng-submit="submitHospital()" show-validation>
+-                <div class="form-group">
+-                    <label for="otp">otp</label>
+-                    <input type="text" class="form-control" id="otp" name="otp" placeholder="otp"
+-                           ng-model="otp"  required>
+-                </div>
++                      <div class="form-group">
++            <label for="firstName">firstName</label>
++            <input type="text" class="form-control" id="firstName" name="firstName"
++                    ng-model="doctorScheduleDTO.firstName" >
++      </div>
++      <div class="form-group">
++            <label for="lastName">lastName</label>
++            <input type="text" class="form-control" id="lastName" name="lastName"
++                    ng-model="doctorScheduleDTO.lastName" >
++      </div>
++      <div class="form-group">
++            <label for="specialities">specialities</label>
++            <input type="text" class="form-control" id="specialities" name="specialities"
++                    ng-model="doctorScheduleDTO.specialities" >
++      </div>
++      <div class="form-group">
++            <label for="location">location</label>
++            <input type="text" class="form-control" id="location" name="location"
++                    ng-model="doctorScheduleDTO.location" >
++      </div>
++
+                 <button type="submit" ng-disabled="form4.$invalid" class="btn btn-primary">Submit Hospital</button>
+             </form>
+ 
+diff --git a/src/main/webapp/scripts/components/auth/services/register.service.js b/src/main/webapp/scripts/components/auth/services/register.service.js
+index edda72f..606ef33 100644
+--- a/src/main/webapp/scripts/components/auth/services/register.service.js
++++ b/src/main/webapp/scripts/components/auth/services/register.service.js
+@@ -8,15 +8,23 @@ angular.module('hipster1App')
+ 
+ angular.module('hipster1App')
+     .factory('SubmitDoctorRegistration', function ($resource) {
+-        return $resource('api/register/doctor', {}, {
++        return $resource('api/account/register/doctor', {}, {
+         });
+     });
+ 
+ angular.module('hipster1App')
+     .factory('SubmitHospitalRegistration', function ($resource) {
+-        return $resource('api/register/hospital', {}, {
++        return $resource('api/account/register/hospital', {}, {
+         });
+     });
+ 
++angular.module('hipster1App')
++    .factory('RegisterOtp', function ($resource) {
++        return $resource('api/account/register/otp', {}, 
++            {
++            'query': { method: 'GET', isArray: false}
++            })
++    });
++
+ 
+ 

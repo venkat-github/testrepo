@@ -1,19 +1,32 @@
-package com.health.app.domain;
+package com.test.app.domain;
 
-import org.elasticsearch.common.joda.time.LocalDateTime;
+
+import org.joda.time.LocalDateTime;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.test.app.domain.util.CustomLocalDateSerializer;
+import com.test.app.domain.util.ISO8601LocalDateDeserializer;
+
+@Document(collection="Onetimepassword")
 public class OneTimePasswordStore {
 	@Id
 	private String id;
+	
 	String userId;
+	
 	String userName;
+	
 	String mobileNo;
+	
 	String otp;
 	
-	LocalDateTime validity;
+	@JsonSerialize(using = CustomLocalDateSerializer.class)
+    @JsonDeserialize(using = ISO8601LocalDateDeserializer.class)
+    LocalDateTime validity;
 	
 	
 	public LocalDateTime getValidity() {
@@ -24,9 +37,6 @@ public class OneTimePasswordStore {
 		this.validity = validity;
 	}
 
-	int validTill;
-
-	
 	public String getId() {
 		return id;
 	}
@@ -65,14 +75,6 @@ public class OneTimePasswordStore {
 
 	public void setOtp(String otp) {
 		this.otp = otp;
-	}
-
-	public int getValidTill() {
-		return validTill;
-	}
-
-	public void setValidTill(int i) {
-		this.validTill = i;
 	}
 
 	public OneTimePasswordStore() {
