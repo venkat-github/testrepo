@@ -94,7 +94,6 @@ public class MedUserResource {
         log.debug("REST request to update UserDTO : {}", user);
         User userToStore = userRepository.findOneById(user.getId());
         userToStore.setAge(user.getAge());
-        userToStore.setLogin(user.getLogin());
         userToStore.setEmail(user.getEmail());
         userToStore.setLocation(user.getLocation());
         userToStore.setCity(user.getCity());

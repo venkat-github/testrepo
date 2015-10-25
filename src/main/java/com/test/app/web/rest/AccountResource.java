@@ -65,45 +65,44 @@ public class AccountResource {
     /**
      * POST  /register -> register the user.
      */
-    @RequestMapping(value = "/register",
-            method = RequestMethod.POST,
-            produces = MediaType.TEXT_PLAIN_VALUE)
-    @Timed
-    public ResponseEntity<?> registerAccount(@Valid @RequestBody User dto, HttpServletRequest request) {
-    	dto.setLogin(dto.getEmail());
-        User user = userRepository.findOneByLogin(dto.getLogin());
-        if (user != null) {
-            return ResponseEntity.badRequest().contentType(MediaType.TEXT_PLAIN).body("login already in use");
-        } else {
-            if (userRepository.findOneByEmail(dto.getEmail()) != null) {
-                return ResponseEntity.badRequest().contentType(MediaType.TEXT_PLAIN).body("e-mail address already in use");
-            }
-            Set<Authority> authorities = new java.util.HashSet<Authority>();
-            if (dto.isDoctor()) {
-            	authorities.add(authorityRepository.findOne("ROLE_DOCTOR"));
-            }
-            if (dto.isHospitalAdmin()) {
-            	authorities.add(authorityRepository.findOne("ROLE_HOSPITAL_ADMIN"));
-            }
-            authorities.add(authorityRepository.findOne("ROLE_USER"));
-            user = userService.createUserInformation(dto.getLogin(), dto.getPassword(),
-            dto.getName(), dto.getName(), dto.getEmail().toLowerCase(),
-            null, authorities, dto.isDoctor(), dto.isHospitalAdmin(), dto.getMobileno(), false);
-            
-            onetimepassword.generateStoreOTP(dto.getMobileno());
-            
-            System.out.println("successfully saved ");
-            String baseUrl = request.getScheme() + // "http"
-            "://" +                            // "://"
-            request.getServerName() +          // "myhost"
-            ":" +                              // ":"
-            request.getServerPort();           // "80"
+	@RequestMapping(value = "/register", method = RequestMethod.POST, produces = MediaType.TEXT_PLAIN_VALUE)
+	@Timed
+	public ResponseEntity<?> registerAccount(@Valid @RequestBody User dto,
+			HttpServletRequest request) {
+		dto.setEmail(dto.getEmail());
+		User user = userRepository.findOneByEmail(dto.getEmail());
+		if (user != null) { //  (user.getMobileno().equals(dto.getMobileno()) == true) ) {
+			return ResponseEntity.badRequest()
+					.contentType(MediaType.TEXT_PLAIN)
+					.body("login already in use");
+		} else {
+			Set<Authority> authorities = new java.util.HashSet<Authority>();
+			if (dto.isDoctor()) {
+				authorities.add(authorityRepository.findOne("ROLE_DOCTOR"));
+			}
+			if (dto.isHospitalAdmin()) {
+				authorities.add(authorityRepository
+						.findOne("ROLE_HOSPITAL_ADMIN"));
+			}
+			authorities.add(authorityRepository.findOne("ROLE_USER"));
+			user = userService.createUserInformation(dto.getEmail(), dto
+					.getPassword(), dto.getName(), dto.getName(), dto
+					.getEmail().toLowerCase(), null, authorities, dto
+					.isDoctor(), dto.isHospitalAdmin(), dto.getMobileno(),
+					false);
 
-            
-            //mailService.sendActivationEmail(user, baseUrl);
-            return new ResponseEntity<>(HttpStatus.CREATED);
-        }
-    }
+			onetimepassword.generateStoreOTP(dto.getMobileno());
+
+			String baseUrl = request.getScheme() + // "http"
+					"://" + // "://"
+					request.getServerName() + // "myhost"
+					":" + // ":"
+					request.getServerPort(); // "80"
+
+			mailService.sendActivationEmail(user, baseUrl);
+			return new ResponseEntity<>(HttpStatus.CREATED);
+		}
+	}
 
     /**
      * GET  /activate -> activate the registered user.
@@ -162,8 +161,8 @@ public class AccountResource {
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public ResponseEntity<String> saveAccount(@RequestBody User medUserDto) {
-        User userHavingThisLogin = userRepository.findOneByLogin(medUserDto.getLogin());
-        if (userHavingThisLogin != null && !userHavingThisLogin.getLogin().equals(SecurityUtils.getCurrentLogin())) {
+        User userHavingThisLogin = userRepository.findOneByEmail(medUserDto.getEmail());
+        if (userHavingThisLogin != null && !userHavingThisLogin.getEmail().equals(SecurityUtils.getCurrentLogin())) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
         userRepository.save(medUserDto);
@@ -243,8 +242,14 @@ public class AccountResource {
 		}
 		
 		if (onetimepassword.verifOTP(mobileno, otp) == true) {
-			System.out.println("successfully verified otp ");
+			User usr = userRepository.findOneByMobileno(mobileno);
 			onetimepassword.deleteOTP(mobileno);
+			if(usr == null ) {
+				return new ResponseEntity<>("registered ", HttpStatus.NOT_FOUND);
+			} else {
+					usr.setActivated(true);
+					userRepository.save(usr);
+			}			
 			return new ResponseEntity<>("registered ", HttpStatus.OK);
 		} else {
 			System.out.println("failed to verify otp");
@@ -304,7 +309,7 @@ public class AccountResource {
           return new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+    
     private boolean checkPasswordLength(String password) {
       return (!StringUtils.isEmpty(password) );
     }

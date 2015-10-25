@@ -41,7 +41,6 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Id
     private String id;
 
-    private String login;//email alias
 
     //@JsonIgnore
     @NotNull
@@ -70,6 +69,8 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Field("email_id")
     private String email;
 
+    private String login;
+    
     List<String> roles;
 	public List<String> getRoles() {
 		return roles;
@@ -173,14 +174,6 @@ public class User extends AbstractAuditingEntity implements Serializable {
     
     boolean isDoctor;
     
-    public String getLogin() {
-		return email;
-	}
-
-	public void setLogin(String login) {
-		this.email = login;
-		this.login = login;
-	}
 
 	public boolean isHospitalAdmin() {
 		return isHospitalAdmin;
@@ -220,12 +213,21 @@ public class User extends AbstractAuditingEntity implements Serializable {
     public User() {
     }
     
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
 	public String getEmail() {
 		return email;
 	}
 
 	public void setEmail(String email) {
 		this.email = email;
+		this.login = email;
 	}
 
 	public String getId() {

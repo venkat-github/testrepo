@@ -394,7 +394,6 @@ public class InitService {
 				emailId, "en", auths, mobileno);
         
 		User doctorDto = user;
-		doctorDto.setLogin(name);
 		doctorDto.setName(name);
 		doctorDto.setAge(age);
 		doctorDto.setSpecialities(specialities);;
@@ -460,7 +459,5 @@ public class InitService {
 		createDoctor("gyn18",42, Speciality.GYNIC, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
 		createDoctor("gyn19",43, Speciality.GYNIC, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
 		createDoctor("gyn20",44, Speciality.GYNIC, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
-
 	}
-
 }

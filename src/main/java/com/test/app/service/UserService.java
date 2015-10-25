@@ -108,7 +108,7 @@ public class UserService {
         }
         //authorities.add(authority2);
         String encryptedPassword = passwordEncoder.encode(password);
-        newUser.setLogin(login);
+        newUser.setEmail(email);
         // new user gets initially a generated password
         newUser.setPassword(encryptedPassword);
         newUser.setName(firstName);
@@ -184,7 +184,7 @@ public class UserService {
         DateTime now = new DateTime();
         List<User> users = userRepository.findAllByActivatedIsFalseAndCreatedDateBefore(now.minusDays(3));
         for (User user : users) {
-            log.debug("Deleting not activated user {}", user.getLogin());
+            log.debug("Deleting not activated user {}", user.getEmail());
             userRepository.delete(user);
         }
     }
