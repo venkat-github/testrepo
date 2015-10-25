@@ -28,6 +28,11 @@ public class CloudMongoDbConfiguration extends AbstractMongoConfiguration  {
     @Inject
     private MongoDbFactory mongoDbFactory;
 
+    public CloudMongoDbConfiguration() {
+    	int i = 0;
+    	int j = 0;
+    }
+    
     @Bean
     public ValidatingMongoEventListener validatingMongoEventListener() {
         return new ValidatingMongoEventListener(validator());

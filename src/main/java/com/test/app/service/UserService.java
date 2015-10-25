@@ -117,7 +117,7 @@ public class UserService {
         newUser.setDoctor(isDoctor);
         newUser.setHospitalAdmin(isHospitalAdmin);
         // new user is not active
-        newUser.setActivated(false);
+        newUser.setActivated(activate);
         newUser.setMobileno(mobileNo);
         // new user gets registration key
         //newUser.setActivationKey(RandomUtil.generateActivationKey());

@@ -44,22 +44,23 @@ angular.module('hipster1App')
                 data: {
                     roles: ['ROLE_USER'],
                 },
-                
-                views: {
-                    'content@': {
+                onEnter: ['$stateParams', '$state', '$modal', function($stateParams, $state, $modal) {
+                    $modal.open({
                         templateUrl: 'scripts/app/entities/testBlob/testBlob-dialog.html',
-                        controller: 'TestBlobDialogController'
-                    }
-                },
-                resolve: {
-                    entity: ['$stateParams', '$rootScope' ,
-                    function () {
+                        controller: 'TestBlobDialogController',
+                        size: 'lg',
+                        resolve: {
+                            entity: function () {
                                 return {image: null, userId: null};
                                 //return {file: null, image: null, id: null};
                             }
-                    ]
-                }
-                
+                        }
+                    }).result.then(function(result) {
+                        $state.go('testBlob', null, { reload: true });
+                    }, function() {
+                        $state.go('testBlob');
+                    })
+                }]
             })
             .state('testBlob.edit', {
                 parent: 'testBlob',

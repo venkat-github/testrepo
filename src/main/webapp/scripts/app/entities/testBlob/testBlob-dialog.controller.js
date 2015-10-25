@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('hipster1App').controller('TestBlobDialogController',
-    ['$scope', '$stateParams', '$modalInstance', 'entity', 'TestBlob',
-        function($scope, $stateParams, $modalInstance, entity, TestBlob) {
+    ['$scope', '$state', '$stateParams', 'entity', 'TestBlob',
+        function($scope,$state, $stateParams, entity, TestBlob) {
 
         $scope.testBlob = entity;
         $scope.load = function(id) {
@@ -12,16 +12,18 @@ angular.module('hipster1App').controller('TestBlobDialogController',
         };
 
         var onSaveFinished = function (result) {
-            $scope.$emit('hipster1App:testBlobUpdate', result);
-            $modalInstance.close(result);
+            $state.go('userDTO.detail');
         };
 
         $scope.save = function () {
+            TestBlob.update($scope.testBlob, onSaveFinished);
+            /*
             if ($scope.testBlob.id != null) {
                 TestBlob.update($scope.testBlob, onSaveFinished);
             } else {
                 TestBlob.save($scope.testBlob, onSaveFinished);
             }
+            */
         };
 
         $scope.clear = function() {

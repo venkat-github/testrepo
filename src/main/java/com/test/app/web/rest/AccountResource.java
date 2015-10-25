@@ -27,6 +27,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.test.app.domain.Authority;
 import com.test.app.domain.PersistentToken;
 import com.test.app.domain.User;
+import com.test.app.domain.UserDto;
 import com.test.app.repository.AuthorityRepository;
 import com.test.app.repository.OneTimePasswordStoreHelperFunctions;
 import com.test.app.repository.PersistentTokenRepository;
@@ -138,7 +139,7 @@ public class AccountResource {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<User> getAccount() {
+    public ResponseEntity<UserDto> getAccount() {
         User user = userService.getUserWithAuthorities();
         if (user == null) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -148,8 +149,9 @@ public class AccountResource {
             roles.add(authority.getName());
         }
         user.setRoles(roles);
+        UserDto dto = new UserDto(user);
         return new ResponseEntity<>(
-            user,
+            dto,
             HttpStatus.OK);
     }
 
@@ -160,12 +162,13 @@ public class AccountResource {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<String> saveAccount(@RequestBody User medUserDto) {
+    public ResponseEntity<String> saveAccount(@RequestBody UserDto medUserDto) {
         User userHavingThisLogin = userRepository.findOneByEmail(medUserDto.getEmail());
         if (userHavingThisLogin != null && !userHavingThisLogin.getEmail().equals(SecurityUtils.getCurrentLogin())) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        userRepository.save(medUserDto);
+        User user = new User(medUserDto);
+        userRepository.save(user);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

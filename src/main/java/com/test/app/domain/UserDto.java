@@ -35,8 +35,8 @@ import org.joda.time.LocalDate;
 /**
  * A user.
  */
-@Document(collection = "JHI_USER")
-public class User extends AbstractAuditingEntity implements Serializable {
+@Document(collection = "UserDto")
+public class UserDto extends AbstractAuditingEntity implements Serializable {
 
     @Id
     private String id;
@@ -50,7 +50,29 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Field("first_name")
     private String firstName;
 
-    @Size(max = 50)
+    @Field("file")
+    private byte[] file;
+
+    @Field("image")
+    private byte[] image;
+    
+    public byte[] getRecord() {
+		return file;
+	}
+
+	public void setRecord(byte[] record) {
+		this.file = record;
+	}
+
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
+
+	@Size(max = 50)
     @Field("last_name")
     private String lastName;
 
@@ -205,16 +227,16 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Field("reset_date")
     private DateTime resetDate = null;
 
-    @Field("photoid")
     String photoId;
     
     String doctorRegistrationId;
     
     
-    public User() {
+    public UserDto() {
     }
     
-    public User(UserDto from) {
+    public UserDto(User from) {
+    	this.id = from.getId();
     	this.name = from.getName();
     	this.activated = from.isActivated();
     	this.adminHospitalIds = from.getAdminHospitalIds();
@@ -247,6 +269,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
     	this.phoneNos = from.getPhoneNos();
     	this.photoId = from.getPhotoId();
     	this.rating = from.getRating();
+    	this.roles = from.roles;
     	this.resetKey = from.getResetKey();
     	this.sex = from.getSex();
     	this.shareIdentity = from.isShareIdentity();
@@ -255,50 +278,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
     	
     	
     }
-
     
-    public void update(UserDto from) {
-    	this.name = from.getName();
-    	this.activated = from.isActivated();
-    	this.adminHospitalIds = from.getAdminHospitalIds();
-    	this.age = from.getAge();
-    	this.authorities = from.getAuthorities();
-    	this.bloodGroup = from.getBloodGroup();
-    	this.city = from.getCity();
-    	this.communication = from.getCommunication();
-    	this.dateOfBirth = from.getDateOfBirth();
-    	this.degrees = from.getDegrees();
-    	this.doctorActivated = from.isDoctorActivated();
-    	this.doctorIds = from.getDoctorIds();
-    	this.doctorRegistrationId = from.getDoctorRegistrationId();
-    	this.email = from.getEmail();
-    	this.experience = from.getExperience();
-    	this.firstName = from.getFirstName();
-    	this.hospitalIds = from.getHospitalIds();
-    	this.isDoctor = from.isDoctor();
-    	this.isHospitalAdmin = from.isHospitalAdmin();
-    	this.labIds = from.getLabIds();
-    	this.landmark = from.getLandmark();
-    	this.langKey = from.getLangKey();
-    	this.languages = from.getLanguages();
-    	this.lastBloodDonationDate = from.getLastBloodDonationDate();
-    	this.lastName = from.getLastName();
-    	this.location = from.getLocation();
-    	this.login = from.getLogin();
-    	this.mobileno = from.getMobileno();
-    	this.name = from.getName();
-    	this.phoneNos = from.getPhoneNos();
-    	this.photoId = from.getPhotoId();
-    	this.rating = from.getRating();
-    	this.resetKey = from.getResetKey();
-    	this.sex = from.getSex();
-    	this.shareIdentity = from.isShareIdentity();
-    	this.specialities = from.getSpecialities();
-    	this.street = from.getStreet();
-    	
-    	
-    }
-
 	public String getLogin() {
 		return login;
 	}
@@ -405,7 +385,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
             return false;
         }
 
-        User userDTO = (User) o;
+        UserDto userDTO = (UserDto) o;
 
         if ( ! Objects.equals(id, userDTO.id)) return false;
 

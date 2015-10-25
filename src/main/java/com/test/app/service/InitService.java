@@ -2,10 +2,12 @@ package com.test.app.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.gridfs.GridFsTemplate;
 
 import java.util.HashSet;
 import java.util.List;
@@ -37,16 +39,33 @@ import com.test.app.repository.DoctorVisitRepository;
 import com.test.app.repository.HospitalDoctorConsultaionRepository;
 import com.test.app.repository.HospitalDoctorConsultationHelperFunctions;
 import com.test.app.repository.HospitalRepository;
+import com.test.app.repository.PhotoService;
 import com.test.app.repository.UserRecordRepository;
 import com.test.app.repository.UserRepository;
 import com.test.app.web.rest.util.PaginationUtil;
+import java.io.IOException;
+import java.io.InputStream;
 
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.core.io.Resource;
+
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
+import com.mongodb.gridfs.GridFSDBFile;
 
 @Service
 public class InitService {
 
     final Logger log = LoggerFactory.getLogger(InitService.class);
 
+    @Inject
+    PhotoService photoService;
+    
+	@Inject
+	GridFsTemplate gridfsTemplate;
+	
     @Inject
     UserRepository userRepository;
 
@@ -79,6 +98,7 @@ public class InitService {
     @PostConstruct
     public  void init() {
     	try {
+    		
     		userRepository.deleteAll();
     		userRecordDTORepository.deleteAll();
     		doctorScheduleRepository.deleteAll();
@@ -86,7 +106,9 @@ public class InitService {
     		doctorVisitRepository.deleteAll();
     		hospitalRepository.deleteAll();
     		userRepository.deleteAll();
-    		
+
+    		loadPhoto();
+		   
 	    	createUsers();
 	    	createDoctors();
 	    	createHospitals();
@@ -113,7 +135,54 @@ public class InitService {
     	}
     }
     
-    void bookAppointments() {
+	private void loadPhoto() {
+		try {
+			InputStream resource = this.getClass().getClassLoader()
+					.getResourceAsStream("audi.jpg");
+
+			DBObject metaData = new BasicDBObject();
+			metaData.put("brand", "Audi");
+			metaData.put("model", "Audi A3");
+			metaData.put(
+					"description",
+					"Audi german automobile manufacturer that designs, engineers, and distributes automobiles");
+
+			String id = photoService.store(resource, "audi.jpg", "image/jpeg",
+					metaData);
+
+			System.out.println("Find By Id----------------------");
+			GridFSDBFile byId = photoService.getById(id);
+			System.out.println("File Name:- " + byId.getFilename());
+			System.out.println("Content Type:- " + byId.getContentType());
+
+			System.out.println("Find By Filename----------------------");
+			GridFSDBFile byFileName = photoService.getByFilename("audi.jpg");
+			System.out.println("File Name:- " + byFileName.getFilename());
+			System.out.println("Content Type:- " + byFileName.getContentType());
+
+			System.out.println("List All Files----------------------");
+			for (GridFSDBFile file : photoService.findAll()) {
+				System.out.println("File Name:- " + file.getFilename());
+				System.out.println("Content Type:- " + file.getContentType());
+				System.out.println("Meta Data Brand:- "
+						+ file.getMetaData().get("brand"));
+				System.out.println("Meta Data Model:- "
+						+ file.getMetaData().get("model"));
+				System.out.println("Meta Data Description:- "
+						+ file.getMetaData().get("description"));
+			}
+
+			GridFSDBFile retrive = photoService.retrive("audi.jpg");
+			retrive.writeTo("newaudi.jpg");
+			System.out.println("successfully written ");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("failed to store ");
+		}
+
+	}
+
+	void bookAppointments() {
     	bookAppointment("user", "doc1", "8:15");
     	bookAppointment("user1", "doc1","8:30");
     	bookAppointment("user2", "doc1","8:45");

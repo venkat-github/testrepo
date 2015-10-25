@@ -1,5 +1,6 @@
 package com.test.app.web.rest;
 
+import java.io.ByteArrayInputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -31,12 +32,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
 import com.test.app.domain.DoctorSchedule;
 import com.test.app.domain.DoctorVisit;
 import com.test.app.domain.Hospital;
 import com.test.app.domain.HospitalDoctorConsultaion;
+import com.test.app.domain.ProfilePic;
 import com.test.app.domain.User;
 import com.test.app.domain.UserDoctorVisitRecord;
+import com.test.app.domain.UserDto;
 import com.test.app.domain.util.CustomLocalDateSerializer;
 import com.test.app.domain.util.ISO8601LocalDateDeserializer;
 import com.test.app.repository.DoctorScheduleRepository;
@@ -45,6 +50,7 @@ import com.test.app.repository.DoctorVisitRepository;
 import com.test.app.repository.HospitalDoctorConsultaionRepository;
 import com.test.app.repository.HospitalDoctorConsultationHelperFunctions;
 import com.test.app.repository.HospitalRepository;
+import com.test.app.repository.PhotoService;
 import com.test.app.repository.UserRecordRepository;
 import com.test.app.repository.UserRepository;
 import com.test.app.security.SecurityUtils;
@@ -90,22 +96,41 @@ public class MedUserResource {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     
-    public ResponseEntity<User> updateUser(@RequestBody User user) throws URISyntaxException {
+    public ResponseEntity<UserDto> updateUser(@RequestBody UserDto user) throws URISyntaxException {
         log.debug("REST request to update UserDTO : {}", user);
         User userToStore = userRepository.findOneById(user.getId());
-        userToStore.setAge(user.getAge());
-        userToStore.setEmail(user.getEmail());
-        userToStore.setLocation(user.getLocation());
-        userToStore.setCity(user.getCity());
-        
-        user = userRepository.save(userToStore);
-        User result = user;
+        userToStore.update(user);
+        userToStore = userRepository.save(userToStore);
+        UserDto result = new UserDto(userToStore);
         
         return ResponseEntity.ok()
                 .headers(HeaderUtil.createEntityUpdateAlert("userDTO", user.getId().toString()))
                 .body(result);
     }
 
+	@Inject
+	PhotoService photoService;
+	
+	@RequestMapping(value = "/upload_photo",
+	        method = RequestMethod.PUT,
+	        produces = MediaType.APPLICATION_JSON_VALUE)
+	    
+    public ResponseEntity<UserDto> updateProfilePic(@RequestBody ProfilePic pic) throws URISyntaxException {
+        System.out.println("pic is "+pic);
+        
+		User user = userRepository.findOneByLogin(SecurityUtils.getCurrentLogin());
+        UserDto result = new UserDto(user);
+        DBObject metaData = new BasicDBObject();
+		
+        String photoId = photoService.store(new ByteArrayInputStream(pic.getImage()),
+        		user.getName(), "", metaData);
+        user.setPhotoId(photoId);
+        user = userRepository.save(user);
+        
+        return ResponseEntity.ok()
+                .headers(HeaderUtil.createEntityUpdateAlert("userDTO", user.getId().toString()))
+                .body(result);
+    }
     /**
      * GET  /userDTOs -> get all the userDTOs.
      */
@@ -279,9 +304,10 @@ public class MedUserResource {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     
-    public ResponseEntity<User> getUser(@PathVariable String id, HttpServletResponse response) {
+    public ResponseEntity<UserDto> getUser(@PathVariable String id, HttpServletResponse response) {
         log.debug("REST request to get UserDTO : {}", id);
-        User userDTO = userRepository.findOne(id);
+        User user = userRepository.findOne(id);
+        UserDto userDTO = new UserDto(user);
         if (userDTO == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

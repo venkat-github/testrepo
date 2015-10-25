@@ -1,0 +1,20 @@
+      <div class="form-group">
+            <label for="firstName">firstName</label>
+            <input type="text" class="form-control" id="firstName" name="firstName"
+                    ng-model="doctorScheduleDTO.firstName" >
+      </div>
+      <div class="form-group">
+            <label for="lastName">lastName</label>
+            <input type="text" class="form-control" id="lastName" name="lastName"
+                    ng-model="doctorScheduleDTO.lastName" >
+      </div>
+      <div class="form-group">
+            <label for="specialities">specialities</label>
+            <input type="text" class="form-control" id="specialities" name="specialities"
+                    ng-model="doctorScheduleDTO.specialities" >
+      </div>
+      <div class="form-group">
+            <label for="location">location</label>
+            <input type="text" class="form-control" id="location" name="location"
+                    ng-model="doctorScheduleDTO.location" >
+      </div>

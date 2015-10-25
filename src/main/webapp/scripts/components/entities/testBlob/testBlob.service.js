@@ -2,8 +2,8 @@
 
 angular.module('hipster1App')
     .factory('TestBlob', function ($resource, DateUtils) {
-        return $resource('api/testBlobs/:id', {}, {
-            'query': { method: 'GET', isArray: true},
+        return $resource('api/upload_photo/:id', {}, {
+            'query': { method: 'GET', isArray: false},
             'get': {
                 method: 'GET',
                 transformResponse: function (data) {
