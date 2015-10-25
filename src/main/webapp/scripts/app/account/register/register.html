@@ -134,11 +134,19 @@
             <input type="text" class="form-control" id="lastName" name="lastName"
                     ng-model="doctorDTO.lastName" >
       </div>
+
       <div class="form-group">
             <label for="degrees">degrees</label>
-            <input type="text" class="form-control" id="degrees" name="degrees"
-                    ng-model="doctorDTO.degrees" >
+
+            <select multiple id="degrees" name="degrees" >
+              <option value="volvo">Volvo</option>
+              <option value="saab">Saab</option>
+              <option value="opel">Opel</option>
+              <option value="audi">Audi</option>
+            </select>
+                      
       </div>
+      <!--
       <div class="form-group">
             <label for="specialities">specialities</label>
             <input type="text" class="form-control" id="specialities" name="specialities"
@@ -149,6 +157,7 @@
             <input type="text" class="form-control" id="languages" name="languages"
                     ng-model="doctorDTO.languages" >
       </div>
+      -->
       <div class="form-group">
             <label for="experience">experience</label>
             <input type="text" class="form-control" id="experience" name="experience"
@@ -171,11 +180,13 @@
             <input type="text" class="form-control" id="lastName" name="lastName"
                     ng-model="doctorScheduleDTO.lastName" >
       </div>
+      <!--
       <div class="form-group">
             <label for="specialities">specialities</label>
             <input type="text" class="form-control" id="specialities" name="specialities"
                     ng-model="doctorScheduleDTO.specialities" >
       </div>
+-->
       <div class="form-group">
             <label for="location">location</label>
             <input type="text" class="form-control" id="location" name="location"

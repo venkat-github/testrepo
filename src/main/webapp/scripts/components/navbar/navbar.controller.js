@@ -71,7 +71,6 @@ angular.module('hipster1App')
             	return resp;
             });
           };
-          
         
         $scope.hello = function() {
         	alert('hello');

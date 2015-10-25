@@ -34,6 +34,7 @@ public class OneTimePasswordStoreHelperFunctions {
 		try {
 		OneTimePasswordStore usr = otpr.findOneByMobileNo(mobileNo);
 		String otp = OneTimePassword.generateOtp(4);
+		System.out.println(otp);
 		LocalDateTime ldt = new LocalDateTime();
 		ldt.plusMinutes(15);
 

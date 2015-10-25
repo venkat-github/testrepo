@@ -264,14 +264,14 @@ public class AccountResource {
 	        method = RequestMethod.POST,
 	        produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> registerDoctor(@RequestBody User doctor) {
-        return null;
+		return new ResponseEntity<>("{} ", HttpStatus.OK);
     }
 
 	@RequestMapping(value = "/account/register/hospital",
 	        method = RequestMethod.POST,
 	        produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> registerHospitalAdmin(@RequestBody User doctor) {
-        return null;
+		return new ResponseEntity<>("{} ", HttpStatus.OK);
     }
 	    	
     

@@ -27,6 +27,8 @@ angular.module('hipster1App')
         $timeout(function (){angular.element('[ng-model="registerAccount.login"]').focus();});
 
         $scope.submitDoctor = function () {
+            var val = angular.element("#degrees").val();
+            $rootScope.doctorDTO.degrees = val;
             return SubmitDoctorRegistration.save($rootScope.doctorDTO, function () {
                     alert('succeeded 1');
                     $scope.success = true;
@@ -34,6 +36,7 @@ angular.module('hipster1App')
                 }, function (err) {
                     alert('failed 1');
                 }).$promise;
+
         }
 
         $scope.submitHospital = function () {
@@ -83,6 +86,13 @@ angular.module('hipster1App')
                 $scope.mobileno = $scope.registerAccount.mobileno;
                 $rootScope.isDoctor = $scope.registerAccount.doctor;
                 $rootScope.isHospital = $scope.registerAccount.hospitalAdmin;
+
+                $scope.registerAccount.languages = ['TAMIL','TELUGU'];
+                $scope.registerAccount.sex = 'MALE'
+                $scope.registerAccount.bloodGroup = 'A_POSITIVE';
+                $scope.registerAccount.communication = 'CALL_MOBILE';
+                $scope.registerAccount.specialities = ['DENTIST','GYNIC'];
+
                 Auth.createAccount($scope.registerAccount).then(function () {
                     
                     alert('showing otp form');
