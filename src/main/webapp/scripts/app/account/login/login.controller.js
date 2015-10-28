@@ -1,5 +1,6 @@
 'use strict';
 
+
 angular.module('hipster1App')
     .controller('LoginController', function ($rootScope, $scope, $state, $timeout,Account, Auth) {
         $scope.user = {};
@@ -17,7 +18,7 @@ angular.module('hipster1App')
                 
                 $scope.authenticationError = false;
                 Account.get().$promise.then(function(user) {
-                	$rootScope.user = user.data;
+                    $rootScope.user = user.data;
                 });
                 if ($rootScope.previousStateName === 'register') {
                     $state.go('home');
@@ -29,4 +30,26 @@ angular.module('hipster1App')
                 $scope.authenticationError = true;
             });
         };
+    });
+
+angular.module('hipster1App')
+    .config(function ($stateProvider) {
+        $stateProvider
+            .state('login', {
+                parent: 'account',
+                url: '/login',
+                data: {
+                    roles: [], 
+                    pageTitle: 'Authentication'
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'scripts/app/account/login/login.html',
+                        controller: 'LoginController'
+                    }
+                },
+                resolve: {
+                    
+                }
+            });
     });

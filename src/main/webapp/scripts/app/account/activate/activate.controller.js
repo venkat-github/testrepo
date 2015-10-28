@@ -1,5 +1,6 @@
 'use strict';
 
+
 angular.module('hipster1App')
     .controller('ActivationController', function ($scope, $stateParams, Auth) {
         Auth.activateAccount({key: $stateParams.key}).then(function () {
@@ -9,5 +10,28 @@ angular.module('hipster1App')
             $scope.success = null;
             $scope.error = 'ERROR';
         });
+    });
+
+
+angular.module('hipster1App')
+    .config(function ($stateProvider) {
+        $stateProvider
+            .state('activate', {
+                parent: 'account',
+                url: '/activate?key',
+                data: {
+                    roles: [],
+                    pageTitle: 'Activation'
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'scripts/app/account/activate/activate.html',
+                        controller: 'ActivationController'
+                    }
+                },
+                resolve: {
+                    
+                }
+            });
     });
 
