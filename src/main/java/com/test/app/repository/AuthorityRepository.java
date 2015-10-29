@@ -1,6 +1,7 @@
 package com.test.app.repository;
 
 import com.test.app.domain.Authority;
+
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**

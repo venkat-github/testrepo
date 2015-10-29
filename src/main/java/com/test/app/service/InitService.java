@@ -43,6 +43,7 @@ import com.test.app.repository.PhotoService;
 import com.test.app.repository.UserRecordRepository;
 import com.test.app.repository.UserRepository;
 import com.test.app.web.rest.util.PaginationUtil;
+
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -505,28 +506,28 @@ public class InitService {
 		createDoctor("doc20",44, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
 
 		
-		createDoctor("gyn1",40, Speciality.GYNIC, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
-		createDoctor("gyn2",41, Speciality.GYNIC, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
-		createDoctor("gyn3",42, Speciality.GYNIC, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
-		createDoctor("gyn4",43, Speciality.GYNIC, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
-		createDoctor("gyn5",44, Speciality.GYNIC, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("gyn1",40, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("gyn2",41, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("gyn3",42, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("gyn4",43, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("gyn5",44, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
 
-		createDoctor("gyn6",40, Speciality.GYNIC, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
-		createDoctor("gyn7",41, Speciality.GYNIC, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
-		createDoctor("gyn8",42, Speciality.GYNIC, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
-		createDoctor("gyn9",43, Speciality.GYNIC, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
-		createDoctor("gyn10",44, Speciality.GYNIC, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("gyn6",40, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("gyn7",41, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("gyn8",42, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("gyn9",43, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("gyn10",44, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
 
-		createDoctor("gyn11",40, Speciality.GYNIC, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
-		createDoctor("gyn12",41, Speciality.GYNIC, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
-		createDoctor("gyn13",42, Speciality.GYNIC, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
-		createDoctor("gyn14",43, Speciality.GYNIC, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
-		createDoctor("gyn15",44, Speciality.GYNIC, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("gyn11",40, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("gyn12",41, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("gyn13",42, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("gyn14",43, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("gyn15",44, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
 
-		createDoctor("gyn16",40, Speciality.GYNIC, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
-		createDoctor("gyn17",41, Speciality.GYNIC, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
-		createDoctor("gyn18",42, Speciality.GYNIC, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
-		createDoctor("gyn19",43, Speciality.GYNIC, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
-		createDoctor("gyn20",44, Speciality.GYNIC, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("gyn16",40, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("gyn17",41, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("gyn18",42, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("gyn19",43, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("gyn20",44, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
 	}
 }

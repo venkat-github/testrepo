@@ -10,6 +10,7 @@ import com.health.app.domain.Languages;
 import com.test.app.domain.enumeration.BloodGroup;
 import com.test.app.domain.enumeration.Sex;
 import com.test.app.domain.enumeration.Speciality;
+import com.test.app.domain.enumeration.TypeOfCommunication;
 import com.test.app.domain.util.CustomDateTimeDeserializer;
 import com.test.app.domain.util.CustomDateTimeSerializer;
 import com.test.app.domain.util.CustomLocalDateSerializer;

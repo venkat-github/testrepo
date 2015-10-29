@@ -4,5 +4,12 @@ package com.test.app.domain.enumeration;
  * The BloodGroup enumeration.
  */
 public enum BloodGroup {
-    A_POSITIVE,B_POSITIVE,O_POSITIVE,O_NEGATIVE,AB
+	B_POSITIVE,
+	B_NEGATIVE,
+	O_POSITIVE,
+	O_NEGATIVE,
+	AB_POSITIVE,
+	AB_NEGATIVE,
+	A_POSITIVE,
+	A_NEGATIVE,
 }

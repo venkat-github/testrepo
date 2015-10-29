@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.Objects;
 import java.util.Set;
 
-import com.test.app.domain.Facility;
 import com.test.app.domain.HospitalService;
 import com.test.app.domain.WorkingDay;
+import com.test.app.domain.enumeration.Facility;
 
 
 public class LabDto implements Serializable {
