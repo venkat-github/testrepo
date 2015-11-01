@@ -25,6 +25,7 @@ public class AjaxAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuc
                                         Authentication authentication)
             throws IOException, ServletException {
     	UserDetails x =  SecurityUtils.getUserDetails();
+    	/*
     	for (GrantedAuthority y : x.getAuthorities()) {
     		switch(y.getAuthority()) {
     		case AuthoritiesConstants.ADMIN:
@@ -41,7 +42,8 @@ public class AjaxAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuc
     			return;
     		}
     	}
-    	
+    	*/
+    	response.sendRedirect("/hipster1/index.html");
         //response.setStatus(HttpServletResponse.SC_OK);
     }
 }

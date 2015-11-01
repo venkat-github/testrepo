@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('hipster1App')
-    .controller('MainController', ['$scope','$rootScope', 'Principal',
-    	function ($scope, $rootScope, Principal) {
+    .controller('MainController', [ '$state', '$scope','$rootScope', 'Principal',
+    	function ($state, $scope, $rootScope, Principal) {
     	/*
     	        Account.get().$promise.then(function(user) {
                     alert('setting the user');
@@ -15,5 +15,9 @@ angular.module('hipster1App')
 			$rootScope.user = account;
             $scope.account = account;
             $scope.isAuthenticated = Principal.isAuthenticated;
+            if ($scope.isAuthenticated()) {
+            	//alert($scope.isAuthenticated());
+            	$state.go("userRecordDTO");
+            }
         });
     }]);
