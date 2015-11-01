@@ -1,0 +1,114 @@
+<div>
+
+	<h2>Available doctors </h2>
+
+	<div class="table-responsive">
+		<!--  
+                    <th>DoctorName</th>
+                    <th>Speciality</th>
+                    <th>Experience</th>
+                    <th>Date</th>
+                    <th>FreeSlots</th>
+                    <th>OccupiedSlots</th>
+                    <th>Degree</th>
+                    <th>DoctorId</th>
+                    <th>HospitalId</th>
+                    <th>Location</th>
+                    <th></th>
+                    -->
+		<div class="row" ng-repeat="doctorDTO in hospitalDoctorDTO4s">
+			<div class="col-md-2">
+				<img alt="Bootstrap Image Preview"
+					src="http://lorempixel.com/140/140/">
+				<!-- 
+							<img src="${thumb}" class="img-thumbnail" alt="Cinque Terre"
+								width="104" height="100">
+								 -->
+			</div>
+			<div class="col-md-5">
+				<h3>{{doctorDTO.doctorName}}</h3>
+				<p>{{doctorDTO.speciality}}</p>
+				<p>{{doctorDTO.experience}} years of experience</p>
+				<p>{{doctorDTO.location}}</p>
+				<p>speciality</p>
+			</div>
+
+			<div class="col-md-5">
+				<h3>{{doctorDTO.doctorName}}</h3>
+				<p>{{doctorDTO.doctorName}}</p>
+				<p>{{doctorDTO.doctorName}} years of experience</p>
+				<p>{{doctorDTO.doctorName}}</p>
+				<button type="submit" ng-click="bookAppointment(doctorDTO, $event)"
+					class="btn btn-primary">Book Appointment</button>
+			</div>
+
+			<button type="submit" ui-sref="doctorDTO.detail({id:doctorDTO.id})"
+				class="btn btn-info btn-sm">
+				<span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span>
+					View</span>
+			</button>
+		</div>
+
+		<div class="modal fade" id="mymodal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true" ng-click="clear()">&times;</button>
+						<h4 class="modal-title" id="myDoctorVisitDTOLabel">Book Appointment</h4>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+				            <label for="startDate">startDate</label>
+
+				            <p class="input-group">
+				              <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="startDate" ng-change="changedt()"
+				               is-open="opened1" ng-click="open1($event)"  />
+				               <span class="input-group-btn" >
+				          <button style="height:34px;" class="btn btn-default" ng-click="open1($event)">
+				          <i class="glyphicon glyphicon-calendar"></i></button> 
+				          </span>
+				            </p>
+
+      					</div>
+
+						<table class="table">
+							<tr ng-repeat="slot in hospitalDoctorDTO4check.freeSlots">
+								>
+								<td><a href="#"
+									ng-click="fixAppointment(slot, hospitalDoctorDTO4check)"
+									type="submit">{{slot}}</a></td>
+							</tr>
+						</table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal"
+							ng-click="clear()">
+							<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+						</button>
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<nav>
+			<ul class="pagination">
+				<li ng-show="links['first']" ng-click="loadPage(links['first'])"><a>&lt;&lt;</a></li>
+				<li ng-show="links['prev']" ng-click="loadPage(links['prev'])"><a>&lt;</a></li>
+				<li ng-show="page > 2" ng-click="loadPage(page - 2)"><a>{{page
+						- 2}}</a></li>
+				<li ng-show="page > 1" ng-click="loadPage(page - 1)"><a>{{page
+						- 1}}</a></li>
+				<li class="active"><a>{{page}}</a></li>
+				<li ng-show="page < links['last']" ng-click="loadPage(page + 1)"><a>{{page
+						+ 1}}</a></li>
+				<li ng-show="page < links['last'] - 1" ng-click="loadPage(page + 2)"><a>{{page
+						+ 2}}</a></li>
+				<li ng-show="links['next']" ng-click="loadPage(links['next'])"><a>&gt;</a></li>
+				<li ng-show="links['last']" ng-click="loadPage(links['last'])"><a>&gt;&gt;</a></li>
+			</ul>
+		</nav>
+	</div>
+</div>

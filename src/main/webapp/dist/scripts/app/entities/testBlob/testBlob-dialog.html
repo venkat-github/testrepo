@@ -1,0 +1,75 @@
+
+<div class="row">
+<div class="col-md-4 col-offset-2">
+
+<form name="editForm" role="form" novalidate ng-submit="save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myTestBlobLabel">Create or edit a TestBlob</h4>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="testBlob.id" readonly>
+        </div>
+<!--
+        <div class="form-group" ngf-drop ngf-change="setFile($files, testBlob)">
+            <label for="field_file">File</label>
+            <div>
+                <div class="help-block clearfix">
+                    <span class="pull-left">{{abbreviate(testBlob.file) + ' ' + byteSize(testBlob.file)}}</span>
+                    <button ng-click="testBlob.file=null"
+                            ng-if="testBlob.file"
+                            class="btn btn-default btn-xs pull-right">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </div>
+                <button type="file" ngf-select class="btn btn-default btn-block"
+                        ngf-change="setFile($files, testBlob)">
+                    Add blob
+                </button>
+            </div>
+            <input type="hidden" class="form-control" name="file" id="field_file"
+                    ng-model="testBlob.file"
+                    >
+
+        </div>
+    -->
+        <div class="form-group" ngf-drop ngf-change="setImage($files, testBlob)" ngf-accept="'image/*'">
+            <label for="field_image">Image</label>
+            <div>
+                <img data-ng-src="{{'data:image/*;base64,' + testBlob.image}}" style="max-height: 100px;" ng-if="testBlob.image"/>
+                <div class="help-block clearfix">
+                    <span class="pull-left">{{byteSize(testBlob.image)}}</span>
+                    <button ng-click="testBlob.image=null"
+                            ng-if="testBlob.image"
+                            class="btn btn-default btn-xs pull-right">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </div>
+                <button type="file" ngf-select class="btn btn-default btn-block"
+                        ngf-change="setImage($files, testBlob)" accept="image/*">
+                    Add image
+                </button>
+            </div>
+            <input type="hidden" class="form-control" name="image" id="field_image"
+                    ng-model="testBlob.image"
+                    >
+
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || editForm.$submitted" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>
+</div>
+</div>

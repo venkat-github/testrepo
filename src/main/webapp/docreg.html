@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset="utf-8">
+<meta name="viewpoint" content="width=device-width, initial-scale=1">
+<script src="jquery-1.10.2.min.js"></script>
+<script src="js/jquery.validate.js"></script>
+<script src="bootstrap.js"></script>
+<link rel="stylesheet" href="bootstrap.min.css">
+</head>
+
+<script>
+	$.validator.setDefaults({
+		submitHandler: function() {
+			alert("submitted!");
+		}
+	});
+
+	$().ready(function() {
+		// validate the comment form when it is submitted
+		$("#commentForm").validate();
+
+		// validate signup form on keyup and submit
+		$("#signupForm").validate({
+			rules: {
+				firstname: {
+				required : true
+				}
+			},
+			messages: {
+				firstname: "Please enter Firstname"
+			}
+		});
+	});
+	</script>
+<style>
+	#commentForm {
+		width: 500px;
+	}
+	#commentForm label {
+		width: 250px;
+	}
+	#commentForm label.error, #commentForm input.submit {
+		margin-left: 253px;
+	}
+	#signupForm {
+		width: 670px;
+	}
+	#signupForm label.error {
+		margin-left: 10px;
+		width: auto;
+		display: inline;
+	}
+	#newsletter_topics label.error {
+		display: none;
+		margin-left: 103px;
+	}
+	</style>
+<body>
+<div class="container-fluid">
+<form method="get" class="cmxform" id="form1" action="localhost/healthcare/docreg">
+<div class='row'>
+<div class='col-lg-3'>
+<div class="form-horizontal">
+  <label>First Name</label>
+  <input type="text" class="form-control" id="fn" name='fn' required minlength="3">
+</div>
+<div class="form-horizontal">
+  <label>Last Name</label>
+  <input type="text" class="form-control" id="ln" required>
+</div>
+<div class="form-horizontal">
+  <label>Choose User Name</label>
+  <input type="text" class="form-control" id="unname" required>
+</div>
+<div class="form-horizontal">
+  <label>Password</label>
+  <input type="text" class="form-control" id="password" name="password" required>
+</div>
+<div class="form-horizontal">
+  <label>E-mail</label>
+  <input type="text" class="form-control" id="email">
+</div>
+<div class="form-horizontal">
+  <label>Mobile</label>
+  <input type="text" class="form-control" id="mobile">
+</div>
+<div class="form-horizontal">
+  <label>Gender</label>
+  <label for="gender">Male</label>
+  <input type="radio" id="gender" name="gender">
+  <label for="gender-female">Female</label>
+  <input type="radio" id="gender-female" name="gender">
+</div>
+<div class="form-horizontal">
+  <label>Address</label>
+  <input type="textarea" class="form-control" id="address">
+</div>
+<div class="form-horizontal">
+  <label>Date of Birth</label>
+  <input type="date" class="form-control" id="dob">
+</div>
+
+<div class="form-horizontal">
+  <label>Years of experience</label>
+  <input type="number" class="form-control" id="experience">
+</div>
+<div class="form-horizontal">
+  <label>Years of experience</label>
+  <input type="number" class="form-control" id="experience">
+</div>
+<div class="form-horizontal">
+  <input type="submit" value="Register" class="btn btn-success form-control">
+  <input type="reset" value="Clear" class="btn btn-default form-control">
+</div>
+</div>
+</div></form>
+
+</div>
+</body>
+</html>

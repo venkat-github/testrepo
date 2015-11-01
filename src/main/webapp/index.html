@@ -1,52 +1,77 @@
+
 <!doctype html>
-<html class="no-js">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>hipster1</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width">
-        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-        <!-- build:css assets/styles/vendor.css -->
-        <!-- bower:css -->
-        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-        <!-- endbower -->
-        <!-- endbuild -->
-        <!-- build:css assets/styles/main.css -->
-        <link rel="stylesheet" href="assets/styles/main.css"> 
-        <!-- <link rel="stylesheet" href="assets/styles/style.css"> -->
-        <!-- endbuild -->
-    </head>
-    <body ng-app="hipster1App">
-        <!--[if lt IE 9]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-        <div ng-show="{{ENV === 'dev'}}" ng-cloak=""></div>
-        <div ui-view="navbar" ng-cloak=""></div>
-        <div class="container">
-            <div class="row">
-            	<div ui-view="content" class="col-md-12 slide ng-scope"></div>
-			</div>
-            <div class="footer">
-                <p translate="footer">This is your footer</p>
-            </div>
-        </div>
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><html lang="en" class="no-js"> <![endif]-->
+<html lang="en">
+<head>
+  
+  <!-- Basic -->
+  <title>Medlup</title>
+  
+  <!-- Define Charset -->
+  <meta charset="utf-8">
+  
+  <!-- Responsive Metatag -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <!-- Page Description and Author -->
+  <meta name="description" content="Margo - Responsive HTML5 Template">
+  <meta name="author" content="iThemesLab">
 
-        <!-- Google Analytics: uncomment and change UA-XXXXX-X to be your site's ID.
-        <script>
-            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-            e.src='//www.google-analytics.com/analytics.js';
-            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-            ga('create','UA-XXXXX-X');ga('send','pageview');
-        </script>-->
+  <!-- Bootstrap CSS  -->
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" type="text/css" media="screen">
 
-        <!-- build:js scripts/vendor.js -->
-        <!-- bower:js -->
-        <script src="bower_components/modernizr/modernizr.js"></script>
-        <script src="bower_components/jquery/dist/jquery.js"></script>
-        <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  <!-- Font Awesome CSS -->
+  <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css" media="screen">
+  
+  <!-- Revolution Banner CSS -->
+  <link rel="stylesheet" type="text/css" href="css/settings.css" media="screen" />
+  
+  <!-- Margo CSS Styles  -->
+  <link rel="stylesheet" type="text/css" href="css/style.css" media="screen">
+  
+  <!-- Responsive CSS Styles  -->
+  <link rel="stylesheet" type="text/css" href="css/responsive.css" media="screen">
+  
+  <!-- Css3 Transitions Styles  -->
+  <link rel="stylesheet" type="text/css" href="css/animate.css" media="screen">
+  
+  <!-- Color CSS Styles  -->
+  <link rel="stylesheet" type="text/css" href="css/colors/red.css" title="red" media="screen" />
+  <link rel="stylesheet" type="text/css" href="css/colors/jade.css" title="jade" media="screen" />
+  <link rel="stylesheet" type="text/css" href="css/colors/blue.css" title="blue" media="screen" />
+  <link rel="stylesheet" type="text/css" href="css/colors/beige.css" title="beige" media="screen" />
+  <link rel="stylesheet" type="text/css" href="css/colors/cyan.css" title="cyan" media="screen" />
+  <link rel="stylesheet" type="text/css" href="css/colors/green.css" title="green" media="screen" />
+  <link rel="stylesheet" type="text/css" href="css/colors/orange.css" title="orange" media="screen" />
+  <link rel="stylesheet" type="text/css" href="css/colors/peach.css" title="peach" media="screen" />
+  <link rel="stylesheet" type="text/css" href="css/colors/pink.css" title="pink" media="screen" />
+  <link rel="stylesheet" type="text/css" href="css/colors/purple.css" title="purple" media="screen" />
+  <link rel="stylesheet" type="text/css" href="css/colors/sky-blue.css" title="sky-blue" media="screen" />
+  <link rel="stylesheet" type="text/css" href="css/colors/yellow.css" title="yellow" media="screen" />
+  
+  
+  
+  <!-- Margo JS  -->
+  <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="js/jquery.migrate.js"></script>
+  <script type="text/javascript" src="js/modernizrr.js"></script>
+  <script type="text/javascript" src="asset/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/jquery.fitvids.js"></script>
+  <script type="text/javascript" src="js/owl.carousel.min.js"></script>
+  <script type="text/javascript" src="js/nivo-lightbox.min.js"></script>
+  <script type="text/javascript" src="js/jquery.isotope.min.js"></script>
+  <script type="text/javascript" src="js/jquery.appear.js"></script>
+  <script type="text/javascript" src="js/count-to.js"></script>
+  <script type="text/javascript" src="js/jquery.textillate.js"></script>
+  <script type="text/javascript" src="js/jquery.lettering.js"></script>
+  <script type="text/javascript" src="js/jquery.easypiechart.min.js"></script>
+  <script type="text/javascript" src="js/jquery.nicescroll.min.js"></script>
+  <script type="text/javascript" src="js/jquery.parallax.js"></script>
+  <script type="text/javascript" src="js/jquery.themepunch.plugins.min.js"></script>
+  <script type="text/javascript" src="js/jquery.themepunch.revolution.min.js"></script>
+  <script type="text/javascript" src="js/script.js"></script>
+
         <script src="bower_components/json3/lib/json3.js"></script>
         <script src="bower_components/angular/angular.js"></script>
         <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
@@ -169,6 +194,217 @@
     <script src="scripts/app/entities/book/book.controller.js"></script>
     <script src="scripts/app/entities/book/book-dialog.controller.js"></script>
     
-    <!-- endbuild -->
+
+  <!--[if IE 8]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+    <body ng-app="hipster1App">
+        <!--[if lt IE 9]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <div ng-show="{{ENV === 'dev'}}" ng-cloak=""></div>
+        <div ui-view="navbar" ng-cloak=""></div>
+        <div >
+            <div class="row">
+            <div style="padding:70px">
+test
+</div>
+            
+            	<div ui-view="content" class="col-md-12 slide ng-scope"></div>
+			</div>
+            <div class="footer">
+                
+                <footer>
+   <div class="container">
+      <div class="row footer-widgets">
+        
+        <!-- Start Subscribe & Social Links Widget -->
+                    <div class="col-md-3">
+                        <div class="footer-widget mail-subscribe-widget">
+                            <h4>Get in touch<span class="head-line"></span></h4>
+                            <p>Join our mailing list to stay up to date and get notices about our events &amp; programs!</p>
+                            <form class="subscribe">
+                                <input type="text" placeholder="mail@example.com">
+                                <input type="submit" class="btn-system" value="Send">
+                            </form>
+                        </div>
+                        <div class="footer-widget social-widget">
+                            <h4>Follow Us<span class="head-line"></span></h4>
+                            <ul class="social-icons">
+                                <li>
+                                    <a class="facebook" href="#"><i class="fa fa-facebook"></i></a>
+                                </li>
+                                <li>
+                                    <a class="twitter" href="#"><i class="fa fa-twitter"></i></a>
+                                </li>
+                                <li>
+                                    <a class="google" href="#"><i class="fa fa-google-plus"></i></a>
+                                </li>
+                             
+                                <li>
+                                    <a class="skype" href="#"><i class="fa fa-skype"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div><!-- .col-md-3 -->
+                    <!-- End Subscribe & Social Links Widget -->
+
+                    <!-- Start Flickr Widget -->
+                    <div class="col-md-6">
+                        <div class="footer-widget flickr-widget">
+                            <h4>In Association With<span class="head-line"></span></h4>
+                            <ul class="flickr-list">
+                                <li>
+                                    <a href="images/flickr-01.jpg" class="lightbox">
+                                        <img alt="" src="images/flickr-01.jpg">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="images/flickr-02.jpg" class="lightbox">
+                                        <img alt="" src="images/flickr-02.jpg">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="images/flickr-03.jpg" class="lightbox">
+                                        <img alt="" src="images/flickr-03.jpg">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="images/flickr-04.jpg" class="lightbox">
+                                        <img alt="" src="images/flickr-04.jpg">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="images/flickr-05.jpg" class="lightbox">
+                                        <img alt="" src="images/flickr-05.jpg">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="images/flickr-06.jpg" class="lightbox">
+                                        <img alt="" src="images/flickr-06.jpg">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="images/flickr-07.jpg" class="lightbox">
+                                        <img alt="" src="images/flickr-07.jpg">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="images/flickr-08.jpg" class="lightbox">
+                                        <img alt="" src="images/flickr-08.jpg">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="images/flickr-09.jpg" class="lightbox">
+                                        <img alt="" src="images/flickr-09.jpg">
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div><!-- .col-md-3 -->
+                    <!-- End Flickr Widget -->
+
+                    
+                    <!-- Start Contact Widget -->
+                    <div class="col-md-3">
+                        <div class="footer-widget contact-widget">
+                            <h4><img src="images/footer-margo.png" class="img-responsive" alt="Footer Logo" /></h4>
+                            <p>Main objective is to get the medical history of the patients at any given point of time and to reduce the consumption of paper, which is used for writing prescription, printing reports and medical.  </p>
+                            <ul>
+                            <li><span>Phone Number:</span> +01 234 567 890</li>
+                                <li><span>Email:</span> contact@medlup.com</li>
+                                <li><span>Website:</span> medlup.com</li>
+                            </ul>
+                        </div>
+                    </div><!-- .col-md-3 -->
+                    <!-- End Contact Widget -->
+
+
+</div> <!-- .row -->
+
+<!-- Start Copyright -->
+<div class="copyright-section">
+   <div class="row">
+      <div class="col-md-6">
+                            <p>&copy; 2015 Medlup -  All Rights Reserved</p>
+     </div>
+     <div class="col-md-6">
+         <ul class="footer-nav">
+            <li><a href="#">Sitemap</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </div>						
+</div>
+</div>
+<!-- End Copyright -->
+
+</div>
+</footer>
+<!-- End Footer -->
+
+<!-- Go To Top Link -->
+<a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
+
+<div id="loader">
+   <div class="spinner">
+      <div class="dot1"></div>
+      <div class="dot2"></div>
+  </div>
+</div>
+                
+            </div>
+        </div>
+
+		
+
+
+
+
+<!-- MODAL NEW USER REGISTRATION -->
+        <div class="modal fade" style="padding-top:100px;" id="modal-register" tabindex="-1" role="dialog" aria-labelledby="modal-register-label" aria-hidden="true">
+        	<div class="modal-dialog">
+        		<div class="modal-content">
+        			
+        			<div class="modal-header">
+        				<button type="button" class="close" data-dismiss="modal">
+        					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+        				</button>
+        				<h3 class="modal-title" id="modal-register-label">Sign up now</h3>
+        				<p>Fill in the form below to get instant access:</p>
+        			</div>
+        			
+        			<div class="modal-body">
+        				
+	                    <form role="form" action="" method="post" class="registration-form">
+	                    	<div class="form-group">
+	                    		<label class="sr-only" for="form-first-name">First name</label>
+	                        	<input type="text" name="form-first-name" placeholder="First name..." class="form-first-name form-control" id="form-first-name">
+	                        </div>
+	                        <div class="form-group">
+	                        	<label class="sr-only" for="form-last-name">Last name</label>
+	                        	<input type="text" name="form-last-name" placeholder="Last name..." class="form-last-name form-control" id="form-last-name">
+	                        </div>
+	                        <div class="form-group">
+	                        	<label class="sr-only" for="form-email">Email</label>
+	                        	<input type="text" name="form-email" placeholder="Email..." class="form-email form-control" id="form-email">
+	                        </div>
+							<div class="form-group">
+	                        	<label class="sr-only" for="form-password">Password</label>
+	                        	<input type="password" name="form-password" placeholder="Password..." class="form-password form-control" id="form-password">
+	                        </div>
+							<div class="form-group">
+	                        	<label class="sr-only" for="form-mobile">Mobile</label>
+	                        	<input type="text" name="form-mobile" placeholder="Mobie Number..." class="form-mobile form-control" id="form-mobile">
+	                        </div>
+	                        <button type="submit" class="btn">Sign me up!</button>
+	                    </form>
+	                    
+        			</div>
+        			
+        		</div>
+        	</div>
+        </div>
 </body>
 </html>

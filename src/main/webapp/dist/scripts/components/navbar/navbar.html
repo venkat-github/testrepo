@@ -1,0 +1,189 @@
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#/"><span>ehealth</span></a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-collapse" ng-switch="isAuthenticated()">
+            <ul class="nav navbar-nav nav-pills navbar-right">
+            	<form class="navbar-form navbar-left  visible-md-inline visible-lg-inline">
+					<div class="form-group" style="margin-top: 4px">
+						<label class="sr-only" for="keyword">Keyword</label>
+						<input type="text" 
+						ng-model="city" placeholder="city" typeahead="city for city in getCities($viewValue)" typeahead-on-select="cityChanged($item, $model, $label)" class="form-control input-sm" id="keyword" placeholder="Enter Search keyword" />
+					</div>
+				</form>
+				
+				<form class="navbar-form navbar-left  visible-md-inline visible-lg-inline">
+					<div class="form-group" style="margin-top: 4px">
+						<label class="sr-only" for="keyword">Keyword</label>
+						<input type="text" 
+						ng-model="speciality" placeholder="speciality" typeahead="speciality for speciality in getSpeciality($viewValue)" typeahead-on-select="specialityChanged($item, $model, $label)" class="form-control input-sm" placeholder="Enter Search keyword" />
+					</div>
+				</form>
+				<form class="navbar-form navbar-left" role="search">
+				<li ui-sref-active="active">
+                    <button class="btn btn-primary" ng-click="specialityChanged(speciality)">
+                        <span class="glyphicon glyphicon-home"></span>
+                        <span>Search</span>
+                    </button>
+                </li>
+                </form>
+                <li ui-sref-active="active" ng-switch-when="true" class="dropdown pointer" has-any-role="ROLE_USER" >
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="">
+                                <span>
+                                    <span class="glyphicon glyphicon-th-list"></span>
+                                    <span class="hidden-tablet">
+                                        User
+                                    </span>
+                                    <b class="caret"></b>
+                                </span>
+                    </a>
+					
+					
+                    <ul class="dropdown-menu" >
+                        
+                        <li ui-sref-active="active" ><a ui-sref="userRecordDTO"><span class="glyphicon glyphicon-asterisk"></span>
+                        &#xA0;<span >listUserRecords</span></a></li>
+
+                        <li ui-sref-active="active" ><a ui-sref="userDTO.detail({id:$rootScope.user.id})"><span class="glyphicon glyphicon-asterisk"></span>
+                        &#xA0;<span >viewProfile2</span></a></li>
+
+
+                        <li ui-sref-active="active" ><a ui-sref="testBlob.new"><span class="glyphicon glyphicon-asterisk"></span>
+                        &#xA0;<span >uploadPhoto</span></a></li>
+
+                        <li ui-sref-active="active" ><a ui-sref="userDTO.edit({id:$rootScope.user.id})"><span class="glyphicon glyphicon-asterisk"></span>
+                        &#xA0;<span >updateProfile</span></a></li>
+                    </ul>
+                    
+                    
+                </li>
+
+                <li ui-sref-active="active" ng-switch-when="true" class="dropdown pointer" has-any-role="ROLE_ADMIN" >
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="">
+                                <span>
+                                    <span class="glyphicon glyphicon-th-list"></span>
+                                    <span class="hidden-tablet">
+                                        ADMIN
+                                    </span>
+                                    <b class="caret"></b>
+                                </span>
+                    </a>
+                    
+                    
+                    <ul class="dropdown-menu" >
+                        
+                        <li ui-sref-active="active" ><a ui-sref="hospitalDTO"><span class="glyphicon glyphicon-asterisk"></span>
+                        &#xA0;<span >listHospitals</span></a></li>
+                        <li ui-sref-active="active" ><a ui-sref="userRecordDTO"><span class="glyphicon glyphicon-asterisk"></span>
+                        &#xA0;<span >listUserRecords</span></a></li>
+                        <li ui-sref-active="active" ><a ui-sref="doctorVisitDTO"><span class="glyphicon glyphicon-asterisk"></span>
+                        &#xA0;<span >listPatients</span></a></li>
+                        <li ui-sref-active="active" ><a href="index4.html"><span class="glyphicon glyphicon-asterisk"></span>
+                        &#xA0;<span >listPatients</span></a></li>
+                        <li ui-sref-active="active" ><a ui-sref="userDTO"><span class="glyphicon glyphicon-asterisk"></span>
+                        &#xA0;<span >listUsers</span></a></li>
+                        <li ui-sref-active="active" ><a ui-sref="hospitalDoctorDTO4"><span class="glyphicon glyphicon-asterisk"></span>
+                        &#xA0;<span >listDoctors</span></a></li>
+                        
+                    </ul>
+                    
+                    
+                </li>
+
+
+                <li ui-sref-active="active" ng-switch-when="true" class="dropdown pointer" has-any-role="ROLE_DOCTOR" >
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="">
+                                <span>
+                                    <span class="glyphicon glyphicon-th-list"></span>
+                                    <span class="hidden-tablet">
+                                        Doctor
+                                    </span>
+                                    <b class="caret"></b>
+                                </span>
+                    </a>
+                    
+                    
+                    <ul class="dropdown-menu" >
+                        
+                        <li ui-sref-active="active" ><a ui-sref="hospitalDTO"><span class="glyphicon glyphicon-asterisk"></span>
+                        &#xA0;<span >listHospitals</span></a></li>
+                        <li ui-sref-active="active" ><a ui-sref="userRecordDTO"><span class="glyphicon glyphicon-asterisk"></span>
+                        &#xA0;<span >listUserRecords</span></a></li>
+                        <li ui-sref-active="active" ><a ui-sref="doctorVisitDTO"><span class="glyphicon glyphicon-asterisk"></span>
+                        &#xA0;<span >listPatients</span></a></li>
+                    </ul>
+                    
+                    
+                </li>
+
+                <li ui-sref-active="active" ng-switch-when="true" class="dropdown pointer" has-any-role="ROLE_HOSPITAL_ADMIN" >
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="">
+                                <span>
+                                    <span class="glyphicon glyphicon-th-list"></span>
+                                    <span class="hidden-tablet">
+                                        HospitalAdmin
+                                    </span>
+                                    <b class="caret"></b>
+                                </span>
+                    </a>
+                    
+                    
+                    <ul class="dropdown-menu" >
+                        
+                        <li ui-sref-active="active" ><a ui-sref="hospitalDTO"><span class="glyphicon glyphicon-asterisk"></span>
+                        &#xA0;<span >listHospitals</span></a></li>
+                        <li ui-sref-active="active" ><a ui-sref="userRecordDTO"><span class="glyphicon glyphicon-asterisk"></span>
+                        &#xA0;<span >listUserRecords</span></a></li>
+                        <li ui-sref-active="active" ><a ui-sref="doctorVisitDTO"><span class="glyphicon glyphicon-asterisk"></span>
+                        &#xA0;<span >listPatients</span></a></li>
+
+                        <li ui-sref-active="active" ><a ui-sref="doctorScheduleDTO"><span class="glyphicon glyphicon-asterisk"></span>
+                        &#xA0;<span >schedules</span></a></li>
+                        
+                        <li ui-sref-active="active" ><a ui-sref="doctorScheduleDTO.new.start"><span class="glyphicon glyphicon-asterisk"></span>
+                        &#xA0;<span >create schedule</span></a></li>
+
+                        <li ui-sref-active="active" ><a ui-sref="doctorScheduleDTO.detail/1"><span class="glyphicon glyphicon-asterisk"></span>
+                        &#xA0;<span >view schedule</span></a></li>
+
+                    </ul>
+                    
+                    
+                </li>
+                <li ng-class="{active: $state.includes('account')}" class="dropdown pointer">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="">
+                                <span>
+                                    <span class="glyphicon glyphicon-user"></span>
+                                    <span class="hidden-tablet">
+                                        Account
+                                    </span>
+                                    <b class="caret"></b>
+                                </span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li ui-sref-active="active" ng-switch-when="true"><a ui-sref="settings"><span class="glyphicon glyphicon-wrench"></span>
+                            &#xA0;<span>Settings</span></a></li>
+                        <li ui-sref-active="active" ng-switch-when="true"><a ui-sref="password"><span class="glyphicon glyphicon-lock"></span>
+                            &#xA0;<span>Password</span></a></li>
+                        <li ui-sref-active="active" ng-switch-when="true"><a ui-sref="sessions"><span class="glyphicon glyphicon-cloud"></span>
+                            &#xA0;<span>Sessions</span></a></li>
+                        <li ui-sref-active="active" ng-switch-when="true"><a href="" ng-click="logout()"><span class="glyphicon glyphicon-log-out"></span>
+                            &#xA0;<span>Log out</span></a></li>
+                        <li ui-sref-active="active" ng-switch-when="false"><a ui-sref="login"><span class="glyphicon glyphicon-log-in"></span>
+                            &#xA0;<span>Authenticate</span></a></li>
+
+                        <li ui-sref-active="active" ng-switch-when="false"><a ui-sref="register"><span class="glyphicon glyphicon-plus-sign"></span>
+                            &#xA0;<span>Register</span></a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

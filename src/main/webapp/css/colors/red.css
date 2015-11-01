@@ -1,0 +1,379 @@
+a {
+    color: #02A6D8;
+}
+
+.accent-color {
+	color: #02A6D8;
+}
+
+.accent-color-bg {
+	background-color: #02A6D8;
+}
+
+.top-bar a:hover {
+	color: #02A6D8;
+}
+
+.section-overlay {
+	background-color: #02A6D8;
+}
+
+.top-bar.color-bar {
+	background-color: #02A6D8;
+}
+
+.service-box .read-more {
+	color: #02A6D8;
+}
+
+a.main-button, input[type="submit"] {
+	background-color: #02A6D8;
+}
+
+.navbar-default .navbar-nav > li:hover > a,
+.navbar-default .navbar-nav > li > a.active {
+	color: #02A6D8;
+}
+
+.dropdown > li:hover > a, .sup-dropdown li:hover > a {
+	color: #02A6D8;
+}
+
+.navbar-default .navbar-nav > li > a:after {
+	background-color: #02A6D8;
+}
+
+.navbar-default .navbar-nav > li > a.active, .navbar-default .navbar-nav > li:hover > a {
+	border-color: #02A6D8;
+}
+
+.dropdown  li a.active, .sup-dropdown li a.active {
+	color: #02A6D8;
+}
+
+ul.breadcrumbs li a:hover {
+    color: #02A6D8;
+}
+
+.full-width-recent-projects .portfolio-item:hover .portfolio-thumb .thumb-overlay {
+	background-color: #02A6D8;
+}
+
+.tp-caption.color-bg {
+	background-color: #02A6D8;
+}
+
+.team-member .member-socail a.mail:hover i {
+	background-color: #02A6D8;
+}
+
+.post-share a.mail:hover {
+	background-color: #02A6D8;
+}
+
+.progress .progress-bar.progress-bar-primary {
+	background-color: #02A6D8;
+}
+
+.latest-posts-classic .left-meta-post .post-type i {
+	background-color: #02A6D8;
+}
+
+.latest-posts-classic .post-title a:hover {
+	color: #02A6D8;
+}
+
+.latest-posts-classic .read-more {
+	color: #02A6D8;
+}
+
+.panel-title a {
+	color: #02A6D8;
+}
+
+.panel-title a:hover {
+	color: #02A6D8;
+}
+
+.milestone-block .milestone-icon {
+	background-color: #02A6D8;
+}
+
+.milestone-block .milestone-icon:after {
+	background-color: #02A6D8;
+}
+
+.milestone-block .milestone-number {
+	color: #02A6D8;
+}
+
+.pricing-tables .pricing-table.highlight-plan .plan-name h3 {
+	//color: #02A6D8;
+}
+
+.pricing-tables .pricing-table.highlight-plan .plan-signup {
+    background-color: #02A6D8;
+}
+
+.pricing-tables .pricing-table.highlight-plan .plan-name {
+	background-color: #02A6D8;
+}
+
+.btn-system {
+	background-color: #02A6D8;
+}
+
+.btn-system.border-btn {
+	border-color: #02A6D8;
+	color: #02A6D8;
+}
+
+.btn-system.border-btn:hover {
+	background-color: #02A6D8;
+}
+
+.btn-system.border-btn.btn-wite:hover {
+	color: #02A6D8;
+}
+
+.btn-system.btn-wite{
+	color: #02A6D8;
+}
+
+ul.icons-list li i {
+	color: #02A6D8;
+}
+
+.nav-tabs > li > a:hover, .nav-tabs > li > a:focus {
+	background-color: #02A6D8;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover {
+	color: #02A6D8;
+}
+
+.icon-small {
+	text-shadow: 0 0 0 #02A6D8;
+}
+
+.icon-small:hover, .service-box:hover .icon-small {
+	color: #02A6D8;
+}
+.icon-medium {
+	text-shadow: 0 0 0 #02A6D8;
+}
+
+.icon-medium:hover, .service-box:hover .icon-medium {
+	color: #02A6D8;
+}
+
+.icon-large {
+	text-shadow: 0 0 0 #02A6D8;
+}
+
+.icon-large:hover, .service-box:hover .icon-large {
+	color: #02A6D8;
+}
+
+.icon-effect-1 {
+	box-shadow: 0 0 0 3px #02A6D8;
+	-o-box-shadow: 0 0 0 3px #02A6D8;
+	-moz-box-shadow: 0 0 0 3px #02A6D8;
+  	-webkit-box-shadow: 0 0 0 3px #02A6D8;
+}
+
+.icon-effect-1:after {
+	background-color: #02A6D8;
+}
+
+.icon-effect-1:hover, .service-box:hover .icon-effect-1 {
+	color: #02A6D8;
+}
+
+.icon-effect-2 {
+	color: #02A6D8;
+	box-shadow: 0 0 0 3px #02A6D8;
+	-o-box-shadow: 0 0 0 3px #02A6D8;
+	-moz-box-shadow: 0 0 0 3px #02A6D8;
+  	-webkit-box-shadow: 0 0 0 3px #02A6D8;
+}
+
+.icon-effect-2:after {
+	background-color: #02A6D8;
+}
+
+.icon-effect-3 {
+	color: #02A6D8;
+	box-shadow: 0 0 0 3px #02A6D8;
+	-o-box-shadow: 0 0 0 3px #02A6D8;
+	-moz-box-shadow: 0 0 0 3px #02A6D8;
+  	-webkit-box-shadow: 0 0 0 3px #02A6D8;
+}
+
+.icon-effect-4 {
+	color: #02A6D8;
+	box-shadow: 0 0 0 3px #02A6D8;
+	-o-box-shadow: 0 0 0 3px #02A6D8;
+	-moz-box-shadow: 0 0 0 3px #02A6D8;
+  	-webkit-box-shadow: 0 0 0 3px #02A6D8;
+}
+
+.icon-effect-5 {
+	color: #02A6D8;
+	box-shadow: 0 0 0 3px #02A6D8;
+	-o-box-shadow: 0 0 0 3px #02A6D8;
+	-moz-box-shadow: 0 0 0 3px #02A6D8;
+  	-webkit-box-shadow: 0 0 0 3px #02A6D8;
+}
+
+.icon-effect-6 {
+	color: #02A6D8;
+	box-shadow: 0 0 0 3px #02A6D8;
+	-o-box-shadow: 0 0 0 3px #02A6D8;
+	-moz-box-shadow: 0 0 0 3px #02A6D8;
+  	-webkit-box-shadow: 0 0 0 3px #02A6D8;
+}
+
+.team-member .member-photo .member-name span {
+	background-color: #02A6D8;
+}
+
+.classic-title span {
+	border-bottom-color: #02A6D8;
+}
+
+.portfolio-filter li a:hover {
+	color: #02A6D8;
+}
+
+.portfolio-filter li a.selected {
+	border-color: #02A6D8;
+	background-color: #02A6D8;
+}
+
+.portfolio-item:hover .portfolio-details h4 {
+	color: #02A6D8;
+}
+
+.project-content h4 span {
+	border-bottom-color: #02A6D8;
+}
+
+.recent-projects h4.title span {
+	border-bottom-color: #02A6D8;
+}
+
+ul.post-meta li a:hover {
+	color: #02A6D8;
+}
+
+#pagination span.current {
+	border-color: #02A6D8;
+	background-color: #02A6D8;
+}
+
+#pagination a:hover {
+	color: #02A6D8;
+}
+
+.post-tags-list a:hover {
+	background-color: #02A6D8;
+}
+
+.post-share a.mail {
+	background-color: #02A6D8;
+}
+
+.sidebar a:hover {
+	color: #02A6D8;
+}
+
+.widget-search .search-btn {
+	background-color: #02A6D8;
+}
+
+.sidebar .tagcloud a:hover {
+    background-color: #02A6D8;
+}
+
+.back-to-top:hover i {
+    background-color: #02A6D8;
+}
+
+.touch-slider .owl-controls.clickable .owl-buttons div:hover {
+	background-color: #02A6D8;
+}
+
+.touch-carousel .owl-controls.clickable .owl-buttons div:hover {
+	background-color: #02A6D8;
+}
+
+.testimonials-carousel .owl-controls.clickable .owl-buttons div {
+	background-color: #02A6D8;
+}
+
+.testimonials-carousel .owl-controls.clickable .owl-buttons div:hover i {
+	color: #02A6D8;
+}
+
+
+
+
+#portfolio-list li .portfolio-item-content {
+    background: rgba(238, 55, 51, 0.9);
+}
+
+.services-3-icon i {
+    background-color: #02A6D8;
+}
+
+.services-2-icon i {
+    background-color: #02A6D8;
+}
+
+.progress-bar {
+    background-color: #02A6D8;
+}
+
+#main-slide .animated2 strong {
+    color: #02A6D8;
+}
+#main-slide .animated4 strong {
+    color: #02A6D8;
+}
+#main-slide .animated7 strong {
+    color: #02A6D8;
+}
+
+#main-slide .carousel-control i:hover{
+	background: #02A6D8;
+}
+.slider.btn {
+    background-color: #02A6D8;
+}
+
+#main-slide .carousel-indicators .active {
+    background-color: #02A6D8;
+}
+
+
+.counter-item i {
+    color: #02A6D8;
+}
+
+.timer {
+    color: #02A6D8;
+}
+
+.team-member.modern .member-photo:after {
+    background-color: #02A6D8;
+}
+
+
+.twitter-widget a {
+	color: #02A6D8;
+}
+
+.dot1, .dot2 {
+    background-color: #02A6D8;
+}

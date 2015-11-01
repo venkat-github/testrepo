@@ -1,0 +1,248 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <!--<![endif]-->
+    <!-- HEAD SECTION -->
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>Medlup - Hospital Management</title>
+        <!--GOOGLE FONT -->
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+        <!--BOOTSTRAP MAIN STYLES -->
+        <link href="../assets/css/bootstrap.css" rel="stylesheet" />
+        <!--FONTAWESOME MAIN STYLE -->
+        <link href="../assets/css/font-awesome.min.css" rel="stylesheet" />
+        <!--CUSTOM STYLE -->
+        <link href="../assets/css/style-doctor.css" rel="stylesheet" />
+        <!-- D3 CHART FOR POPULATING PIE CHART-->
+        <link rel="stylesheet" type="text/css" href="../assets/css/dataTables.bootstrap.css">
+
+    </head>
+    <!--END HEAD SECTION -->
+    <body>
+        <!-- NAV SECTION -->
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#"><img src="../assets/img/medlup-title.png"/></a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="index.html">HOME</a>
+                        </li>
+                        <li>
+                            <a href="appointments.html">APPOINTMENTS</a>
+                        </li>
+                        <li>
+                            <a href="manage.html">MANAGE</a>
+                        </li>
+                        <li>
+                            <a href="schedule.html">SCHEDULES</a>
+                        </li>
+                        <li>
+                            <a href="index.html">LOGOUT</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+        <!--END NAV SECTION -->
+        <!-- HOME SECTION -->
+
+        <div class="container">
+            <div class="row main-low-margin text-center">
+                <div class="col-md-6 col-sm-4">
+                    <h3>PATIENTS CLASSIFICATION</h3>
+                    <div id="pie" style="padding-top:-40px; margin-top:-50px"></div>
+                </div>
+                <div class="col-md-6 col-sm-4">
+                    <h3>PLACE HOLDER FOR TIME SERIES CHART</h3>
+
+                    <div class='row trunk-section'>
+                        <div class='col-lg-7 text-center'></div>
+                    </div>
+
+                </div>
+                <div class="row main-low-margin ">
+                    <div class="col-md-12 col-sm-8">
+                        <h3>11th October 2015 - Today Schedules</h3>
+                        <section>
+                            <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>Status</th>
+                                        <th>Record Number</th>
+                                        <th>Patient Name</th>
+                                        <th>Address</th>
+                                        <th>Contact Number</th>
+                                        <th>Appointment Doctor</th>
+                                        <th>Slot</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </section>
+                    </div>
+                </div>
+            </div>
+            <div class="row main-low-margin ">
+               
+
+            </div>
+
+        </div>
+
+        <div id="footer">
+            <div class="row">
+                <div class="col-md-4">
+                    <h4>Quick Information :</h4>
+                    <p>
+                        Medlup tries to maintain qualitative information as we can do our best. If you feel anything is irrelevant please write us. We tries to do our best.
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <h4>Need Help ? Write Us. </h4>
+                    <hr>
+                    <form>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" required="required" placeholder="Name">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" required="required" placeholder="Email address">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <textarea name="message" id="message" required="required" class="form-control" rows="3" placeholder="Message"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">
+                                        Submit Request
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-4">
+                    <a href="#"><i class="fa fa-facebook-square fa-3x color-facebook"></i></a>
+                    <a href="#"><i class="fa fa-twitter-square fa-3x color-twitter"></i></a>
+                    <a href="#"><i class="fa fa-google-plus-square fa-3x color-google-plus"></i></a>
+                    <a href="#"><i class="fa fa-linkedin-square fa-3x color-linkedin"></i></a>
+                    <a href="#"><i class="fa fa-pinterest-square fa-3x color-pinterest"></i></a>
+                    <hr>
+                    <p>
+                        Medlup
+                        <br>
+                        Bangalore
+                        <br>
+                        Call: +974 2299605
+                        <br>
+                        Email: info@medlup.com
+                        <br>
+                    </p>
+
+                    2015 www.medlup.com | All Right Reserved
+                </div>
+            </div>
+
+        </div>
+
+        <!--END FOOTER SECTION -->
+        <!-- JAVASCRIPT FILES PLACED AT THE BOTTOM TO REDUCE THE LOADING TIME  -->
+        <!-- CORE JQUERY LIBRARY -->
+        <script src="../assets/js/jquery-1.11.1.js"></script>
+        <!-- CORE BOOTSTRAP LIBRARY -->
+        <script src="../assets/js/jquery-1.11.1.min.js"></script>
+        <script src="../assets/js/d3.min.js"></script>
+        <script src="../assets/js/d3pie.min.js"></script>
+        <!--
+        THIS SCRIPT IS FOR POPULATING AND PLOTTING DONUT GRAPH
+        -->
+        <script rel="javascript">
+            var pie = new d3pie("pie", {
+                data : {
+                    content : [{
+                        label : "New Patients",
+                        value : 50
+                    }, {
+                        label : "In Patients",
+                        value : 20
+                    }, {
+                        label : "Others",
+                        value : 30
+                    }]
+                },
+                labels : {
+                    mainLabel : {
+                        color : "#333333",
+                        font : "'Open Sans', sans-serif",
+                        fontSize : 20
+                    },
+                    percentage : {
+                        color : "#dddddd",
+                        font : "'Open Sans', sans-serif",
+                        fontSize : 38
+                    }
+                }
+            });
+
+        </script>
+
+        <!--
+        SCRIPTS TAKES CARE ABOUT POPULATING GRID TABLE
+        -->
+        <script src="../assets/js/bootstrap.min.js"></script>
+        <script src="../assets/js/jquery.metisMenu.js"></script>
+        <script type="text/javascript" language="javascript" src="../assets/js/jquery.dataTables.js"></script>
+        <script type="text/javascript" language="javascript" src="../assets/js/dataTables.bootstrap.js"></script>
+        <script type="text/javascript" language="javascript" src="../assets/js/dataTables.tableTools.js"></script>
+        <script type="text/javascript" language="javascript" class="init">
+            $(document).ready(function() {
+                $('#example').DataTable({
+                    "processing" : true,
+                    "ajax" : "../data/convertcsv.txt",
+                    "oLanguage" : {
+                        "sZeroRecords" : "No Properties information found."
+                    },
+                    "columns" : [
+                    //{ "data": "status" },
+                    {
+                        'fnRender' : function(oObj) {
+                            return '<div>sfdasdf</div>';
+                        },
+                        "data" : 'status',
+                        sDefaultContent : ''
+                    }, {
+                        "data" : "recordNumber"
+                    }, {
+                        "data" : "patientName"
+                    }, {
+                        "data" : "address"
+                    }, {
+                        "data" : "primaryContact"
+                    }, {
+                        "data" : "concernDoctor"
+                    }, {
+                        "data" : "slot"
+                    }]
+                });
+            });
+        </script>
+
+    </body>
+</html>

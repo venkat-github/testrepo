@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>KO Shopping Cart</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1>Catalog</h1>
+            <strong>Items:</strong><span data-bind="{text:catalog2().length}"></span>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                </tr>
+                </thead>
+                <tbody data-bind="{foreach:catalog2}">
+                <tr>
+                    <td data-bind="{text:name}"></td>
+                    <td data-bind="{text:age}"></td>
+                    
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- libraries -->
+<script type="text/javascript" src="/hipster1/scripts/vendors/jquery.min.js"></script>
+<script type="text/javascript" src="/hipster1/scripts/vendors/bootstrap.min.js"></script>
+<script type="text/javascript" src="/hipster1/scripts/vendors/knockout.debug.js"></script>
+<script type="text/javascript" src="/hipster1/scripts/models/items.js"></script>
+<script type="text/javascript" src="/hipster1/scripts/viewmodel2.js"></script>
+</body>
+</html>

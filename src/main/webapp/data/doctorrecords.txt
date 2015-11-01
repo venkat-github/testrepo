@@ -1,0 +1,44 @@
+{
+    "data":[
+  {
+    "status":"ok",
+    "id":4084010096,
+    "doctorName":"Dr. Ravi Shankar",
+    "specialization":"General Surgeon",
+    "primaryContact":"9701111665",
+    "slot":"9:30 AM"
+  },
+  {
+    "status":"error",
+    "id":1005050001,
+    "doctorName":"Dr. Surya Narayana",
+    "specialization":"MD - Physician",
+    "primaryContact":"974229945",
+    "slot":"10:00 AM"
+  },
+  {
+    "status":"warning",
+    "id":1021420100,
+    "doctorName":"Dr. Krishna Murthy",
+    "specialization":"Heart",
+    "primaryContact":"85858477",
+    "slot":"11:00 AM"
+  },
+  {
+    "status":"warning",
+    "id":10214561200,
+    "doctorName":"Dr. Raghu Krihna Ayyar",
+    "specialization":"Pediatrician",
+    "primaryContact":"85858477",
+    "slot":"11:00 AM"
+  },
+  {
+    "status":"warning",
+    "id":1021420100,
+    "doctorName":"Dr. Krishna Murthy",
+    "specialization":"Gynacologist",
+    "primaryContact":"85858477",
+    "slot":"11:00 AM"
+  }
+]
+}

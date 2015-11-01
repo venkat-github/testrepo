@@ -1,0 +1,106 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()">
+
+    <div>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myDoctorScheduleDTOLabel">Create or edit a DoctorScheduleDTO</h4>
+    </div>
+    
+    <div>
+      <div class="form-group">
+            <label for="doctorName">doctorName</label>
+            <input type="text" class="form-control" id="doctorName" name="doctorName"
+                    ng-model="doctorScheduleDTO.doctorName" >
+      </div>
+      <div class="form-group">
+            <label for="doctorId">doctorId</label>
+            <input type="text" class="form-control" id="doctorId" name="doctorId"
+                    ng-model="doctorScheduleDTO.doctorId" >
+      </div>
+      <div class="form-group">
+            <label for="hospitalName">hospitalName</label>
+            <select class="form-control" id="hospitalName" name="hospitalName"
+                    ng-model="doctorScheduleDTO.hospitalId"  
+                    ng-options="h.id as h.name for (pos,h) in hospitals2" />
+      </div>
+      
+      <div class="form-group">
+            <label for="startDate">startDate</label>
+
+            <p class="input-group">
+              <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="doctorScheduleDTO.startDate" 
+               is-open="opened1" ng-click="open1($event)"  />
+               <span class="input-group-btn" >
+          <button style="height:34px;" class="btn btn-default" ng-click="open2($event)">
+          <i class="glyphicon glyphicon-calendar"></i></button> 
+          </span>
+            </p>
+
+      </div>
+      <div class="form-group">
+            <label for="endDate">endDate</label>
+                    <p class="input-group">
+              <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="doctorScheduleDTO.endDate" 
+               is-open="opened2" ng-click="open2($event)"  />
+               <span class="input-group-btn" >
+          <button style="height:34px;" class="btn btn-default" ng-click="open2($event)">
+          <i class="glyphicon glyphicon-calendar"></i></button> 
+          </span>
+            </p>
+      </div>
+      <div class="form-group">
+            <label for="fees">fees</label>
+            <input type="text" class="form-control" id="fees" name="fees"
+                    ng-model="doctorScheduleDTO.fees" >
+      </div>
+      <div class="form-group">
+            <label for="slotDuration">slotDuration</label>
+            <input type="text" class="form-control" id="slotDuration" name="slotDuration"
+                    ng-model="doctorScheduleDTO.slotDuration" >
+      </div>
+    
+      <div class="form-group">
+            <label for="startTime">startTime</label>
+
+            <select class="form-control" id="startTime" name="startTime"
+                    ng-model="doctorScheduleDTO.startTime"  
+                    ng-options="h.name  as h.name for h in times" />
+
+      </div>
+
+      <div class="form-group">
+            <label for="breakStartTime">breakStartTime</label>
+            <select class="form-control" id="breakStartTime" name="breakStartTime"
+                    ng-model="doctorScheduleDTO.breakStartTime"  
+                    ng-options="h.name  as h.name for h in times" />
+
+            
+      </div>
+      <div class="form-group">
+            <label for="breakEndTime">breakEndTime</label>
+
+            <select class="form-control" id="breakEndTime" name="breakEndTime"
+                    ng-model="doctorScheduleDTO.breakEndTime"  
+                    ng-options="h.name  as h.name for h in times" />
+
+            
+      </div>
+      <div class="form-group">
+            <label for="endTime">endTime</label>
+            <select class="form-control" id="endTime" name="endTime"
+                    ng-model="doctorScheduleDTO.endTime"  
+                    ng-options="h.name  as h.name for h in times" />
+            
+      </div>
+
+    </div>
+    <div>
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || editForm.$submitted" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

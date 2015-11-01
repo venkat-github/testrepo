@@ -1,0 +1,49 @@
+{
+    "data":[
+  {
+    "status":"ok",
+    "recordNumber":4084010096,
+    "patientName":"Ravi Shankar",
+    "address":"Bangalore-JG Nagar",
+    "primaryContact":"9701111665",
+    "concernDoctor":"Dr. Hara Gopal",
+    "slot":"9:30 AM"
+  },
+  {
+    "status":"error",
+    "recordNumber":1005050001,
+    "patientName":"Surya Narayana",
+    "address":"Bangalore - Vignana Nagar",
+    "primaryContact":"974229945",
+    "concernDoctor":"Raghuram Kumar",
+    "slot":"10:00 AM"
+  },
+  {
+    "status":"warning",
+    "recordNumber":1021420100,
+    "patientName":"Krishna Murthy",
+    "address":"Bangalore",
+    "primaryContact":"85858477",
+    "concernDoctor":"Jaya Narayana",
+    "slot":"11:00 AM"
+  },
+  {
+    "status":"warning",
+    "recordNumber":10214561200,
+    "patientName":"Raghu Krihna Ayyar",
+    "address":"Bangalore",
+    "primaryContact":"85858477",
+    "concernDoctor":"Bangalore",
+    "slot":"11:00 AM"
+  },
+  {
+    "status":"warning",
+    "recordNumber":1021420100,
+    "patientName":"Krishna Murthy",
+    "address":"Bangalore - Kolar",
+    "primaryContact":"85858477",
+    "concernDoctor":"Jaya Narayana",
+    "slot":"11:00 AM"
+  }
+]
+}

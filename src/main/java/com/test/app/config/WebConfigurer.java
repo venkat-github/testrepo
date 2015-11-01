@@ -118,6 +118,13 @@ public class WebConfigurer implements ServletContextInitializer, EmbeddedServlet
         staticResourcesProductionFilter.addMappingForUrlPatterns(disps, true, "/index4.html");
         staticResourcesProductionFilter.addMappingForUrlPatterns(disps, true, "/assets/*");
         staticResourcesProductionFilter.addMappingForUrlPatterns(disps, true, "/scripts/*");
+        
+        staticResourcesProductionFilter.addMappingForUrlPatterns(disps, true, "/asset/*");
+        staticResourcesProductionFilter.addMappingForUrlPatterns(disps, true, "/css/*");
+        staticResourcesProductionFilter.addMappingForUrlPatterns(disps, true, "/js/*");
+        staticResourcesProductionFilter.addMappingForUrlPatterns(disps, true, "/images/*");
+        
+        
         staticResourcesProductionFilter.setAsyncSupported(true);
     }
 
@@ -126,6 +133,7 @@ public class WebConfigurer implements ServletContextInitializer, EmbeddedServlet
      */
     private void initCachingHttpHeadersFilter(ServletContext servletContext,
                                               EnumSet<DispatcherType> disps) {
+    	/*
         log.debug("Registering Caching HTTP Headers Filter");
         FilterRegistration.Dynamic cachingHttpHeadersFilter =
                 servletContext.addFilter("cachingHttpHeadersFilter",
@@ -134,6 +142,7 @@ public class WebConfigurer implements ServletContextInitializer, EmbeddedServlet
         cachingHttpHeadersFilter.addMappingForUrlPatterns(disps, true, "/assets/*");
         cachingHttpHeadersFilter.addMappingForUrlPatterns(disps, true, "/scripts/*");
         cachingHttpHeadersFilter.setAsyncSupported(true);
+        */
     }
 
     /**

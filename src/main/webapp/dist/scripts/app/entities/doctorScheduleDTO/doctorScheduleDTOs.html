@@ -1,0 +1,61 @@
+<div>
+
+    <h2>Records</h2>
+
+        
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>UserId</th>
+                    <th>VisitId</th>
+                    <th>Symptoms</th>
+                    <th>Diagnosis</th>
+                    <th>Prescription</th>
+                    <th>Tests</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="doctorScheduleDTO in doctorScheduleDTOs">
+                    <td><a ui-sref="doctorScheduleDTO.detail({id:doctorScheduleDTO.id})">{{doctorScheduleDTO.id}}</a></td>
+                    <td>{{doctorScheduleDTO.userId}}</td>
+                    <td>{{doctorScheduleDTO.visitId}}</td>
+                    <td>{{doctorScheduleDTO.symptoms}}</td>
+                    <td>{{doctorScheduleDTO.diagnosis}}</td>
+                    <td>{{doctorScheduleDTO.prescription}}</td>
+                    <td>{{doctorScheduleDTO.tests}}</td>
+                    <td>
+                        <button type="submit"
+                                ui-sref="doctorScheduleDTO.detail({id:doctorScheduleDTO.id})"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span> View</span>
+                        </button>
+                        <a href="/hipster1/download_record/{{doctorScheduleDTO.id}}.pdf">
+                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span> Download</span>
+                        </a>
+                        <button type="submit"
+                                ng-click="delete(doctorScheduleDTO.id)"
+                                class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span> Delete</span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <nav>
+            <ul class="pagination">
+                <li ng-show="links['first']" ng-click="loadPage(links['first'])"><a>&lt;&lt;</a></li>
+                <li ng-show="links['prev']" ng-click="loadPage(links['prev'])"><a>&lt;</a></li>
+                <li ng-show="page > 2" ng-click="loadPage(page - 2)"><a>{{page - 2}}</a></li>
+                <li ng-show="page > 1" ng-click="loadPage(page - 1)"><a>{{page - 1}}</a></li>
+                <li class="active"><a>{{page}}</a></li>
+                <li ng-show="page < links['last']" ng-click="loadPage(page + 1)"><a>{{page + 1}}</a></li>
+                <li ng-show="page < links['last'] - 1" ng-click="loadPage(page + 2)"><a>{{page + 2}}</a></li>
+                <li ng-show="links['next']" ng-click="loadPage(links['next'])"><a>&gt;</a></li>
+                <li ng-show="links['last']" ng-click="loadPage(links['last'])"><a>&gt;&gt;</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>

@@ -1,0 +1,99 @@
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+<form name="editForm" class="form-horizontal" role="form" novalidate ng-submit="save()">
+
+    <div >
+        <button type="button" class="close"  aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 id="myUserDTOLabel">edit Profile2</h4>
+    </div>
+    <div >
+        <div class="form-group">
+            <label for="id" class="col-md-2 control-label">ID</label>
+            <div class="col-md-10">
+              <input type="text" class="form-control" id="id"  name="id" ng-model="userDTO.id" readonly>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                    ng-model="userDTO.name"
+                    >
+
+        </div>
+        <div class="form-group">
+            <label for="field_mobileno">Mobileno</label>
+            <input type="text" class="form-control" name="mobileno" id="field_mobileno"
+                    ng-model="userDTO.mobileno"
+                    >
+
+        </div>
+        <div class="form-group">
+            <label for="field_emailId">EmailId</label>
+            <input type="text" class="form-control" name="emailId" id="field_emailId"
+                    ng-model="userDTO.email"
+                    >
+
+        </div>
+        
+        <div class="form-group">
+            <label for="field_sex">Sex</label>
+            <select class="form-control" name="sex" ng-model="userDTO.sex" id="field_sex">
+               <option value="MALE">MALE</option>
+               <option value="FEMALE">FEMALE</option>
+            </select>
+
+        </div>
+        <div class="form-group">
+            <label for="field_age">Age</label>
+            <input type="number" class="form-control" name="age" id="field_age"
+                    ng-model="userDTO.age"
+                    >
+
+        </div>
+        <div class="form-group">
+            <label for="field_dateOfBirth">DateOfBirth</label>
+            <input type="date" class="form-control" name="dateOfBirth" id="field_dateOfBirth"
+                    ng-model="userDTO.dateOfBirth"
+                    >
+
+        </div>
+        <div class="form-group">
+            <label for="field_bloodGroup">BloodGroup</label>
+            <select class="form-control" name="bloodGroup" ng-model="userDTO.bloodGroup" id="field_bloodGroup">
+               <option value="A_POSITIVE">A_POSITIVE</option>
+               <option value="B_POSITIVE">B_POSITIVE</option>
+               <option value="O_POSITIVE">O_POSITIVE</option>
+               <option value="O_NEGATIVE">O_NEGATIVE</option>
+               <option value="AB">AB</option>
+            </select>
+
+        </div>
+        <div class="form-group">
+            <label for="field_location">Location</label>
+            <input type="text" class="form-control" name="location" id="field_location"
+                    ng-model="userDTO.location"
+                    >
+
+        </div>
+        <div class="form-group">
+            <label for="field_city">City</label>
+            <input type="text" class="form-control" name="city" id="field_city"
+                    ng-model="userDTO.city"
+                    >
+
+        </div>
+
+    </div>
+    <div >
+        <button type="button" class="btn btn-default"  ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || editForm.$submitted" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>
+</div>
+</div>

@@ -1,0 +1,68 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()">
+
+    <div >
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myHospitalDTOLabel">Create or edit a HospitalDTO</h4>
+    </div>
+    <div >
+        <div class="form-group">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="hospitalDTO.id" readonly>
+        </div>
+
+        <div class="form-group">
+            <label for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                    ng-model="hospitalDTO.name"
+                    >
+
+        </div>
+        <div class="form-group">
+            <label for="field_mobileNo">MobileNo</label>
+            <input type="text" class="form-control" name="mobileNo" id="field_mobileNo"
+                    ng-model="hospitalDTO.mobileNo"
+                    >
+
+        </div>
+        <div class="form-group">
+            <label for="field_emailId">EmailId</label>
+            <input type="text" class="form-control" name="emailId" id="field_emailId"
+                    ng-model="hospitalDTO.emailId"
+                    >
+
+        </div>
+        <div class="form-group">
+            <label for="field_city">City</label>
+            <input type="text" class="form-control" name="city" id="field_city"
+                    ng-model="hospitalDTO.city"
+                    >
+
+        </div>
+        <div class="form-group">
+            <label for="field_location">Location</label>
+            <input type="text" class="form-control" name="location" id="field_location"
+                    ng-model="hospitalDTO.location"
+                    >
+
+        </div>
+        <div class="form-group">
+            <label for="field_zipcode">Zipcode</label>
+            <input type="text" class="form-control" name="zipcode" id="field_zipcode"
+                    ng-model="hospitalDTO.zipcode"
+                    >
+
+        </div>
+
+    </div>
+    <div >
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || editForm.$submitted" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>
