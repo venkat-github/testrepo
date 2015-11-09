@@ -6,7 +6,7 @@
                         <!-- Profile Image -->
                           <div class="box box-primary">
                             <div class="box-body box-profile">
-                              <img class="profile-user-img img-responsive img-circle" src="/hipster1/images/user.jpg" alt="User profile picture">
+                              <img class="profile-user-img img-responsive img-circle" src="/hipster1/api/image" alt="User profile picture">
 
                               <h3 class="profile-username text-center">User Name</h3>
                                    <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
@@ -71,9 +71,9 @@
                         </ul>
 
                         <div class="tab-content">
-                          <div class="active tab-pane" id="profile">
-                               <form class="form-horizontal">
-                                  <div class="form-group">
+                           <div class="active tab-pane" id="profile">
+                               <form class="form-horizontal" role="form" novalidate ng-submit="save()">
+                                  <!-- <div class="form-group">
                                     <label for="fullName" class="col-sm-2 control-label">Name</label>
 
                                     <div class="col-sm-10">
@@ -197,7 +197,108 @@
                                       <button type="submit" class="btn btn-danger">Update</button>
                                     </div>
                                   </div>
-                                </form>
+ 
+ 									<div class="form-group">
+							            <label for="id" class="col-md-2 control-label">ID</label>
+							            <div class="col-md-10">
+							              <input type="text" class="form-control" id="id"  name="id" ng-model="userDTO.id" readonly>
+							            </div>
+							        </div>
+-->
+ 							
+							        <div class="form-group">
+							            <label for="field_name" class="col-md-2 control-label">Name</label>
+							            <div class="col-md-10">
+							            <input type="text" class="form-control" name="name" id="field_name" 
+							            	ng-model="userDTO.name"/>
+							        	</div>
+							        </div>
+							        
+							        <div class="form-group">
+							            <label for="field_mobileno" class="col-md-2 control-label">Mobileno</label>
+							            <div class="col-md-10">
+							            <input type="text" class="form-control" name="mobileno" id="field_mobileno"
+							                    ng-model="userDTO.mobileno">
+							            </div>
+							
+							        </div>
+							        <div class="form-group">
+							            <label for="field_emailId" class="col-md-2 control-label">EmailId</label>
+							            <div class="col-md-10">
+							            <input type="text" class="form-control" name="emailId" id="field_emailId"
+							                    ng-model="userDTO.email">
+							            </div>
+							
+							        </div>
+							        
+							        <div class="form-group">
+							            <label for="field_sex" class="col-md-2 control-label">Sex</label>
+							            <div class="col-md-10">
+							            <select class="form-control" name="sex" ng-model="userDTO.sex" id="field_sex">
+							               <option value="MALE">MALE</option>
+							               <option value="FEMALE">FEMALE</option>
+							            </select>
+							            </div>
+							
+							        </div>
+							        <div class="form-group">
+							            <label for="field_age" class="col-md-2 control-label">Age</label>
+							            <div class="col-md-10">
+							            <input type="number" class="form-control" name="age" id="field_age"
+							                    ng-model="userDTO.age"
+							                    >
+							            </div>
+							
+							        </div>
+							        <div class="form-group" class="col-md-2 control-label">
+							            <label for="field_dateOfBirth"  class="col-md-2 control-label">DateOfBirth</label>
+							            <div class="col-md-10">
+							            <input type="date" class="form-control" name="dateOfBirth" id="field_dateOfBirth"
+							                    ng-model="userDTO.dateOfBirth"
+							                    >
+							            </div>
+							
+							        </div>
+							        <div class="form-group" class="col-md-2 control-label">
+							            <label for="field_bloodGroup"  class="col-md-2 control-label">BloodGroup</label>
+							            <div class="col-md-10">
+							            <select class="form-control" name="bloodGroup" ng-model="userDTO.bloodGroup" id="field_bloodGroup">
+							               <option value="A_POSITIVE">A_POSITIVE</option>
+							               <option value="A_NEGATIVE">A_NEGATIVE</option>
+							               <option value="B_POSITIVE">B_POSITIVE</option>
+							               <option value="B_NEGATIVE">B_NEGATIVE</option>
+=							               <option value="O_POSITIVE">O_POSITIVE</option>
+							               <option value="O_NEGATIVE">O_NEGATIVE</option>
+							               <option value="AB">AB</option>
+							            </select>
+							            </div>
+							
+							        </div>
+							        <div class="form-group" class="col-md-2 control-label">
+							            <label for="field_location"  class="col-md-2 control-label">Location</label>
+							            <div class="col-md-10">
+							            <input type="text" class="form-control" name="location" id="field_location"
+							                    ng-model="userDTO.location"
+							                    >
+							            </div>
+							
+							        </div>
+							        <div class="form-group" class="col-md-2 control-label">
+							            <label for="field_city"  class="col-md-2 control-label">City</label>
+							            <div class="col-md-10">
+							            <input type="text" class="form-control" name="city" id="field_city"
+							                    ng-model="userDTO.city"
+							                    >
+							            </div>
+							
+							        </div>
+ 									<div >
+								        <button type="submit" ng-disabled="editForm.$invalid || editForm.$submitted" class="btn btn-primary">
+								            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+								        </button>
+								    </div>
+								    
+                                 </form>
                           </div><!--tab-1 close -->
 
                           <div class="tab-pane" id="oldrecords">

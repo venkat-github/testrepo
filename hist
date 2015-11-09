@@ -1,11 +1,11 @@
-  318  yo jhipster
-  319  grunt
-  321  npm install -g npm
-  323  npm install --save-dev grunt-wiredep
-  324  bower install jquery --save
-  333  cp -rf ~/Documents/repos/testrepo/src/ .
-  362  bower install stomp-websocket
-  366  sublim src/test/javascript/karma.conf.js 
-  371  vi Gruntfile.js 
-  373  sublim src/main/webapp/scripts/app/sortable.js 
-  380  grunt
+  yo jhipster
+  grunt
+  npm install -g npm
+  npm install --save-dev grunt-wiredep
+  bower install jquery --save
+  cp -rf ~/Documents/repos/testrepo/src/ .
+  bower install stomp-websocket
+  sublim src/test/javascript/karma.conf.js 
+  vi Gruntfile.js 
+  sublim src/main/webapp/scripts/app/sortable.js 
+  grunt

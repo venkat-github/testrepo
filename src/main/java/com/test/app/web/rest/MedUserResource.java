@@ -11,8 +11,10 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.IOUtils;
 import org.joda.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +36,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
+import com.mongodb.gridfs.GridFSDBFile;
 import com.test.app.domain.DoctorSchedule;
 import com.test.app.domain.DoctorVisit;
 import com.test.app.domain.Hospital;
@@ -110,6 +113,18 @@ public class MedUserResource {
 
 	@Inject
 	PhotoService photoService;
+	
+	@RequestMapping(value = "/image", method = RequestMethod.GET)
+	  public void showImage(HttpServletResponse response,HttpServletRequest request) 
+	          throws Exception {
+	    response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
+		User user = userRepository.findOneByLogin(SecurityUtils.getCurrentLogin());
+
+	    GridFSDBFile retrived = photoService.getById(user.getPhotoId());
+
+	    IOUtils.copy(retrived.getInputStream(), response.getOutputStream());
+	    response.getOutputStream().close();
+	}
 	
 	@RequestMapping(value = "/upload_photo",
 	        method = RequestMethod.PUT,
