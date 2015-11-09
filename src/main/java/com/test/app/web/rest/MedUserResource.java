@@ -125,7 +125,20 @@ public class MedUserResource {
 	    IOUtils.copy(retrived.getInputStream(), response.getOutputStream());
 	    response.getOutputStream().close();
 	}
-	
+
+	@RequestMapping(value = "/imagebyid", method = RequestMethod.GET)
+	  public void getImageById(@RequestParam(value = "id" , required = true) String id,
+			  HttpServletResponse response,HttpServletRequest request) 
+	          throws Exception {
+	    response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
+		User user = userRepository.findOneByLogin(SecurityUtils.getCurrentLogin());
+
+	    GridFSDBFile retrived = photoService.getById(id);
+
+	    IOUtils.copy(retrived.getInputStream(), response.getOutputStream());
+	    response.getOutputStream().close();
+	}
+
 	@RequestMapping(value = "/upload_photo",
 	        method = RequestMethod.PUT,
 	        produces = MediaType.APPLICATION_JSON_VALUE)

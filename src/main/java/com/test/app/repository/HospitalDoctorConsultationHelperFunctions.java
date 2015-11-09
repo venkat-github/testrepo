@@ -78,6 +78,9 @@ public class HospitalDoctorConsultationHelperFunctions {
 		}
 	}
 	
+	@Inject
+	UserRepository userRepo;
+	
 	public void addNextDayConsultationRecordForDoctorAndHospital(String doctorId, String hospitalId, 
 			LocalDate startDate, int days) {
 
@@ -97,6 +100,7 @@ public class HospitalDoctorConsultationHelperFunctions {
 		HospitalDoctorConsultaion  hdc = new HospitalDoctorConsultaion();
 		hdc.setDate(startDate.plusDays(days));
 		hdc.setDoctorId(doctorId);
+		hdc.setDoctorPhotoId(userRepo.findOneById(doctorId).getPhotoId());
 		hdc.setDoctorName(ds.getDoctorName());
 		hdc.setHospitalId(hospitalId);
 		hdc.setDoctorName(ds.getDoctorName());

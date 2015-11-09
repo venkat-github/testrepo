@@ -38,6 +38,8 @@ public class HospitalDoctorConsultaion implements Serializable {
     @Field("doctor_name")
     private String doctorName;
 
+    String doctorPhotoId;
+
     private String hospitalName;
 
     public String getHospitalName() {
@@ -51,6 +53,13 @@ public class HospitalDoctorConsultaion implements Serializable {
 	}
 	public void setDegrees(Set<String> degrees) {
 		this.degrees = degrees;
+	}
+
+	public String getDoctorPhotoId() {
+		return doctorPhotoId;
+	}
+	public void setDoctorPhotoId(String doctorPhotoId) {
+		this.doctorPhotoId = doctorPhotoId;
 	}
 
 

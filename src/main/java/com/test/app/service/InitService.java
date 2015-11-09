@@ -480,6 +480,7 @@ public class InitService {
 		doctorDto.setMobileno(mobileno);
 		doctorDto.setSex(sex);
 		doctorDto.setId(user.getId());
+		doctorDto.setPhotoId(photoid);
 		userRepository.save(doctorDto);
 		
 		return doctorDto;
