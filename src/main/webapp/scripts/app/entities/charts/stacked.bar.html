@@ -1,0 +1,43 @@
+	<script>
+		$(function () { 
+		    var chart = $('#stackChart').highcharts({
+		        chart: {
+		            type: 'bar'
+		        },
+		        title: {
+		            text: 'Age pyramid of employees'
+		        },
+		        xAxis: {
+		            categories: ['40-55', '25-40', '18-25']
+		        },
+		        yAxis: {
+		            title: {
+		                text: 'Number of employees'
+		            }
+		        },
+				plotOptions: {
+					series: {
+						stacking: 'normal'
+					}
+				},
+		        series: [
+					{
+						name: 'Male',
+						data: [835, 2635, 1437],
+						stack: 1,
+						color: '#6495ED'
+					},
+					{
+						name: 'Female',
+						data: [785, 2435, 1657],
+						stack: 1,
+						color: '#DC143C'
+					}
+				]
+		    });
+		});
+	</script>
+	<div class="col-md-offset-2">
+	
+  	<div id="stackChart" style="width:600px; height:400px;"></div>
+  	</div>

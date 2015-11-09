@@ -1,0 +1,44 @@
+	<script>
+		$(function () { 
+		    var chart = $('#pieChart').highcharts({
+		        chart: {
+		            type: 'pie'
+		        },
+		        title: {
+		            text: 'Operating Systems used in a company'
+		        },
+				plotOptions: {
+					pie: {
+						allowPointSelect: true,
+						showInLegend: true,
+						tooltip: {
+							valueSuffix: ' %'
+						},
+						dataLabels: {
+							enabled: true,
+							color: '#000000',
+							connectorColor: '#888888',
+							formatter: function() {
+								return '<b>'+ this.point.name +'</b>: '+ this.percentage +' %';
+							}
+						}
+					}
+				},
+		        series: [{
+					name: 'Operating Systems',
+					data: [
+						['Windows 7', 45],
+						['Windows XP', 35], //First way
+						{
+							name: 'Mac OS X',
+							color: '#CC0033',
+							y: 20
+						} //Second way
+					]
+				}]
+		    });
+		});
+	</script>
+	<div class="col-md-offset-2">
+  		<div id="pieChart" style="width:600px; height:400px;"></div>
+  	</div>

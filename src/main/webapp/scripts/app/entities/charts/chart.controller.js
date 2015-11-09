@@ -26,6 +26,54 @@ angular.module('hipster1App')
                 },
                 resolve: {
                 }
+            })
+            .state('line1', {
+                parent: 'home',
+                url: '/line1',
+                data: {
+                    roles: ['ROLE_USER'],
+                    pageTitle: 'ChartController'
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'scripts/app/entities/charts/line.html',
+                        controller: 'ChartController'
+                    }
+                },
+                resolve: {
+                }
+            })
+            .state('pie1', {
+                parent: 'home',
+                url: '/pie1',
+                data: {
+                    roles: ['ROLE_USER'],
+                    pageTitle: 'ChartController'
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'scripts/app/entities/charts/pie.html',
+                        controller: 'ChartController'
+                    }
+                },
+                resolve: {
+                }
+            })
+            .state('stack1', {
+                parent: 'home',
+                url: '/stack1',
+                data: {
+                    roles: ['ROLE_USER'],
+                    pageTitle: 'ChartController'
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'scripts/app/entities/charts/stacked.bar.html',
+                        controller: 'ChartController'
+                    }
+                },
+                resolve: {
+                }
             });
         });
 

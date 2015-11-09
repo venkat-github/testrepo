@@ -95,6 +95,8 @@ public class InitService {
     
     @Inject
     MongoTemplate mongoTemplate;
+
+	private String photoid;
     
     @PostConstruct
     public  void init() {
@@ -136,10 +138,10 @@ public class InitService {
     	}
     }
     
-	private void loadPhoto() {
+	private String loadPhoto() {
 		try {
 			InputStream resource = this.getClass().getClassLoader()
-					.getResourceAsStream("audi.jpg");
+					.getResourceAsStream("audi1.jpg");
 
 			DBObject metaData = new BasicDBObject();
 			metaData.put("brand", "Audi");
@@ -148,16 +150,16 @@ public class InitService {
 					"description",
 					"Audi german automobile manufacturer that designs, engineers, and distributes automobiles");
 
-			String id = photoService.store(resource, "audi.jpg", "image/jpeg",
+			String id = photoService.store(resource, "audi1.jpg", "image/jpeg",
 					metaData);
-
+			photoid = id;
 			System.out.println("Find By Id----------------------");
 			GridFSDBFile byId = photoService.getById(id);
 			System.out.println("File Name:- " + byId.getFilename());
 			System.out.println("Content Type:- " + byId.getContentType());
 
 			System.out.println("Find By Filename----------------------");
-			GridFSDBFile byFileName = photoService.getByFilename("audi.jpg");
+			GridFSDBFile byFileName = photoService.getByFilename("audi1.jpg");
 			System.out.println("File Name:- " + byFileName.getFilename());
 			System.out.println("Content Type:- " + byFileName.getContentType());
 
@@ -173,14 +175,16 @@ public class InitService {
 						+ file.getMetaData().get("description"));
 			}
 
-			GridFSDBFile retrive = photoService.retrive("audi.jpg");
+			GridFSDBFile retrive = photoService.retrive("audi1.jpg");
 			retrive.writeTo("newaudi.jpg");
 			System.out.println("successfully written ");
+			photoid = id;
+			return id;
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("failed to store ");
 		}
-
+		return "";
 	}
 
 	void bookAppointments() {
@@ -261,6 +265,8 @@ public class InitService {
         
 		User user = userService.createUserInformation(name, password , first, last,
         		email, lang, auths, mobileNo);
+		user.setPhotoId(photoid);
+		userRepository.save(user);
         return user.getId();
 	}
 	

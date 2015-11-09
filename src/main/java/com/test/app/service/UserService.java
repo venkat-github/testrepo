@@ -17,6 +17,8 @@ import org.springframework.stereotype.Service;
 import com.test.app.domain.Authority;
 import com.test.app.domain.PersistentToken;
 import com.test.app.domain.User;
+import com.test.app.domain.enumeration.BloodGroup;
+import com.test.app.domain.enumeration.Sex;
 import com.test.app.repository.AuthorityRepository;
 import com.test.app.repository.PersistentTokenRepository;
 import com.test.app.repository.UserRepository;
@@ -122,7 +124,15 @@ public class UserService {
         // new user gets registration key
         //newUser.setActivationKey(RandomUtil.generateActivationKey());
         newUser.setAuthorities(authorities);
-        userRepository.save(newUser);
+        newUser.setSex(Sex.MALE);
+		newUser.setBloodGroup(BloodGroup.A_POSITIVE);;
+        newUser.setLocation("koramangala");
+        newUser.setCity("bangalore");
+        newUser.setAge(30);
+        LocalDate x = new LocalDate(1990, 11, 10);
+		newUser.setDateOfBirth(x);
+		
+		userRepository.save(newUser);
         log.info("Created Information for User2: {}", newUser);
         return newUser;
     }

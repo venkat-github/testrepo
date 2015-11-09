@@ -1,0 +1,24 @@
+<div>
+	<form class="visible-md-inline visible-lg-inline">
+		<div class="form-group" style="margin-top: 4px">
+			<label class="sr-only" for="keyword">Keyword</label> <input
+				type="text" ng-model="city" placeholder="city"
+				typeahead="city for city in getCities($viewValue)"
+				typeahead-on-select="cityChanged($item, $model, $label)"
+				class="form-control input-sm" id="keyword"
+				placeholder="Enter Search keyword" />
+		</div>
+		<div class="form-group" style="margin-top: 4px">
+			<label class="sr-only" for="keyword">Keyword</label> <input
+				type="text" ng-model="speciality" placeholder="speciality"
+				typeahead="speciality for speciality in getSpeciality($viewValue)"
+				typeahead-on-select="specialityChanged($item, $model, $label)"
+				class="form-control input-sm" placeholder="Enter Search keyword" />
+		</div>
+		<button class="btn btn-primary"
+			ng-click="specialityChanged(speciality)">
+			<span class="glyphicon glyphicon-home"></span> <span>Search</span>
+		</button>
+	</form>
+
+</div>

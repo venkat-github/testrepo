@@ -1,0 +1,70 @@
+	<script>
+		$(function () { 
+		    var chart = $('#lineChart1').highcharts({
+		        chart: {
+		            type: 'line',
+					zoomType: 'x'
+		        },
+		        title: {
+		            text: 'Energy consumption linked to the temperature'
+		        },
+		        xAxis: {
+					type: 'datetime',
+					title: {
+						text: null
+					}
+				},
+		        yAxis: [
+					{
+						title: {
+							text: 'Temperature'
+						},
+						min:0
+					},
+					{
+						title: {
+							text: 'Electricity consumed'
+						},
+						opposite:true,
+						min:0
+					}
+		        ],
+				tooltip: {
+					crosshairs: true,
+					shared: true
+				},
+		        series: [
+					{
+						name: 'Temperature',
+						pointInterval: 24 * 3600 * 1000,
+						pointStart: Date.UTC(2013, 0, 01),
+						data: [17.5, 16.2, 16.1, 16.1, 15.9, 15.8, 16.2],
+						tooltip: {
+							valueSuffix: ' °C'
+						},
+						yAxis: 0
+					},
+					{
+						name: 'Electricity consumption',
+						data: [
+							[Date.UTC(2013, 0, 01), 8.1],
+							[Date.UTC(2013, 0, 02), 6.2],
+							[Date.UTC(2013, 0, 03), 7.3],
+							[Date.UTC(2013, 0, 05), 7.1],
+							[Date.UTC(2013, 0, 06), 12.3],
+							[Date.UTC(2013, 0, 07), 10.2]
+						],
+						tooltip: {
+							valueSuffix: ' KWh'
+						},
+						yAxis: 1
+					}
+				]
+		    });
+		});
+	</script>
+	<div class="col-md-offset-2">
+
+  	<div id="lineChart1" style="width:600px; height:400px;">
+	</div>
+	</div>
