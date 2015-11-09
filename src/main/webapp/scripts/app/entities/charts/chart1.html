@@ -1,0 +1,58 @@
+	<script>
+		$(function () { 
+		    var chart = $('#myFirstChartContainer').highcharts({
+		        chart: {
+		            type: 'column'
+		        },
+		        title: {
+		            text: 'Sales by city'
+		        },
+		        subtitle: {
+		            text: 'Statistics of 2012'
+		        },
+		        credits: {
+		            text: 'Packt Publishing',
+		            href: 'http://www.packtpub.com'
+		        },
+		        xAxis: {
+		            categories: ['London', 'Paris', 'Madrid']
+		        },
+		        yAxis: {
+		            title: {
+		                text: 'Sales'
+		            },
+		            plotLines: [{
+		                color: '#FF0000',
+		                width: 2,
+		                value: 2500
+		            }],
+		            plotBands: [{
+		                color: 'rgba(124,252,0, 0.3)',
+		                from: 1000,
+		                to: 1500,
+		                label: {
+	                        text: 'Expected Sales'
+	                    }
+		            }]
+		        },
+		        tooltip: {
+		            valueSuffix: ' Units'
+		        },
+		        legend: {
+		            align: 'right',
+		            verticalAlign: 'top',
+		            floating: true
+		        },
+		        series: [{
+		            name: '2011',
+		            data: [1000, 2500, 1500]
+		        },
+		        {
+		            name: '2012',
+		            data: [1200, 2200, 1700]
+		        }]
+		    });
+		});
+	</script>
+<div id="myFirstChartContainer" style="width:600px; height:400px;"></div>
+  
