@@ -17,7 +17,7 @@ angular.module('hipster1App')
             $scope.isAuthenticated = Principal.isAuthenticated;
             if ($scope.isAuthenticated()) {
             	//alert($scope.isAuthenticated());
-            	$state.go("userRecordDTO");
+            	//$state.go("userRecordDTO");
             }
         });
     }]);

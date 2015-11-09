@@ -109,7 +109,7 @@ angular.module('hipster1App')
                 parent: 'home',
                 url: '/userRecordDTOs',
                 data: {
-                    roles: ['ROLE_USER'],
+                    roles: ['ROLE_USER','ROLE_DOCTOR'],
                     pageTitle: 'UserRecordDTOs'
                 },
                 views: {
@@ -117,6 +117,11 @@ angular.module('hipster1App')
                         templateUrl: 'scripts/app/entities/userRecordDTO/userRecordDTOs.html',
                         controller: 'UserRecordDTOController'
                     }
+                /*,
+                    'navbar@': {
+                        templateUrl: 'scripts/components/navbar/navbar.html',
+                        controller: 'NavbarController'
+                    }*/
                 },
                 resolve: {
                 }

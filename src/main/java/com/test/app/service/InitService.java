@@ -184,18 +184,18 @@ public class InitService {
 	}
 
 	void bookAppointments() {
-    	bookAppointment("user", "doc1", "8:15");
-    	bookAppointment("user1", "doc1","8:30");
-    	bookAppointment("user2", "doc1","8:45");
+    	bookAppointment("user@gmail.com", "doc1@gmail.com", "8:15");
+    	bookAppointment("user1@gmail.com", "doc1@gmail.com","8:30");
+    	bookAppointment("user2@gmail.com", "doc1@gmail.com","8:45");
 
-    	bookAppointment("user", "doc2","9:15");
-    	bookAppointment("user1", "doc2","9:30");
-    	bookAppointment("user2", "doc2","9:45");
+    	bookAppointment("user@gmail.com", "doc2@gmail.com","9:15");
+    	bookAppointment("user1@gmail.com", "doc2@gmail.com","9:30");
+    	bookAppointment("user2@gmail.com", "doc2@gmail.com","9:45");
 	}
 
     
 	void bookAppointment(String userName, String docName, String slot) {
-    	User userDto = userRepository.findOneByName(userName);
+    	User userDto = userRepository.findOneByLogin(userName);
 		HospitalDoctorConsultaion consultDto = findConsultation("koramanagala", "DENTIST", docName);
 		DoctorVisit visitDto = bookAppointment(consultDto, userDto.getId(), slot);
 
@@ -290,52 +290,52 @@ public class InitService {
 	}
 
 	void addDoctorsToHospitals() {
-		addDoctorToHospital("koramanagala", "manipal", "doc1");
+		addDoctorToHospital("koramanagala", "manipal", "doc1@gmail.com");
 		LocalDate dt = new LocalDate(2015,8,1);
 		for (HospitalDoctorConsultaion dto : 
 			hospitalDoctorConsultaionRepository.findBySpecialityAndDate(Speciality.DENTIST.toString(), dt) ) {
 			System.out.println("dto name "+dto.getDoctorName());
 		}
-		addDoctorToHospital("koramanagala", "manipal", "doc2");
+		addDoctorToHospital("koramanagala", "manipal", "doc2@gmail.com");
 		
-		addDoctorToHospital("koramanagala", "apollo", "doc3");
-		addDoctorToHospital("koramanagala", "apollo", "doc4");
+		addDoctorToHospital("koramanagala", "apollo", "doc3@gmail.com");
+		addDoctorToHospital("koramanagala", "apollo", "doc4@gmail.com");
 		
-		addDoctorToHospital("koramanagala", "mallya", "doc5");
-		addDoctorToHospital("koramanagala", "mallya", "doc6");
+		addDoctorToHospital("koramanagala", "mallya", "doc5@gmail.com");
+		addDoctorToHospital("koramanagala", "mallya", "doc6@gmail.com");
 		
-		addDoctorToHospital("koramanagala", "sakra", "doc7");
-		addDoctorToHospital("koramanagala", "sakra", "doc8");
+		addDoctorToHospital("koramanagala", "sakra", "doc7@gmail.com");
+		addDoctorToHospital("koramanagala", "sakra", "doc8@gmail.com");
 		
-		addDoctorToHospital("marathalli", "jeevika", "doc9");
-		addDoctorToHospital("marathalli", "jeevika", "doc10");
+		addDoctorToHospital("marathalli", "jeevika", "doc9@gmail.com");
+		addDoctorToHospital("marathalli", "jeevika", "doc10@gmail.com");
 		
-		addDoctorToHospital("marathalli", "vims", "doc11");
-		addDoctorToHospital("marathalli", "vims", "doc12");
+		addDoctorToHospital("marathalli", "vims", "doc11@gmail.com");
+		addDoctorToHospital("marathalli", "vims", "doc12@gmail.com");
 		
-		addDoctorToHospital("marathalli", "yashomati", "doc13");
-		addDoctorToHospital("marathalli", "yashomati", "doc14");
+		addDoctorToHospital("marathalli", "yashomati", "doc13@gmail.com");
+		addDoctorToHospital("marathalli", "yashomati", "doc14@gmail.com");
 		
-		addDoctorToHospital("koramanagala", "manipal", "gyn1");
-		addDoctorToHospital("koramanagala", "manipal", "gyn2");
+		addDoctorToHospital("koramanagala", "manipal", "gyn1@gmail.com");
+		addDoctorToHospital("koramanagala", "manipal", "gyn2@gmail.com");
 		
-		addDoctorToHospital("koramanagala", "apollo", "gyn3");
-		addDoctorToHospital("koramanagala", "apollo", "gyn4");
+		addDoctorToHospital("koramanagala", "apollo", "gyn3@gmail.com");
+		addDoctorToHospital("koramanagala", "apollo", "gyn4@gmail.com");
 		
-		addDoctorToHospital("koramanagala", "mallya", "gyn5");
-		addDoctorToHospital("koramanagala", "mallya", "gyn6");
+		addDoctorToHospital("koramanagala", "mallya", "gyn5@gmail.com");
+		addDoctorToHospital("koramanagala", "mallya", "gyn6@gmail.com");
 		
-		addDoctorToHospital("koramanagala", "sakra", "gyn7");
-		addDoctorToHospital("koramanagala", "sakra", "gyn8");
+		addDoctorToHospital("koramanagala", "sakra", "gyn7@gmail.com");
+		addDoctorToHospital("koramanagala", "sakra", "gyn8@gmail.com");
 		
-		addDoctorToHospital("marathalli", "jeevika", "gyn9");
-		addDoctorToHospital("marathalli", "jeevika", "gyn10");
+		addDoctorToHospital("marathalli", "jeevika", "gyn9@gmail.com");
+		addDoctorToHospital("marathalli", "jeevika", "gyn10@gmail.com");
 		
-		addDoctorToHospital("marathalli", "vims", "gyn11");
-		addDoctorToHospital("marathalli", "vims", "gyn12");
+		addDoctorToHospital("marathalli", "vims", "gyn11@gmail.com");
+		addDoctorToHospital("marathalli", "vims", "gyn12@gmail.com");
 		
-		addDoctorToHospital("marathalli", "yashomati", "gyn13");
-		addDoctorToHospital("marathalli", "yashomati", "gyn14");
+		addDoctorToHospital("marathalli", "yashomati", "gyn13@gmail.com");
+		addDoctorToHospital("marathalli", "yashomati", "gyn14@gmail.com");
 		
 		
 	}
@@ -445,6 +445,7 @@ public class InitService {
 
 	User createDoctor(String name, int age, Speciality speciality,
 			String degree, String emailId, int experience, String mobileno, Sex sex) {
+		emailId = name;
 		HashSet<Authority> auths = new HashSet<Authority>();
 		Authority docAuth = authorityRepository.findOne("ROLE_DOCTOR");
 		Authority hospAuth = authorityRepository.findOne("ROLE_HOSPITAL_ADMIN");
@@ -480,54 +481,53 @@ public class InitService {
 	
 	
 	void createDoctors() {
-		createDoctor("doc1",40, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
-		createDoctor("doc1",45, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
-		createDoctor("doc2",41, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
-		createDoctor("doc3",42, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
-		createDoctor("doc4",43, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
-		createDoctor("doc5",44, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("doc1@gmail.com",40, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("doc2@gmail.com",41, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("doc3@gmail.com",42, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("doc4@gmail.com",43, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("doc5@gmail.com",44, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
 
-		createDoctor("doc6",40, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
-		createDoctor("doc7",41, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
-		createDoctor("doc8",42, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
-		createDoctor("doc9",43, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
-		createDoctor("doc10",44, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("doc6@gmail.com",40, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("doc7@gmail.com",41, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("doc8@gmail.com",42, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("doc9@gmail.com",43, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("doc10@gmail.com",44, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
 
-		createDoctor("doc11",40, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
-		createDoctor("doc12",41, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
-		createDoctor("doc13",42, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
-		createDoctor("doc14",43, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
-		createDoctor("doc15",44, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("doc11@gmail.com",40, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("doc12@gmail.com",41, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("doc13@gmail.com",42, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("doc14@gmail.com",43, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("doc15@gmail.com",44, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
 
-		createDoctor("doc16",40, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
-		createDoctor("doc17",41, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
-		createDoctor("doc18",42, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
-		createDoctor("doc19",43, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
-		createDoctor("doc20",44, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("doc16@gmail.com",40, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("doc17@gmail.com",41, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("doc18@gmail.com",42, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("doc19@gmail.com",43, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("doc20@gmail.com",44, Speciality.DENTIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
 
 		
-		createDoctor("gyn1",40, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
-		createDoctor("gyn2",41, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
-		createDoctor("gyn3",42, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
-		createDoctor("gyn4",43, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
-		createDoctor("gyn5",44, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("gyn1@gmail.com",40, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("gyn2@gmail.com",41, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("gyn3@gmail.com",42, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("gyn4@gmail.com",43, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("gyn5@gmail.com",44, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
 
-		createDoctor("gyn6",40, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
-		createDoctor("gyn7",41, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
-		createDoctor("gyn8",42, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
-		createDoctor("gyn9",43, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
-		createDoctor("gyn10",44, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("gyn6@gmail.com",40, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("gyn7@gmail.com",41, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("gyn8@gmail.com",42, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("gyn9@gmail.com",43, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("gyn10@gmail.com",44, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
 
-		createDoctor("gyn11",40, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
-		createDoctor("gyn12",41, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
-		createDoctor("gyn13",42, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
-		createDoctor("gyn14",43, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
-		createDoctor("gyn15",44, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("gyn11@gmail.com",40, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("gyn12@gmail.com",41, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("gyn13@gmail.com",42, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("gyn14@gmail.com",43, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("gyn15@gmail.com",44, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
 
-		createDoctor("gyn16",40, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
-		createDoctor("gyn17",41, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
-		createDoctor("gyn18",42, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
-		createDoctor("gyn19",43, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
-		createDoctor("gyn20",44, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("gyn16@gmail.com",40, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("gyn17@gmail.com",41, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("gyn18@gmail.com",42, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("gyn19@gmail.com",43, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
+		createDoctor("gyn20@gmail.com",44, Speciality.GYNECOLOGIST, "md", "test@gmail.com", 10, "123456789", Sex.MALE);
 	}
 }

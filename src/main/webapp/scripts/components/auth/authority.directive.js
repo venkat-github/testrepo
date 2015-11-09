@@ -5,8 +5,8 @@ angular.module('hipster1App')
         return {
             restrict: 'A',
             link: function (scope, element, attrs) {
-            	//alert('test roles1 '+element.id)
-                var setVisible = function () {
+            	var setVisible = function () {
+            			//alert('setting element visible');
                         element.removeClass('hidden');
                     },
                     setHidden = function () {
@@ -15,7 +15,7 @@ angular.module('hipster1App')
                     defineVisibility = function (reset) {
                         var result;
                         if (reset) {
-                            setVisible();
+                            //setVisible();
                         }
                         setHidden();
                         result = Principal.isInAnyRole(roles, setVisible);
@@ -23,14 +23,13 @@ angular.module('hipster1App')
                         //alert(result)
                         if (result) {
                         	//alert('setting visible2')
-                            //setVisible();
+                            setVisible();
                         } else {
                         	//alert('setting hidden')
                             //setHidden();
                         }
                     },
                     roles = attrs.hasAnyRole.replace(/\s+/g, '').split(',');
-
                 if (roles.length > 0) {
                 	//alert(attrs.hasAnyRole)
                 	//alert(roles);

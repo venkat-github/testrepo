@@ -1,50 +1,255 @@
+<div class="container" style="{background-color: #ecf0f5}">
+            <div class="row main-low-margin text-center">
+               
+                <div class="row main-low-margin ">
+                    <div class="col-md-3">
+                        <!-- Profile Image -->
+                          <div class="box box-primary">
+                            <div class="box-body box-profile">
+                              <img class="profile-user-img img-responsive img-circle" src="../images/user.jpg" alt="User profile picture">
 
-<form name="editForm" role="form" novalidate ng-submit="save()">
+                              <h3 class="profile-username text-center">User Name</h3>
+                                   <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
 
-    <div >
-        <button type="button" class="close"  aria-hidden="true"
-                ng-click="clear()">&times;</button>
-        <h4 id="myUserDTOLabel">Edit profile</h4>
-    </div>
-    <div >
-            <input type="hidden" class="form-control" id="id" name="id"
-                    ng-model="userDTO.id" readonly>
+              <p class="text-muted">Bangalore, Kaarnataka</p>
 
-        <div class="form-group">
-            <label for="field_mobileno">Mobileno *</label>
-            <input type="text" class="form-control" name="mobileno" id="field_mobileno"
-                    ng-model="userDTO.mobileno"
-                    required>
-			<div ng-show="editForm.mobileno.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.mobileno.$error.required">
-                    This field is required.
-                </p>
+                              <ul class="list-group list-group-unbordered">
+                                <li class="list-group-item">
+                                  <b>Family Members</b> <a class="pull-right">8</a>
+                                </li>
+                                <li class="list-group-item">
+                                  <b>Reports</b> <a class="pull-right">5</a>
+                                </li>
+                                <li class="list-group-item">
+                                  <b>Bills</b> <a class="pull-right">87</a>
+                                </li>
+                              </ul>
+
+                            </div>
+                            <!-- /.box-body -->
+                          </div>
+                          <!-- /.box -->
+                     <!-- Profile Image Close -->
+
+                        <!-- About Me Box -->
+                              <div class="box box-primary">
+                                <div class="box-header with-border">
+                                  <h3 class="box-title">About</h3>
+                                </div>
+                                <!-- /.box-header -->
+                                <div class="box-body">
+                                  <strong><i class="fa fa-phone margin-r-5"></i> Mobile </strong>
+
+                                  <p class="text-muted">
+                                    +91-9999999787 
+                                  </p>
+                                  <hr>
+
+
+                                  <strong><i class="fa fa-tint margin-r-5"></i> Blood Group</strong>
+
+                                  <p>
+                                    <span class="label label-danger">A -</span>
+                                  </p>
+
+                                  <hr>
+
+                                </div>
+                                <!-- /.box-body -->
+                              </div>
+                              <!-- /.box -->
+                    </div>
+
+                    <div class="col-md-9">
+                      <div class="nav-tabs-custom">
+                        <ul class="nav nav-tabs">
+                          <li class="active"><a href="#profile" data-toggle="tab"><i class="fa fa-user margin-r-5"></i>Update Profile</a></li>
+                          <li><a href="#oldrecords" data-toggle="tab"><i class="fa fa-archive margin-r-5"></i> Old Records</a></li>
+                          <li><a href="#oldmedicalbills" data-toggle="tab"><i class="fa fa-list margin-r-5"></i> Old Medical Bills</a></li>                          
+                          <li><a href="#addfamilymember" data-toggle="tab"><i class="fa fa-group margin-r-5"></i> Add Family Member</a></li>
+                          <li><a href="#uploadrecords" data-toggle="tab"><i class="fa fa-cloud-upload margin-r-5"></i> Upload Records</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="active tab-pane" id="profile">
+                               <form class="form-horizontal">
+                                  <div class="form-group">
+                                    <label for="fullName" class="col-sm-2 control-label">Name</label>
+
+                                    <div class="col-sm-10">
+                                      <input type="email" class="form-control" id="fullName" placeholder="Full Name">
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="uuid" class="col-sm-2 control-label">UUID</label>
+
+                                    <div class="col-sm-10">
+                                      <input type="text" class="form-control" id="uuid" placeholder="UUID">
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="sex" class="col-sm-2 control-label">Sex</label>
+
+                                    <div class="col-sm-10">
+                                      <input type="radio" name="sex" id="optionsRadios1" value="Male" checked>MALE
+                                       <input type="radio" name="sex" id="optionsRadios2" value="Fe">Female
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="dateofBirth" class="col-sm-2 control-label">Date of Birth</label>
+
+                                    <div class="col-sm-10">
+                                      <input type="date" class="form-control" id="dob">
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="bloodGroup" class="col-sm-2 control-label">Blood Group</label>
+
+                                    <div class="col-sm-10">
+                                      <select class="form-control">
+                                        <option></option>
+                                        <option>B+</option>
+                                        <option>B-</option>
+                                        <option>O+</option>
+                                        <option>O-</option>
+                                        <option>AB+</option>
+                                        <option>AB-</option>
+                                        <option>A+</option>
+                                        <option>A-</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="donateBlood" class="col-sm-2 control-label">Will To donate Blood</label>
+
+                                    <div class="col-sm-10">
+                                      <select class="form-control">
+                                        <option></option>
+                                        <option>Yes</option>
+                                        <option>No</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="communication" class="col-sm-2 control-label">Type of Communication</label>
+
+                                    <div class="col-sm-10">
+                                      <input type="checkbox" name="communication" id="optionsCheck1" value="sms" checked>SMS
+                                      <input type="checkbox" name="communication" id="optionsCheck2" value="call">Call
+                                      <input type="checkbox" name="communication" id="optionsCheck3" value="mail">Mail
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="idProof" class="col-sm-2 control-label">ID Proof</label>
+
+                                    <div class="col-sm-10">
+                                      <select class="form-control">
+                                        <option></option>
+                                        <option>Pan Card</option>
+                                        <option>Aadhar Card</option>                                        
+                                        <option>Driving Licence</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="idproofValue" class="col-sm-2 control-label">Identity Proof No</label>
+
+                                    <div class="col-sm-10">
+                                      <input type="text" class="form-control" id="idproofValue" placeholder="Id Proof No">
+                                    </div>
+                                  </div>                                 
+                                  <div class="form-group">
+                                    <label for="address" class="col-sm-2 control-label">Address</label>
+
+                                    <div class="col-sm-10">
+                                      <textarea class="form-control" rows="3" id="address" placeholder="Enter Address"></textarea>
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="city" class="col-sm-2 control-label">City</label>
+
+                                    <div class="col-sm-10">
+                                      <input type="text" class="form-control" id="city" placeholder="Enter your city">
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="state" class="col-sm-2 control-label">State</label>
+
+                                    <div class="col-sm-10">
+                                      <select class="form-control">
+                                        <option>Select</option>
+                                        <option>Andhra Pradesh</option>
+                                        <option>Tamilanadu</option>
+                                        <option>Karnataka</option>
+                                        <option>Kerala</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="zip" class="col-sm-2 control-label">Zip/Postal Code</label>
+
+                                    <div class="col-sm-10">
+                                      <input type="text" class="form-control" id="zip" placeholder="Enter Zip/Postal Code">
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                      <button type="submit" class="btn btn-danger">Update</button>
+                                    </div>
+                                  </div>
+                                </form>
+                          </div><!--tab-1 close -->
+
+                          <div class="tab-pane" id="oldrecords">
+                            <!-- Date and time range -->
+                              <div class="form-group">
+                                <label>View Old Records</label>
+
+                                <div class="input-group">
+                                  <button type="button" class="btn btn-default pull-right" id="daterange-btn">
+                                    <i class="fa fa-calendar"></i> Date range picker
+                                    <i class="fa fa-caret-down"></i>
+                                  </button>
+                                </div>
+                              </div>
+                            <!-- /.form group -->
+                          </div><!-- tab2 close -->
+
+                          <div class="tab-pane" id="oldmedicalbills">
+                           <p>medical bills</p>
+                          </div><!-- tab3 close -->
+
+                          <div class="tab-pane" id="addfamilymember">
+                             <!-- search form -->
+                              <form action="#" method="get" class="sidebar-form">
+                                <div class="input-group">
+                                  <input type="text" name="q" class="form-control" placeholder="Search...">
+                                      <span class="input-group-btn">
+                                        <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                                        </button>
+                                      </span>
+                                </div>
+                              </form>
+                              <!-- /.search form -->
+                          </div><!-- tab4 close -->
+
+                          <div class="tab-pane" id="uploadrecords">
+                             <div class="form-group">
+                              <label for="uploadRecords">Upload Files</label>
+                              <input type="file" id="uploadRecords">
+
+                              <p class="help-block">Upload bill or medical record.</p>
+                            </div>
+                          </div><!-- tab5
+                           close -->
+                        </div><!-- tab content close -->  
+                      </div>
+                    </div><!-- col-md9-colse -->
+                </div>
+            </div>
+            <div class="row main-low-margin ">
+               
+
             </div>
 
         </div>
-        <div class="form-group">
-            <label for="field_emailId">EmailId *</label>
-            <input type="text" class="form-control" name="emailId" id="field_emailId"
-                    ng-model="userDTO.email"
-                    required>
-
-        </div>
-        <div class="form-group">
-            <label for="field_password">Password *</label>
-            <input type="password" class="form-control" name="password" id="field_password"
-                    ng-model="userDTO.password"
-                    required>
-
-        </div>
-        
-    </div>
-    <div >
-        <button type="button" class="btn btn-default"  ng-click="clear()">
-            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
-        </button>
-        <button type="submit" ng-disabled="editForm.$invalid || editForm.$submitted" class="btn btn-primary">
-            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
-        </button>
-    </div>
-</form>

@@ -14,40 +14,32 @@ angular.module('hipster1App')
             },
             isInRole: function (role, cb) {
                 if (!_authenticated) {
-                   return false;
+                	return false;
                }
 
-               return this.identity().then(function(_id) {
-            	   if (_id.roles && _id.roles.indexOf(role) !== -1) {
-            		   //alert('setting now')
+               if (angular.isDefined(_identity) && _identity != null) {
+            	   if (_identity.roles && _identity.roles.indexOf(role) !== -1) {
             		   if (angular.isDefined(cb)) {
             			   cb();
             		   }
             	   }
-                   return _id.roles && _id.roles.indexOf(role) !== -1;
-                   
-               }, function(err){
-                   return false;
-               });
+                   return _identity.roles && _identity.roles.indexOf(role) !== -1;
+               } else {
+            	   return false;
+               }    
             },
             isInAnyRole: function (roles, cb) {
-                if (!_authenticated || !_identity || !_identity.roles) {
-                	//alert('returning false1 '+_authenticated)
-                    //alert('returning false2 '+_identity)
-                    if (_identity) {
-                    //alert('returning false '+_identity.roles)
-                    }
-                    
-                    return false;
+            	if (!_authenticated || !_identity || !_identity.roles) {
+                	return false;
                 }
 
                 for (var i = 0; i < roles.length; i++) {
-                    if (this.isInRole(roles[i], cb)) {
-                        return true;
-                    }
+                	if (this.isInRole(roles[i], cb) ) {
+                		return true;
+                	}
+                	
                 }
-                //alert('returning false ')
-                return false;
+                return true;
             },
             authenticate: function (identity) {
                 _identity = identity;
@@ -71,7 +63,7 @@ angular.module('hipster1App')
                 // retrieve the identity data from the server, update the identity object, and then resolve.
                 Account.get().$promise
                     .then(function (account) {
-                        _identity = account.data;
+                    	_identity = account.data;
                         _authenticated = true;
                         deferred.resolve(_identity);
                     })

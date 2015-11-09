@@ -1,5 +1,6 @@
 package com.test.app.web.rest;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.Set;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.apache.commons.lang.StringUtils;
@@ -117,6 +119,13 @@ public class AccountResource {
         if (user == null) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+        return new ResponseEntity<String>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/refresh",
+            method = RequestMethod.GET)
+    public ResponseEntity<String> refresh(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    	response.sendRedirect("/hipster1/index.html");
         return new ResponseEntity<String>(HttpStatus.OK);
     }
 

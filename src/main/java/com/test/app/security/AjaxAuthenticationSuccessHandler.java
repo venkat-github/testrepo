@@ -43,7 +43,7 @@ public class AjaxAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuc
     		}
     	}
     	*/
-    	response.sendRedirect("/hipster1/index.html");
-        //response.setStatus(HttpServletResponse.SC_OK);
+    	//response.sendRedirect("/hipster1/index.html");
+        response.setStatus(HttpServletResponse.SC_OK);
     }
 }

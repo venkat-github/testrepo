@@ -32,15 +32,17 @@ public class UserDetailsService implements org.springframework.security.core.use
     @Override
     @Transactional
     public UserDetails loadUserByUsername(final String login) {
-        log.debug("Authenticating {}", login);
+        log.info("Authenticating {}", login);
         String lowercaseLogin = login.toLowerCase();
         User userFromDatabase = userRepository.findOneByLogin(lowercaseLogin);
         if (userFromDatabase == null) {
+        	log.info("user is not found");
             throw new UsernameNotFoundException("User " + lowercaseLogin + " was not found in the database");
         } else if (!userFromDatabase.isActivated()) {
+        	log.info("user is not activated ");
             throw new UserNotActivatedException("User " + lowercaseLogin + " was not activated");
         }
-
+        log.info("found user "+userFromDatabase);
         Collection<GrantedAuthority> grantedAuthorities = new ArrayList<>();
         for (Authority authority : userFromDatabase.getAuthorities()) {
             GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(authority.getName());
